@@ -14,12 +14,13 @@ import Alamofire
 
 class SelectionViewController: UIViewController {
     
-    var genresArray = [Int]()
+    var genreCodeSet = Set<Int>()
 
     @IBOutlet weak var chooseGenreButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("genreCodeSet in SelectionViewController: \(genreCodeSet)")
         // Do any additional setup after loading the view.
         
         TMDBClient.getGenres()

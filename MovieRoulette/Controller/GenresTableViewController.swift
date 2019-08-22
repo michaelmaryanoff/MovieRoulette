@@ -11,8 +11,9 @@ import UIKit
 class GenresTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var confirmSelectionButton: UIButton!
     
-    var genresArray = ["Action",
+    static var genresArray = ["Action",
                        "Adventure",
                        "Animation",
                        "Comedy",
@@ -32,7 +33,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                        "War",
                        "Western"]
     
-    var genresDictionary: [String:Int] = ["Action": 28,
+    static var genresDictionary: [String:Int] = ["Action": 28,
                                           "Adventure": 12,
                                           "Animation": 16,
                                           "Comedy": 35,
@@ -52,7 +53,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                                           "War": 10752,
                                           "Western": 37]
     
-    var genreCodeSet = Set<Int>()
+    static var genreCodeSet = Set<Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,12 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    @IBAction func confirmSelection(_ sender: Any) {
+        self.performSegue(withIdentifier: "confirmGenreSelection", sender: GenresTableViewController.genreCodeSet)
+        
+    }
+    
 
     // MARK: - Table view data source
 
@@ -76,13 +83,13 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return genresArray.count
+        return GenresTableViewController.genresArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)
         
-        cell.textLabel?.text = genresArray[indexPath.row]
+        cell.textLabel?.text = GenresTableViewController.genresArray[indexPath.row]
 
         // Configure the cell...
 
@@ -98,31 +105,59 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
+            GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
             print("cell deselected")
             
         } else {
             print("cell selected")
-            GenresTableViewController.editGenreCodeArray(forCell: currentCell)
+            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
             currentCell.accessoryType = .checkmark
             
         }
 
     }
     
-    class func editGenreCodeArray(forCell cell: UITableViewCell) {
+    class func addToGenreCodeSet(forCell cell: UITableViewCell) {
         
         guard let cellText = cell.textLabel?.text else {
             print("nil returned in \(#function)")
             return
         }
-        print(cellText)
+        
+        for (key, value) in genresDictionary {
+            if cellText == key {
+                genreCodeSet.insert(value)
+                print("new genreCodeSet: \(genreCodeSet)")
+            }
+        }
+        
+    }
+    
+    class func removeFromGenreCodeSet(forCell cell: UITableViewCell) {
+        
+        guard let cellText = cell.textLabel?.text else {
+            print("nil returned in \(#function)")
+            return
+        }
+        
+        for (key, value) in genresDictionary {
+            if cellText == key {
+                genreCodeSet.remove(value)
+                print("new genreCodeSet after removal: \(genreCodeSet)")
+            }
+        }
+        
     }
 
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destination.
-//        // Pass the selected object to the new view controller.
-//    }
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "confirmGenreSelection" {
+            let destinationVC = segue.destination as! SelectionViewController
+            
+            destinationVC.genreCodeSet = GenresTableViewController.genreCodeSet
+            
+        }
+    }
 
 
 }

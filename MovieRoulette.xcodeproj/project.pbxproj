@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16B9DF7B63D256C3AD5C597C /* Pods_MovieRoulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C9E3BCE641BCCC8061068F /* Pods_MovieRoulette.framework */; };
+		CB0DCD03230F086F001EB9F1 /* MovieSelectionParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0DCD02230F086F001EB9F1 /* MovieSelectionParameters.swift */; };
 		CB165BC9230C6C2100688014 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB165BC8230C6C2100688014 /* AppDelegate.swift */; };
 		CB165BCB230C6C2100688014 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB165BCA230C6C2100688014 /* SelectionViewController.swift */; };
 		CB165BCE230C6C2100688014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB165BCC230C6C2100688014 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		99C9E3BCE641BCCC8061068F /* Pods_MovieRoulette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieRoulette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E2CBFDD7008C97BF72670E0 /* Pods-MovieRoulette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRoulette.debug.xcconfig"; path = "Target Support Files/Pods-MovieRoulette/Pods-MovieRoulette.debug.xcconfig"; sourceTree = "<group>"; };
+		CB0DCD02230F086F001EB9F1 /* MovieSelectionParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSelectionParameters.swift; sourceTree = "<group>"; };
 		CB165BC5230C6C2100688014 /* MovieRoulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRoulette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB165BC8230C6C2100688014 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB165BCA230C6C2100688014 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				CB165BCF230C6C2100688014 /* MovieRoulette.xcdatamodeld */,
 				CB7D867C230C805C004FEFED /* TMDBClient.swift */,
+				CB0DCD02230F086F001EB9F1 /* MovieSelectionParameters.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */,
 				CB165BCB230C6C2100688014 /* SelectionViewController.swift in Sources */,
 				CB165BC9230C6C2100688014 /* AppDelegate.swift in Sources */,
+				CB0DCD03230F086F001EB9F1 /* MovieSelectionParameters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

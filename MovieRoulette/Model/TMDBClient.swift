@@ -35,8 +35,8 @@ class TMDBClient {
     class func getGenres() {
         print(Endpoints.getGenres.url)
         AF.request(Endpoints.getGenres.url).responseJSON { (response) in
-            print("Request: \(String(describing: response.request!))")
-            print("Result: \(response.result)")
+//            print("Request: \(String(describing: response.request!))")
+//            print("Result: \(response.result)")
         }
     }
     
