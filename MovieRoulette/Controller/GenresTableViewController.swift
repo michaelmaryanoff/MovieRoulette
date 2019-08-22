@@ -12,7 +12,46 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     
-    var genresArray = ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV Movie", "Thriller", "War", "Western"]
+    var genresArray = ["Action",
+                       "Adventure",
+                       "Animation",
+                       "Comedy",
+                       "Crime",
+                       "Documentary",
+                       "Drama",
+                       "Family",
+                       "Fantasy",
+                       "History",
+                       "Horror",
+                       "Music",
+                       "Mystery",
+                       "Romance",
+                       "Science Fiction",
+                       "TV Movie",
+                       "Thriller",
+                       "War",
+                       "Western"]
+    
+    var genresDictionary: [String:Int] = ["Action": 28,
+                                          "Adventure": 12,
+                                          "Animation": 16,
+                                          "Comedy": 35,
+                                          "Crime": 80,
+                                          "Documentary": 99,
+                                          "Drama": 18,
+                                          "Family": 10751,
+                                          "Fantasy": 14,
+                                          "History": 36,
+                                          "Horror": 27,
+                                          "Music": 10402,
+                                          "Mystery": 9648,
+                                          "Romance": 10749,
+                                          "Science Fiction": 878,
+                                          "TV Movie": 10770,
+                                          "Thriller": 53,
+                                          "War": 10752,
+                                          "Western": 37]
+    
     var genreCodeSet = Set<Int>()
 
     override func viewDidLoad() {
@@ -51,101 +90,39 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath)
         
-        if let currentCellGenre = currentCell?.textLabel?.text {
-            print(self.genreCodeSet)
-            switch currentCellGenre {
-            case "Action":
-                genreCodeSet.insert(28)
-            case "Adventure":
-                genreCodeSet.insert(12)
-            case "Animation":
-                genreCodeSet.insert(16)
-            case "Comedy":
-                genreCodeSet.insert(35)
-            case "Crime":
-                genreCodeSet.insert(80)
-            case "Documentary":
-                genreCodeSet.insert(99)
-            case "Drama":
-                genreCodeSet.insert(18)
-            case "Family":
-                genreCodeSet.insert(10751)
-            case "Fantasy":
-                genreCodeSet.insert(14)
-            case "History":
-                genreCodeSet.insert(36)
-            case "Horror":
-                genreCodeSet.insert(27)
-            case "Music":
-                genreCodeSet.insert(10402)
-            case "Mystery":
-                genreCodeSet.insert(9648)
-            case "Romance":
-                genreCodeSet.insert(10749)
-            case "Science Fiction":
-                genreCodeSet.insert(878)
-            case "TV Movie":
-                genreCodeSet.insert(10770)
-            case "Thriller":
-                genreCodeSet.insert(53)
-            case "War":
-                genreCodeSet.insert(10752)
-            case "Western":
-                genreCodeSet.insert(37)
-            default:
-                print("This genre does not exist")
-            }
+        guard let currentCell = tableView.cellForRow(at: indexPath) else {
+            print("nothing selected1")
+            return
+        }
+        
+        if currentCell.accessoryType == .checkmark {
+            currentCell.accessoryType = .none
+            print("cell deselected")
+            
+        } else {
+            print("cell selected")
+            GenresTableViewController.editGenreCodeArray(forCell: currentCell)
+            currentCell.accessoryType = .checkmark
             
         }
 
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    class func editGenreCodeArray(forCell cell: UITableViewCell) {
+        
+        guard let cellText = cell.textLabel?.text else {
+            print("nil returned in \(#function)")
+            return
+        }
+        print(cellText)
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+//    // In a storyboard-based application, you will often want to do a little preparation before navigation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // Get the new view controller using segue.destination.
+//        // Pass the selected object to the new view controller.
+//    }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
