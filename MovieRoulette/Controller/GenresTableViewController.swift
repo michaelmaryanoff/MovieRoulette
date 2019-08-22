@@ -53,13 +53,17 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                                           "War": 10752,
                                           "Western": 37]
     
-    static var genreCodeSet = Set<Int>()
+    static var selectedIndexPathArray = [Int]()
+    
+   static var genreCodeSet = Set<Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        GenresTableViewController.genreCodeSet = []
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -68,10 +72,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    @IBAction func confirmSelection(_ sender: Any) {
-        self.performSegue(withIdentifier: "confirmGenreSelection", sender: GenresTableViewController.genreCodeSet)
+//    @IBAction func confirmSelection(_ sender: Any) {
+//        self.performSegue(withIdentifier: "confirmGenreSelection", sender: GenresTableViewController.genreCodeSet)
         
-    }
+//    }
     
 
     // MARK: - Table view data source
@@ -87,6 +91,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)
         
         cell.textLabel?.text = GenresTableViewController.genresArray[indexPath.row]
@@ -103,17 +108,22 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
+        let currentIndexPath = [indexPath.row]
+        
+        print("current cell is: \(currentCell)")
+        
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
             GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
-            print("cell deselected")
             
         } else {
-            print("cell selected")
-            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
             currentCell.accessoryType = .checkmark
+            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
+            
             
         }
+        
+        
 
     }
     
@@ -148,16 +158,20 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var setToBePassed = GenresTableViewController.genreCodeSet
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "confirmGenreSelection" {
-            let destinationVC = segue.destination as! SelectionViewController
-            
-            destinationVC.genreCodeSet = GenresTableViewController.genreCodeSet
-            
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "confirmGenreSelection" {
+//            let destinationVC = segue.destination as! SelectionViewController
+//            
+//            destinationVC.genreCodeSet = GenresTableViewController.genreCodeSet
+//            
+//        }
+//    }
 
 
 }

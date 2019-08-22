@@ -32,13 +32,35 @@ class TMDBClient {
         
     }
     
-    class func getGenres() {
-        print(Endpoints.getGenres.url)
-        AF.request(Endpoints.getGenres.url).responseJSON { (response) in
-//            print("Request: \(String(describing: response.request!))")
-//            print("Result: \(response.result)")
+    static func searchForMovies(withTheseGenres genreCodes: Set<Int>?) {
+        guard let genreCodes = genreCodes else {
+            print("there are no genre codes")
+            return
         }
+        
+        var genreParams = ""
+        
+        for code in genreCodes {
+            let newCodeParam = "&with_genres=\(code)"
+            genreParams += newCodeParam
+        }
+        
+        let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams
+        print(url)
+        AF.request(url).responseJSON { (response) in
+            print("Response in function is \(response)")
+            
+        }
+        
     }
+    
+//    class func getGenres() {
+//        print(Endpoints.getGenres.url)
+//        AF.request(Endpoints.getGenres.url).responseJSON { (response) in
+////            print("Request: \(String(describing: response.request!))")
+////            print("Result: \(response.result)")
+//        }
+//    }
     
     
 }

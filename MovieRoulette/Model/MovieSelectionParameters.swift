@@ -9,8 +9,19 @@
 import Foundation
 
 struct MovieSelectionParameters {
-    let genresSet = Set<Int>()
-    let actor: Int?
-    let yearMinimum: Int?
-    let yearMaximum: Int?
+    
+    var genresSet = Set<Int>()
+    var actor: Int?
+    var yearMinimum: Int?
+    var yearMaximum: Int?
+    
+//    static func shared() -> MovieSelectionParameters {
+//        struct Singleton {
+//            private init() {}
+//            static var shared = MovieSelectionParameters(actor: nil, yearMinimum: nil, yearMaximum: nil)
+//        }
+//        return Singleton.shared
+//    }
 }
+
+
