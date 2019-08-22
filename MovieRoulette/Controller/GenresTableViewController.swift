@@ -13,6 +13,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     var genresArray = ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV Movie", "Thriller", "War", "Western"]
+    var genreCodeSet = Set<Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,58 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Configure the cell...
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCell = tableView.cellForRow(at: indexPath)
+        
+        if let currentCellGenre = currentCell?.textLabel?.text {
+            print(self.genreCodeSet)
+            switch currentCellGenre {
+            case "Action":
+                genreCodeSet.insert(28)
+            case "Adventure":
+                genreCodeSet.insert(12)
+            case "Animation":
+                genreCodeSet.insert(16)
+            case "Comedy":
+                genreCodeSet.insert(35)
+            case "Crime":
+                genreCodeSet.insert(80)
+            case "Documentary":
+                genreCodeSet.insert(99)
+            case "Drama":
+                genreCodeSet.insert(18)
+            case "Family":
+                genreCodeSet.insert(10751)
+            case "Fantasy":
+                genreCodeSet.insert(14)
+            case "History":
+                genreCodeSet.insert(36)
+            case "Horror":
+                genreCodeSet.insert(27)
+            case "Music":
+                genreCodeSet.insert(10402)
+            case "Mystery":
+                genreCodeSet.insert(9648)
+            case "Romance":
+                genreCodeSet.insert(10749)
+            case "Science Fiction":
+                genreCodeSet.insert(878)
+            case "TV Movie":
+                genreCodeSet.insert(10770)
+            case "Thriller":
+                genreCodeSet.insert(53)
+            case "War":
+                genreCodeSet.insert(10752)
+            case "Western":
+                genreCodeSet.insert(37)
+            default:
+                print("This genre does not exist")
+            }
+            
+        }
+
     }
     
 
