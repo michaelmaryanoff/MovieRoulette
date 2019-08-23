@@ -16,6 +16,8 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
+    var moviesArray = [String]()
+    
     @IBAction func confirmSelection(_ unwindSegue: UIStoryboardSegue) {
         print("unwind called")
         guard let genresTableViewController = unwindSegue.source as? GenresTableViewController else {
@@ -40,15 +42,20 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var chooseGenreButton: UIButton!
     
     @IBAction func spinForMovie(_ sender: Any) {
-        TMDBClient.searchForMovies(withTheseGenres: genreCodeSet)
+        TMDBClient.searchForMovies(withTheseGenres: genreCodeSet) { (success, stringArray, error) in
+            if success {
+                print("moviesArray in network call: \(stringArray)")
+                self.moviesArray = stringArray
+                print("global moviesArray: \(self.moviesArray)")
+                var randomNumber = Int.random(in: 0...stringArray.count)
+                print("The movie you are watching tonight is \(self.moviesArray[randomNumber])")
+                
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("genreCodeSet in SelectionViewController: \(genreCodeSet)")
-        // Do any additional setup after loading the view.
-        
-//        TMDBClient.getGenres()
         
     }
     
@@ -60,6 +67,10 @@ class SelectionViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! GenresTableViewController
+        
+    }
+    
+    func constructUrl(withTheseGenres genreCodes: Set<Int>?) {
         
     }
 }

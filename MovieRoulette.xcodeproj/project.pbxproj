@@ -107,9 +107,9 @@
 		CB7D867A230C803B004FEFED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CB165BCA230C6C2100688014 /* SelectionViewController.swift */,
 				CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */,
 				CB165BC8230C6C2100688014 /* AppDelegate.swift */,
-				CB165BCA230C6C2100688014 /* SelectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
