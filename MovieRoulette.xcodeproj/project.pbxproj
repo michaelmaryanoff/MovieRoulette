@@ -17,6 +17,7 @@
 		CB165BD6230C6C2100688014 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB165BD4230C6C2100688014 /* LaunchScreen.storyboard */; };
 		CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D867C230C805C004FEFED /* TMDBClient.swift */; };
 		CBC3F780230DEF3F00862D5B /* GenresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */; };
+		CBE5D59723108A8300C7E2E4 /* ReleaseWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		CB165BD7230C6C2100688014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB7D867C230C805C004FEFED /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresTableViewController.swift; sourceTree = "<group>"; };
+		CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseWindowViewController.swift; sourceTree = "<group>"; };
 		EDC6340A6A823C136C8EFBDE /* Pods-MovieRoulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRoulette.release.xcconfig"; path = "Target Support Files/Pods-MovieRoulette/Pods-MovieRoulette.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				CB165BCA230C6C2100688014 /* SelectionViewController.swift */,
 				CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */,
 				CB165BC8230C6C2100688014 /* AppDelegate.swift */,
+				CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE5D59723108A8300C7E2E4 /* ReleaseWindowViewController.swift in Sources */,
 				CBC3F780230DEF3F00862D5B /* GenresTableViewController.swift in Sources */,
 				CB165BD1230C6C2100688014 /* MovieRoulette.xcdatamodeld in Sources */,
 				CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */,

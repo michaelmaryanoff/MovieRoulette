@@ -18,7 +18,9 @@ class SelectionViewController: UIViewController {
     
     var moviesArray = [String]()
     
-    @IBAction func confirmSelection(_ unwindSegue: UIStoryboardSegue) {
+    var yearsArray = [Int]()
+    
+    @IBAction func confirmGenreSelection(_ unwindSegue: UIStoryboardSegue) {
         print("unwind called")
         guard let genresTableViewController = unwindSegue.source as? GenresTableViewController else {
             print("could not find source!")
@@ -40,6 +42,8 @@ class SelectionViewController: UIViewController {
 
     @IBOutlet weak var spinForMovieButton: UIButton!
     @IBOutlet weak var chooseGenreButton: UIButton!
+    @IBOutlet var chooseReleaseWindowButton: UIView!
+    
     
     @IBAction func spinForMovie(_ sender: Any) {
         TMDBClient.searchForMovies(withTheseGenres: genreCodeSet) { (success, stringArray, error) in
@@ -59,16 +63,17 @@ class SelectionViewController: UIViewController {
         
     }
     
-    
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
     }
     
+
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! GenresTableViewController
-        
-    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let destinationVC = segue.destination as! GenresTableViewController
+//
+//    }
     
     func constructUrl(withTheseGenres genreCodes: Set<Int>?) {
         

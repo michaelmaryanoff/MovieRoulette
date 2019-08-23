@@ -57,18 +57,58 @@
                                     <action selector="spinForMovie:" destination="tzt-m6-IiU" eventType="touchUpInside" id="hOV-7d-lzc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-Ob-ZQU">
+                                <rect key="frame" x="160" y="391" width="95" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Choose Years"/>
+                                <connections>
+                                    <segue destination="hf4-vJ-vVq" kind="show" id="PBg-Lz-Uoi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Release Year Range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7e-Pi-DxY">
+                                <rect key="frame" x="131" y="362" width="151" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="DcV-Wp-obf"/>
                     </view>
                     <navigationItem key="navigationItem" id="115-85-kAz"/>
                     <connections>
+                        <outlet property="chooseReleaseWindowButton" destination="5RW-yR-bLy" id="dOW-Lz-V6U"/>
                         <outlet property="spinForMovieButton" destination="3FB-yb-Rk9" id="wd5-c0-uIL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iiz-rr-9bB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="697" y="179"/>
+            <point key="canvasLocation" x="695.6521739130435" y="178.79464285714286"/>
+        </scene>
+        <!--Release Window View Controller-->
+        <scene sceneID="r4x-qf-KtX">
+            <objects>
+                <viewController id="hf4-vJ-vVq" customClass="ReleaseWindowViewController" customModule="MovieRoulette" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dQ7-sv-xVx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dx0-Qb-C0E">
+                                <rect key="frame" x="0.0" y="340" width="414" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Id3-0u-Lt4"/>
+                    </view>
+                    <connections>
+                        <outlet property="releaseYearPickerView" destination="Dx0-Qb-C0E" id="n9n-CQ-hdo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ekm-Yw-rDD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="700" y="984"/>
         </scene>
         <!--Genres Table View Controller-->
         <scene sceneID="S97-ox-uX7">
