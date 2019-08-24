@@ -20,20 +20,17 @@ class SelectionViewController: UIViewController {
     
     var yearsArray = [Int]()
     
-    @IBAction func confirmGenreSelection(_ unwindSegue: UIStoryboardSegue) {
+    @IBAction func confirmSelection(_ unwindSegue: UIStoryboardSegue) {
         print("unwind called")
         guard let genresTableViewController = unwindSegue.source as? GenresTableViewController else {
             print("could not find source!")
             return
         }
-        
         let passedGenereCodeSet = GenresTableViewController.genreCodeSet
         print("passedGenreCodeSet: \(passedGenereCodeSet)")
         self.genreCodeSet = passedGenereCodeSet
         print("genreCodeSet after passing: \(self.genreCodeSet)")
         
-//        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
     }
     
     
@@ -65,6 +62,15 @@ class SelectionViewController: UIViewController {
     
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Adapted from Stack Overflow post
+        if segue.identifier == "chooseGenres" {
+            let controller = segue.destination as! GenresTableViewController
+        } else if segue.identifier == "chooseReleaseWindow" {
+            let controller = segue.destination as! ReleaseWindowViewController
+        }
     }
     
 

@@ -62,7 +62,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Choose Years"/>
                                 <connections>
-                                    <segue destination="hf4-vJ-vVq" kind="show" id="PBg-Lz-Uoi"/>
+                                    <segue destination="hf4-vJ-vVq" kind="show" identifier="chooseReleaseWindow" id="PBg-Lz-Uoi"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Release Year Range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7e-Pi-DxY">

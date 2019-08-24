@@ -12,6 +12,10 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     
     var yearRange: [Int] = Array(1900...2019).reversed()
     
+    var firstSectionValue: Int = 2019
+    
+    var secondSectionValue: Int = 2019
+    
     var yearFrom: Int = 2019
     
     var yearTo: Int = 2019
@@ -31,10 +35,13 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
         return yearRange.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        
         return String(yearRange[row])
     }
     
@@ -43,15 +50,16 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         let yearRangeInt = Int(yearRange[row])
         
         if component == 0 {
-            yearFrom = Int(yearRange[row])
-        }
+            firstSectionValue = yearRangeInt
+        } else if component == 1 {
+            secondSectionValue = yearRangeInt
+            }
         
-        if component == 1 {
-            yearTo = Int(yearRange[row])
-        }
+        self.yearFrom = min(firstSectionValue, secondSectionValue)
+        self.yearTo = max(firstSectionValue, secondSectionValue)
         
+        print("yearFrom: \(yearFrom)")
+        print("yearTo: \(yearTo)")
     }
-    
-    
     
 }
