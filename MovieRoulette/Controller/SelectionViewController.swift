@@ -20,20 +20,9 @@ class SelectionViewController: UIViewController {
     
     var yearsArray = [Int]()
     
-    @IBAction func confirmSelection(_ unwindSegue: UIStoryboardSegue) {
-        print("unwind called")
-        guard let genresTableViewController = unwindSegue.source as? GenresTableViewController else {
-            print("could not find source!")
-            return
-        }
-        let passedGenereCodeSet = GenresTableViewController.genreCodeSet
-        print("passedGenreCodeSet: \(passedGenereCodeSet)")
-        self.genreCodeSet = passedGenereCodeSet
-        print("genreCodeSet after passing: \(self.genreCodeSet)")
-        
-    }
+    var yearFrom = Int()
     
-    
+    var yearTo = Int()
     
     var movieSelectionParameters: MovieSelectionParameters?
 
@@ -43,7 +32,7 @@ class SelectionViewController: UIViewController {
     
     
     @IBAction func spinForMovie(_ sender: Any) {
-        TMDBClient.searchForMovies(withTheseGenres: genreCodeSet) { (success, stringArray, error) in
+        TMDBClient.searchForMovies(withTheseGenres: genreCodeSet, from: yearFrom, to: yearTo) { (success, stringArray, error) in
             if success {
                 print("moviesArray in network call: \(stringArray)")
                 self.moviesArray = stringArray
@@ -60,6 +49,36 @@ class SelectionViewController: UIViewController {
         
     }
     
+    @IBAction func confirmGenreSelection(_ unwindSegue: UIStoryboardSegue) {
+        print("unwind called")
+        guard let genresTableViewController = unwindSegue.source as? GenresTableViewController else {
+            print("could not find source!")
+            return
+        }
+        let passedGenereCodeSet = GenresTableViewController.genreCodeSet
+        print("passedGenreCodeSet: \(passedGenereCodeSet)")
+        self.genreCodeSet = passedGenereCodeSet
+        print("genreCodeSet after passing: \(self.genreCodeSet)")
+        
+    }
+    
+    @IBAction func confirmReleaseWindow(_ undwindSegue: UIStoryboardSegue) {
+        print("unwind 2 called")
+        guard let releaseWindowViewController = undwindSegue.source as? ReleaseWindowViewController else {
+            print("could not find ReleaseWindowViewController!")
+            return
+        }
+        let passedYearFrom = ReleaseWindowViewController.yearFrom
+        let passedYearTo = ReleaseWindowViewController.yearTo
+        self.yearFrom = passedYearFrom
+        self.yearTo = passedYearTo
+        
+        print("self.yearTo): \(self.yearTo)")
+        print("self.yearTo): \(self.yearFrom)")
+    }
+    
+    
+    
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
     }
@@ -73,13 +92,6 @@ class SelectionViewController: UIViewController {
         }
     }
     
-
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let destinationVC = segue.destination as! GenresTableViewController
-//
-//    }
     
     func constructUrl(withTheseGenres genreCodes: Set<Int>?) {
         

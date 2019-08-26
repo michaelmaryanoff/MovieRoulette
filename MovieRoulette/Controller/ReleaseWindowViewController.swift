@@ -16,9 +16,9 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     
     var secondSectionValue: Int = 2019
     
-    var yearFrom: Int = 2019
+    static var yearFrom: Int = 2019
     
-    var yearTo: Int = 2019
+    static var yearTo: Int = 2019
 
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
     
@@ -55,11 +55,11 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
             secondSectionValue = yearRangeInt
             }
         
-        self.yearFrom = min(firstSectionValue, secondSectionValue)
-        self.yearTo = max(firstSectionValue, secondSectionValue)
+        ReleaseWindowViewController.yearFrom = min(firstSectionValue, secondSectionValue)
+        ReleaseWindowViewController.yearTo = max(firstSectionValue, secondSectionValue)
         
-        print("yearFrom: \(yearFrom)")
-        print("yearTo: \(yearTo)")
+        print("yearFrom: \(ReleaseWindowViewController.yearFrom)")
+        print("yearTo: \(ReleaseWindowViewController.yearTo)")
     }
     
 }

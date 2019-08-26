@@ -32,9 +32,7 @@ class TMDBClient {
         
     }
     
-    
-    
-    static func searchForMovies(withTheseGenres genreCodes: Set<Int>?, completion: @escaping(Bool, [String], Error?) -> Void) {
+    static func searchForMovies(withTheseGenres genreCodes: Set<Int>?, from yearFrom: Int?, to yearTo: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
         
         // Makes sure that we have some genre codes to pass through
         guard let genreCodes = genreCodes else {
@@ -42,6 +40,21 @@ class TMDBClient {
             completion(false, [], nil)
             return
         }
+        
+        guard let yearFrom = yearFrom else {
+            print("there is no yearfrom")
+            return
+        }
+        
+        guard let yearTo = yearTo else {
+            print("There is no yearTo")
+            return
+        }
+        
+        // An empty string to hold year from
+        // TODO: Formuate query parameter
+        var yearFromQueryParam = ""
+        var yearToQueryParam = ""
         
        // An empty string to hold the genre codes that we are going to pass through
         var genreParams = ""
@@ -52,17 +65,18 @@ class TMDBClient {
             genreParams += newCodeParam
         }
         
+        yearFromQueryParam = "&primary_release_date.gte=\(yearFrom)"
+        yearToQueryParam = "&primary_release_date.lte=\(yearTo)"
+        
         // Forms a url to make a request to get a list of movies that meet the criteria
-        let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams
+        let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam
         
         var titleStringArray = [String]()
         
         // Make the request with the url
         AF.request(url, method: .get).validate().responseJSON {
             (response) in
-
-            // An empty array of titles that we will add the search results to
-
+            print(url)
 
             // A switch statement where we determine what to do with the results
             switch response.result {
