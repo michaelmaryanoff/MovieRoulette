@@ -107,7 +107,12 @@ class TMDBClient {
         print("titleStringArray all the way down here is` is \(titleStringArray)")
     }
     
-    static func searchForActorID(query: String) {
+    static func searchForActorID(query: String?, completion: @escaping (Bool, [String], [Int], Error?) -> Void) {
+        
+        guard let query = query else {
+            print("there was not query in \(#function)!")
+            return
+        }
         var queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         
         let url = Endpoints.base + "/search/person" + Endpoints.apiKeyParam + queryString
@@ -143,6 +148,8 @@ class TMDBClient {
                     let newItem = Int(item) ?? 0
                     idStringArray.append(newItem)
                 }
+                
+                completion(true, actorStringArray, idStringArray, nil)
                 
             
             case .failure(let error):

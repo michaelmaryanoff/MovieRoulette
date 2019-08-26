@@ -166,6 +166,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mN2-M9-CLJ"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Lrv-TI-Zbm" id="dQl-3W-ZnY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcc-ho-li1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,22 +12,41 @@ import UIKit
 class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var actors = [String]()
+    var actorsIdArray = [Int]()
     
     var selectedIndex = 0
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TMDBClient.searchForActorID(query: "Tom")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        TMDBClient.searchForActorID(query: "tom") { (success, actorStringArray, idIntArray, error) in
+            if success {
+                self.actors = actorStringArray
+                self.actorsIdArray = idIntArray
+                print("actors array is \(self.actors)")
+                print("actors id array is \(self.actorsIdArray)")
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
+        }
         // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return actors.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "actorCell", for: indexPath)
+        
+        cell.textLabel?.text = self.actors[indexPath.row]
         
         return cell
     }
