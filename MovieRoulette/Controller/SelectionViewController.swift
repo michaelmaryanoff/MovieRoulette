@@ -24,6 +24,8 @@ class SelectionViewController: UIViewController {
     
     var yearTo: Int = 2019
     
+    var actorId = Int()
+    
     var movieSelectionParameters: MovieSelectionParameters?
 
     @IBOutlet weak var spinForMovieButton: UIButton!
@@ -78,6 +80,18 @@ class SelectionViewController: UIViewController {
         
         print("self.yearTo): \(self.yearTo)")
         print("self.yearTo): \(self.yearFrom)")
+    }
+    
+    @IBAction func confirmActorSelection(_ unwindSegue: UIStoryboardSegue) {
+        print("unwind 3 called")
+        
+        guard let actorSearchViewController = unwindSegue.source as? ActorSearchViewController else {
+            print("could not find actorSearchViewController")
+            return
+        }
+        let passedActorId = actorSearchViewController.selectedActorId
+        self.actorId = passedActorId
+        print(self.actorId)
     }
     
     

@@ -15,6 +15,7 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     var actorsIdArray = [Int]()
     
     var selectedIndex = 0
+    var selectedActorId = 0
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -26,20 +27,6 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         self.searchBar.delegate = self
         
-        
-//        TMDBClient.searchForActorID(query: "tom") { (success, actorStringArray, idIntArray, error) in
-//            if success {
-//                self.actors = actorStringArray
-//                self.actorsIdArray = idIntArray
-//                print("actors array is \(self.actors)")
-//                print("actors id array is \(self.actorsIdArray)")
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//
-//            }
-//        }
-        // Do any additional setup after loading the view.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,23 +47,26 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        let selectedActorInt = actorsIdArray[selectedIndex]
+        self.selectedActorId = selectedActorInt
+        print(selectedActorInt)
+        print(self.selectedActorId)
+        unwindToSelectionViewController(segue: newSeuge)
+        
     }
-    */
+    @IBAction func unwindToSelectionViewController (segue: UIStoryboardSegue) {
+        performSegue(withIdentifier: "unwindToSelectionVC", sender: selectedActorId)
+    }
 
 }
+
+
 
 extension ActorSearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
             print("actorStringArray in \(#function) actorStringArray")
             self.actors = actorStringArray
