@@ -17,26 +17,33 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     var selectedIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.searchBar.delegate = self
         
-        TMDBClient.searchForActorID(query: "tom") { (success, actorStringArray, idIntArray, error) in
-            if success {
-                self.actors = actorStringArray
-                self.actorsIdArray = idIntArray
-                print("actors array is \(self.actors)")
-                print("actors id array is \(self.actorsIdArray)")
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
-            }
-        }
+        
+//        TMDBClient.searchForActorID(query: "tom") { (success, actorStringArray, idIntArray, error) in
+//            if success {
+//                self.actors = actorStringArray
+//                self.actorsIdArray = idIntArray
+//                print("actors array is \(self.actors)")
+//                print("actors id array is \(self.actorsIdArray)")
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//
+//            }
+//        }
         // Do any additional setup after loading the view.
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,7 +53,9 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "actorCell", for: indexPath)
         
-        cell.textLabel?.text = self.actors[indexPath.row]
+        let movieTitle = actors[indexPath.row]
+        
+        cell.textLabel?.text = movieTitle
         
         return cell
     }
@@ -65,7 +74,16 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
 }
 
 extension ActorSearchViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        print(searchText)
+        TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
+            print("actorStringArray in \(#function) actorStringArray")
+            self.actors = actorStringArray
+            self.actorsIdArray = idIntArray
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 }
