@@ -9,13 +9,16 @@
 import UIKit
 
 
-class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var actors = [String]()
     
+    var selectedIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        TMDBClient.searchForActorID(query: "Tom")
         // Do any additional setup after loading the view.
     }
     
@@ -40,4 +43,10 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     }
     */
 
+}
+
+extension ActorSearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
 }

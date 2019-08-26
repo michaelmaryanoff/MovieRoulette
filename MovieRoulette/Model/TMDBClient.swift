@@ -107,6 +107,50 @@ class TMDBClient {
         print("titleStringArray all the way down here is` is \(titleStringArray)")
     }
     
+    static func searchForActorID(query: String) {
+        var queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+        
+        let url = Endpoints.base + "/search/person" + Endpoints.apiKeyParam + queryString
+        
+        var actorStringArray = [String]()
+        
+        var idStringArray = [Int]()
+        
+        var actorArray = [Actor]()
+        
+        AF.request(url).validate().responseJSON {
+            (response) in
+            print("url for \(#function): \(url)")
+            
+            switch response.result {
+                
+            case .success(let value):
+                let json = JSON(value)
+                
+                let jsonArrayNameMap = json["results"].arrayValue.map {
+                    $0["name"].stringValue
+                }
+                
+                let jsonArrayIDMap = json["results"].arrayValue.map {
+                    $0["id"].stringValue
+                }
+                
+                for item in jsonArrayNameMap {
+                    actorStringArray.append(item)
+                }
+                
+                for item in jsonArrayIDMap {
+                    let newItem = Int(item) ?? 0
+                    idStringArray.append(newItem)
+                }
+                
+            
+            case .failure(let error):
+                print("Here was the error in \(#function): print \(error.localizedDescription)")
+            }
+        }
+    }
+    
 //    class func getGenres() {
 //        print(Endpoints.getGenres.url)
 //        AF.request(Endpoints.getGenres.url).responseJSON { (response) in
