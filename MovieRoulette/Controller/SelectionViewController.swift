@@ -20,9 +20,9 @@ class SelectionViewController: UIViewController {
     
     var yearsArray = [Int]()
     
-    var yearFrom = Int()
+    var yearFrom: Int = 1960
     
-    var yearTo = Int()
+    var yearTo: Int = 2019
     
     var movieSelectionParameters: MovieSelectionParameters?
 
@@ -34,11 +34,14 @@ class SelectionViewController: UIViewController {
     @IBAction func spinForMovie(_ sender: Any) {
         TMDBClient.searchForMovies(withTheseGenres: genreCodeSet, from: yearFrom, to: yearTo) { (success, stringArray, error) in
             if success {
-                print("moviesArray in network call: \(stringArray)")
                 self.moviesArray = stringArray
-                print("global moviesArray: \(self.moviesArray)")
-                var randomNumber = Int.random(in: 0...stringArray.count)
-                print("The movie you are watching tonight is \(self.moviesArray[randomNumber])")
+                if stringArray.count > 0 {
+                    let randomNumber = Int.random(in: 0...stringArray.count)
+                    print("The movie you are watching tonight is \(self.moviesArray[randomNumber])")
+                } else {
+                    print("there are no movies to choose from!")
+                }
+                
                 
             }
         }
