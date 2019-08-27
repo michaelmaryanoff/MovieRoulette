@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F203" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Selection" representedClassName="Selection" syncable="YES" codeGenerationType="class">
-        <attribute name="genres" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
+    <entity name="Actor" representedClassName="Actor" syncable="YES" codeGenerationType="class">
+        <attribute name="actorId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="actorName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
+        <attribute name="genreCode" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="genreName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="YearRange" representedClassName="YearRange" syncable="YES" codeGenerationType="class">
+        <attribute name="yearFrom" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="yearTo" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Selection" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="Genre" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Actor" positionX="-54" positionY="9" width="128" height="75"/>
+        <element name="YearRange" positionX="-36" positionY="27" width="128" height="75"/>
     </elements>
 </model>

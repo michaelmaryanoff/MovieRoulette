@@ -14,6 +14,8 @@ import Alamofire
 
 class SelectionViewController: UIViewController {
     
+    var dataController: DataController!
+    
     var genreCodeSet = Set<Int>()
     
     var moviesArray = [String]()
