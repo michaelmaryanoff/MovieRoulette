@@ -53,11 +53,12 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         self.selectedActorId = selectedActorInt
         print(selectedActorInt)
         print(self.selectedActorId)
-        unwindToSelectionViewController(segue: newSeuge)
+        performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorInt)
+        
         
     }
     @IBAction func unwindToSelectionViewController (segue: UIStoryboardSegue) {
-        performSegue(withIdentifier: "unwindToSelectionVC", sender: selectedActorId)
+        performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorId)
     }
 
 }

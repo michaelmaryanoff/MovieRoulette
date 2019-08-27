@@ -34,12 +34,16 @@ class SelectionViewController: UIViewController {
     
     
     @IBAction func spinForMovie(_ sender: Any) {
-        TMDBClient.searchForMovies(withTheseGenres: genreCodeSet, from: yearFrom, to: yearTo) { (success, stringArray, error) in
+        TMDBClient.searchForMovies(withTheseGenres: genreCodeSet, from: yearFrom, to: yearTo, withActorCode: actorId) { (success, stringArray, error) in
             if success {
                 self.moviesArray = stringArray
                 if stringArray.count > 0 {
                     let randomNumber = Int.random(in: 0...stringArray.count)
                     print("The movie you are watching tonight is \(self.moviesArray[randomNumber])")
+                    let randomMovie = self.moviesArray[randomNumber]
+                    DispatchQueue.main.async {
+                        self.presentAlertControllerDismiss(title: "The movie you are watching tonight is...", message: "\(randomMovie)")
+                    }
                 } else {
                     print("there are no movies to choose from!")
                 }
@@ -91,7 +95,13 @@ class SelectionViewController: UIViewController {
         }
         let passedActorId = actorSearchViewController.selectedActorId
         self.actorId = passedActorId
-        print(self.actorId)
+        print("new actor id in SelectionViewController \(self.actorId)")
+    }
+    
+    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alertController, animated: true)
     }
     
     
@@ -108,7 +118,6 @@ class SelectionViewController: UIViewController {
             let controller = segue.destination as! ReleaseWindowViewController
         }
     }
-    
     
     func constructUrl(withTheseGenres genreCodes: Set<Int>?) {
         

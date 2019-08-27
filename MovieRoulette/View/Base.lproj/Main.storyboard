@@ -170,6 +170,8 @@
                         <outlet property="searchBar" destination="KZT-OW-klS" id="vrE-XX-GJ3"/>
                         <outlet property="tableView" destination="Lrv-TI-Zbm" id="dQl-3W-ZnY"/>
                         <segue destination="9uB-PH-ysz" kind="unwind" identifier="unwindToSelectionVC" unwindAction="unwindToSelectionViewControllerWithSegue:" id="nwf-IK-5M3"/>
+                        <segue destination="9uB-PH-ysz" kind="unwind" unwindAction="unwindToSelectionViewControllerWithSegue:" id="3ZW-6m-j7M"/>
+                        <segue destination="9uB-PH-ysz" kind="unwind" identifier="confirmActorSelection" unwindAction="confirmActorSelection:" id="GHm-4t-g2S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcc-ho-li1" userLabel="First Responder" sceneMemberID="firstResponder"/>
