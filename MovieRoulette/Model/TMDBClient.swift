@@ -119,11 +119,12 @@ class TMDBClient {
         var queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         
         let url = Endpoints.base + "/search/person" + Endpoints.apiKeyParam + queryString
-        
+        print(url)
         var actorStringArray = [String]()
+        print(actorStringArray)
         
         var idStringArray = [Int]()
-        
+        print(idStringArray)
         var actorArray = [Actor]()
         
         AF.request(url).validate().responseJSON {
@@ -151,6 +152,9 @@ class TMDBClient {
                     let newItem = Int(item) ?? 0
                     idStringArray.append(newItem)
                 }
+                
+                print(actorStringArray)
+                print(idStringArray)
                 
                 completion(true, actorStringArray, idStringArray, nil)
                 
