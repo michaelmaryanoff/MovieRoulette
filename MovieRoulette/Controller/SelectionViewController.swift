@@ -27,8 +27,6 @@ class SelectionViewController: UIViewController {
     var yearTo: Int = 2019
     
     var actorId = Int()
-    
-    var movieSelectionParameters: MovieSelectionParameters?
 
     @IBOutlet weak var spinForMovieButton: UIButton!
     @IBOutlet weak var chooseGenreButton: UIButton!
@@ -115,7 +113,8 @@ class SelectionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Adapted from Stack Overflow post
         if segue.identifier == "chooseGenres" {
-            let controller = segue.destination as! GenresTableViewController
+            let destinationVC = segue.destination as! GenresTableViewController
+            destinationVC.dataController = dataController
         } else if segue.identifier == "chooseReleaseWindow" {
             let controller = segue.destination as! ReleaseWindowViewController
         }

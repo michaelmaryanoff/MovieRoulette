@@ -10,6 +10,10 @@ import UIKit
 
 class GenresTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var dataController: DataController!
+    
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
@@ -55,6 +59,8 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     static var selectedIndexPathArray = [Int]()
     
+    static var genreArray: Set<Genre> = []
+    
    static var genreCodeSet = Set<Int>()
 
     override func viewDidLoad() {
@@ -98,13 +104,13 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let currentCell = tableView.cellForRow(at: indexPath) else {
-            print("nothing selected1")
+            print("nothing selected 1")
             return
         }
         
-        let currentIndexPath = [indexPath.row]
+        let newGenre = Genre(context: dataController.viewContext)
         
-        print("current cell is: \(currentCell)")
+        let currentIndexPath = [indexPath.row]
         
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
