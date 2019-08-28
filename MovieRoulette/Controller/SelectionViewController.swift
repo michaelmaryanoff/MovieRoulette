@@ -18,6 +18,8 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
+    var managedGenreSet: Set<Genre> = []
+    
     var moviesArray = [String]()
     
     var yearsArray = [Int]()
