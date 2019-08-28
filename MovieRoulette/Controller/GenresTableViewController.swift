@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import Foundation
 
 class GenresTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,13 +17,13 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
-
-    
     static var selectedIndexPathArray = [Int]()
     
     static var managedGenreSet: Set<Genre> = []
     
-   static var genreCodeSet = Set<Int>()
+    static var genreCodeSet = Set<Int>()
+    
+    var fetchedResultsController: NSFetchedResultsController<Genre>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +32,38 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         
         GenresTableViewController.genreCodeSet = []
+        let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
+        makeFetchRequest(fetchRequest)
+        
     }
     
-//    @IBAction func confirmSelection(_ sender: Any) {
-//        self.performSegue(withIdentifier: "confirmGenreSelection", sender: GenresTableViewController.genreCodeSet)
-//        
-//    }
+    fileprivate func makeFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
+        // Takes the results of the fetch request
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            print("result of fetch request is \(result)")
+            
+            let arraySet = Set(result)
+            
+            GenresTableViewController.managedGenreSet = arraySet
+            
+            
+            // Loops through the new pin array
+//            for pin in pinArray {
+//
+//                // Creates a new annotation from the results array and adds to annotations
+//                var loadedAnnotation = MKPointAnnotation()
+//                let lat = pin.latitude
+//                let long = pin.longitude
+//                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//                loadedAnnotation.coordinate = coordinate
+//                annotations.append(loadedAnnotation)
+//                mapView.addAnnotation(loadedAnnotation)
+//
+//
+//            }
+            
+        }
+    }
     
 
     // MARK: - Table view data source
@@ -47,14 +75,14 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return GenresTableViewController.genresArray.count
+        return GenreConstants.genresArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)
         
-        cell.textLabel?.text = GenresTableViewController.genresArray[indexPath.row]
+        cell.textLabel?.text = GenreConstants.genresArray[indexPath.row]
 
         // Configure the cell...
 
@@ -84,7 +112,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
-        for (key, value) in genresDictionary {
+        for (key, value) in GenreConstants.genresDictionary {
             if cellText == key {
                 genreCodeSet.insert(value)
                 print("new genreCodeSet: \(genreCodeSet)")
@@ -102,7 +130,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         let newGenre =  Genre(context: dataController.viewContext)
         if add == true {
-            for (key, value) in GenresTableViewController.genresDictionary {
+            for (key, value) in GenreConstants.genresDictionary {
                 if cellText == key {
                     
                     newGenre.genreName = cellText
@@ -121,7 +149,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
             //TODO: just pass through to main VC
         } else if add == false {
-            for (key, value) in GenresTableViewController.genresDictionary {
+            for (key, value) in GenreConstants.genresDictionary {
                 if cellText == key {
                     for item in GenresTableViewController.managedGenreSet {
                         if item.genreName == cellText {
@@ -154,7 +182,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         
-        for (key, value) in GenresTableViewController.genresDictionary {
+        for (key, value) in GenreConstants.genresDictionary {
             if cellText == key {
                 GenresTableViewController.genreCodeSet.insert(value)
                 let newGenre = Genre(context: dataController.viewContext)
@@ -180,7 +208,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
-        for (key, value) in genresDictionary {
+        for (key, value) in GenreConstants.genresDictionary {
             if cellText == key {
                 genreCodeSet.remove(value)
                 print("new genreCodeSet after removal: \(genreCodeSet)")
@@ -194,7 +222,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
-        for (key, value) in GenresTableViewController.genresDictionary {
+        for (key, value) in GenreConstants.genresDictionary {
             if cellText == key {
                 GenresTableViewController.genreCodeSet.remove(value)
                 print("new genreCodeSet after removal: \(GenresTableViewController.genreCodeSet)")

@@ -10,7 +10,7 @@ import Foundation
 
 struct GenreConstants {
     
-    static var genresArray = ["Action",
+    static let genresArray = ["Action",
                               "Adventure",
                               "Animation",
                               "Comedy",
@@ -30,7 +30,7 @@ struct GenreConstants {
                               "War",
                               "Western"]
     
-    static var genresDictionary: [String:Int] = ["Action": 28,
+    static let genresDictionary: [String:Int] = ["Action": 28,
                                                  "Adventure": 12,
                                                  "Animation": 16,
                                                  "Comedy": 35,
