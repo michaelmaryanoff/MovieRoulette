@@ -42,13 +42,6 @@
                                     <segue destination="myJ-z4-WD0" kind="show" identifier="chooseGenres" id="bX2-1e-P21"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Genres Selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phh-dn-uXp">
-                                <rect key="frame" x="131" y="255" width="153" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-yb-Rk9">
                                 <rect key="frame" x="190" y="761" width="35" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -87,6 +80,13 @@
                                     <segue destination="oZg-JT-3o3" kind="show" id="qk3-sZ-EDk"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please Select Some Genres" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phh-dn-uXp">
+                                <rect key="frame" x="20" y="255" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="DcV-Wp-obf"/>
@@ -94,6 +94,7 @@
                     <navigationItem key="navigationItem" id="115-85-kAz"/>
                     <connections>
                         <outlet property="chooseReleaseWindowButton" destination="5RW-yR-bLy" id="dOW-Lz-V6U"/>
+                        <outlet property="genresSelectedLabel" destination="phh-dn-uXp" id="oRZ-oh-CW2"/>
                         <outlet property="spinForMovieButton" destination="3FB-yb-Rk9" id="wd5-c0-uIL"/>
                     </connections>
                 </viewController>

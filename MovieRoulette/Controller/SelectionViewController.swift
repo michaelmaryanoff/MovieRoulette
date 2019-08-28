@@ -31,6 +31,7 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var spinForMovieButton: UIButton!
     @IBOutlet weak var chooseGenreButton: UIButton!
     @IBOutlet var chooseReleaseWindowButton: UIView!
+    @IBOutlet weak var genresSelectedLabel: UILabel!
     
     
     @IBAction func spinForMovie(_ sender: Any) {
@@ -57,6 +58,9 @@ class SelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
     }
     
     @IBAction func confirmGenreSelection(_ unwindSegue: UIStoryboardSegue) {
@@ -72,6 +76,11 @@ class SelectionViewController: UIViewController {
             self.genreCodeSet.insert(Int(genreId))
         }
         print("genreCodeSet after passing: \(self.genreCodeSet)")
+        if genreCodeSet.count > 0 {
+            genresSelectedLabel.text = "\(genreCodeSet.count) genres selected"
+        } else if genreCodeSet.count == 1 {
+            genresSelectedLabel.text = "\(genreCodeSet.count) genre selected"
+        }
         
     }
     

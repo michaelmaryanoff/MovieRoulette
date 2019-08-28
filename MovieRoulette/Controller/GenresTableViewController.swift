@@ -37,12 +37,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     fileprivate func makeFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            print("result of fetch request is \(result)")
             
             let arraySet = Set(result)
             
             GenresTableViewController.managedGenreSet = arraySet
-
         }
     }
     
@@ -63,9 +61,21 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)
         
+        
         cell.textLabel?.text = GenreConstants.genresArray[indexPath.row]
+        
+        for item in GenresTableViewController.managedGenreSet {
+            
+            if let itemString = item.genreName {
+                if cell.textLabel?.text == itemString {
 
-        // Configure the cell...
+                    cell.accessoryType = .checkmark
+                }
+            }
+            
+        }
+        
+
 
         return cell
     }
