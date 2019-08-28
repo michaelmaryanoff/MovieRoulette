@@ -51,8 +51,6 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         selectedIndex = indexPath.row
         let selectedActorInt = actorsIdArray[selectedIndex]
         self.selectedActorId = selectedActorInt
-        print(selectedActorInt)
-        print(self.selectedActorId)
         performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorInt)
         
         
@@ -69,7 +67,6 @@ extension ActorSearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
-            print("actorStringArray in \(#function) actorStringArray")
             self.actors = actorStringArray
             self.actorsIdArray = idIntArray
             DispatchQueue.main.async {

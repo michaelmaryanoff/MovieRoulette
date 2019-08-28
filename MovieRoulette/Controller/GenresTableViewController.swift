@@ -12,8 +12,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     var dataController: DataController!
     
-    
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
@@ -59,7 +57,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     static var selectedIndexPathArray = [Int]()
     
-    static var genreArray: Set<Genre> = []
+    static var managedGenreSet: Set<Genre> = []
     
    static var genreCodeSet = Set<Int>()
 
@@ -108,23 +106,19 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
-        let newGenre = Genre(context: dataController.viewContext)
+        
         
         let currentIndexPath = [indexPath.row]
         
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
             GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
-            
         } else {
             currentCell.accessoryType = .checkmark
             GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
-            
-            
+            addToManagedGenreSet(forCell: currentCell)
         }
-        
-        
-
+    
     }
     
     class func addToGenreCodeSet(forCell cell: UITableViewCell) {
@@ -138,6 +132,72 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             if cellText == key {
                 genreCodeSet.insert(value)
                 print("new genreCodeSet: \(genreCodeSet)")
+            }
+        }
+        
+    }
+    
+    // Adds to the managedGenreSet
+    
+    // Reusalbe function that changes the context
+    func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {
+        guard let cellText = cell.textLabel?.text else {
+            return
+        }
+        
+        if add == true {
+            for (key, value) in GenresTableViewController.genresDictionary {
+                if cellText == key {
+                    let newGenre =  Genre(context: dataController.viewContext)
+                    newGenre.genreName = cellText
+                    newGenre.genreCode = Int64(value)
+                    GenresTableViewController.managedGenreSet.insert(newGenre)
+                    do {
+                        try dataController.viewContext.save()
+                        print("newGenreName \(newGenre.genreName!)")
+                        print("newGenreId: \(newGenre.genreCode)")
+                    } catch  {
+                        print("will not save in \(#function)")
+                    }
+                }
+                
+            }
+            //TODO: just pass through to main VC
+        } else if add == false {
+            var cellIndexPath = indexPath.row
+            for item in GenresTableViewController.managedGenreSet {
+                if cell.textLabel?.text == "Hi" {
+                    
+                }
+            }
+//            var genreToDelete = GenresTableViewController.managedGenreSet[cellIndexPath]
+            
+            }
+        }
+        
+        
+    
+    func addToManagedGenreSet(forCell cell: UITableViewCell) {
+    
+        guard let cellText = cell.textLabel?.text else {
+            return
+        }
+        
+        
+        for (key, value) in GenresTableViewController.genresDictionary {
+            if cellText == key {
+                GenresTableViewController.genreCodeSet.insert(value)
+                let newGenre = Genre(context: dataController.viewContext)
+                newGenre.genreName = cellText
+                newGenre.genreCode = Int64(value)
+                do {
+                    try dataController.viewContext.save()
+                    print("newGenreName \(newGenre.genreName!)")
+                    print("newGenreId: \(newGenre.genreCode)")
+                } catch  {
+                    print("will not save in \(#function)")
+                }
+                
             }
         }
         
@@ -158,20 +218,25 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
     }
+    func removieFromMangedGenreSet(forCell cell: UITableViewCell) {
+        
+        guard let cellText = cell.textLabel?.text else {
+            return
+        }
+        
+        for (key, value) in GenresTableViewController.genresDictionary {
+            if cellText == key {
+                GenresTableViewController.genreCodeSet.remove(value)
+                print("new genreCodeSet after removal: \(GenresTableViewController.genreCodeSet)")
+                
+            }
+        }
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var setToBePassed = GenresTableViewController.genreCodeSet
     }
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "confirmGenreSelection" {
-//            let destinationVC = segue.destination as! SelectionViewController
-//            
-//            destinationVC.genreCodeSet = GenresTableViewController.genreCodeSet
-//            
-//        }
-//    }
 
 
 }

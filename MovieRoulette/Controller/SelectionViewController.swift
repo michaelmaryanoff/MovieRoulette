@@ -41,6 +41,7 @@ class SelectionViewController: UIViewController {
                     let randomNumber = Int.random(in: 0...stringArray.count)
                     print("The movie you are watching tonight is \(self.moviesArray[randomNumber])")
                     let randomMovie = self.moviesArray[randomNumber]
+                    print(self.moviesArray)
                     DispatchQueue.main.async {
                         self.presentAlertControllerDismiss(title: "The movie you are watching tonight is...", message: "\(randomMovie)")
                     }

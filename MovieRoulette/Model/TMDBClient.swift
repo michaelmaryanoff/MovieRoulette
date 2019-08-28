@@ -97,12 +97,14 @@ class TMDBClient {
                 for item in jsonArrayMap {
                     titleStringArray.append(item)
                 }
+                print(jsonArrayMap)
                 completion(true, titleStringArray, nil)
 
                 // Generating a random number using the titleStringArray as the upper limit
 
                 case .failure(let error):
                 print("Here was the error in \(#function): print \(error.localizedDescription)")
+             
             }
 
         }
