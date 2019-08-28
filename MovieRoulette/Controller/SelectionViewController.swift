@@ -65,9 +65,12 @@ class SelectionViewController: UIViewController {
             print("could not find source!")
             return
         }
-        let passedGenereCodeSet = GenresTableViewController.genreCodeSet
+        let passedGenereCodeSet = GenresTableViewController.managedGenreSet
         print("passedGenreCodeSet: \(passedGenereCodeSet)")
-        self.genreCodeSet = passedGenereCodeSet
+        for item in passedGenereCodeSet {
+            var genreId = item.genreCode
+            self.genreCodeSet.insert(Int(genreId))
+        }
         print("genreCodeSet after passing: \(self.genreCodeSet)")
         
     }

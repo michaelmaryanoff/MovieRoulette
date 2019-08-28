@@ -21,8 +21,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     static var managedGenreSet: Set<Genre> = []
     
-    static var genreCodeSet = Set<Int>()
-    
     var fetchedResultsController: NSFetchedResultsController<Genre>!
 
     override func viewDidLoad() {
@@ -31,7 +29,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        GenresTableViewController.genreCodeSet = []
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         makeFetchRequest(fetchRequest)
         
@@ -45,23 +42,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             let arraySet = Set(result)
             
             GenresTableViewController.managedGenreSet = arraySet
-            
-            
-            // Loops through the new pin array
-//            for pin in pinArray {
-//
-//                // Creates a new annotation from the results array and adds to annotations
-//                var loadedAnnotation = MKPointAnnotation()
-//                let lat = pin.latitude
-//                let long = pin.longitude
-//                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-//                loadedAnnotation.coordinate = coordinate
-//                annotations.append(loadedAnnotation)
-//                mapView.addAnnotation(loadedAnnotation)
-//
-//
-//            }
-            
+
         }
     }
     
@@ -103,22 +84,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             changeManagedGenreSet(forCell: currentCell, add: true, indexPath: indexPath)
         }
 
-    }
-
-    class func addToGenreCodeSet(forCell cell: UITableViewCell) {
-        
-        guard let cellText = cell.textLabel?.text else {
-            print("nil returned in \(#function)")
-            return
-        }
-        
-        for (key, value) in GenreConstants.genresDictionary {
-            if cellText == key {
-                genreCodeSet.insert(value)
-                print("new genreCodeSet: \(genreCodeSet)")
-            }
-        }
-        
     }
     
     // Adds to the managedGenreSet
@@ -172,68 +137,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             
             }
         }
-        
-        
     
-    func addToManagedGenreSet(forCell cell: UITableViewCell) {
-    
-        guard let cellText = cell.textLabel?.text else {
-            return
-        }
-        
-        
-        for (key, value) in GenreConstants.genresDictionary {
-            if cellText == key {
-                GenresTableViewController.genreCodeSet.insert(value)
-                let newGenre = Genre(context: dataController.viewContext)
-                newGenre.genreName = cellText
-                newGenre.genreCode = Int64(value)
-                do {
-                    try dataController.viewContext.save()
-                    print("newGenreName \(newGenre.genreName!)")
-                    print("newGenreId: \(newGenre.genreCode)")
-                } catch  {
-                    print("will not save in \(#function)")
-                }
-                
-            }
-        }
-        
-    }
-    
-    class func removeFromGenreCodeSet(forCell cell: UITableViewCell) {
-        
-        guard let cellText = cell.textLabel?.text else {
-            print("nil returned in \(#function)")
-            return
-        }
-        
-        for (key, value) in GenreConstants.genresDictionary {
-            if cellText == key {
-                genreCodeSet.remove(value)
-                print("new genreCodeSet after removal: \(genreCodeSet)")
-            }
-        }
-        
-    }
-    func removieFromMangedGenreSet(forCell cell: UITableViewCell) {
-        
-        guard let cellText = cell.textLabel?.text else {
-            return
-        }
-        
-        for (key, value) in GenreConstants.genresDictionary {
-            if cellText == key {
-                GenresTableViewController.genreCodeSet.remove(value)
-                print("new genreCodeSet after removal: \(GenresTableViewController.genreCodeSet)")
-                
-            }
-        }
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var setToBePassed = GenresTableViewController.genreCodeSet
+        var setToBePassed = GenresTableViewController.managedGenreSet
     }
 
 
