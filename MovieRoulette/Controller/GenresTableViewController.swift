@@ -15,45 +15,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
-    static var genresArray = ["Action",
-                       "Adventure",
-                       "Animation",
-                       "Comedy",
-                       "Crime",
-                       "Documentary",
-                       "Drama",
-                       "Family",
-                       "Fantasy",
-                       "History",
-                       "Horror",
-                       "Music",
-                       "Mystery",
-                       "Romance",
-                       "Science Fiction",
-                       "TV Movie",
-                       "Thriller",
-                       "War",
-                       "Western"]
-    
-    static var genresDictionary: [String:Int] = ["Action": 28,
-                                          "Adventure": 12,
-                                          "Animation": 16,
-                                          "Comedy": 35,
-                                          "Crime": 80,
-                                          "Documentary": 99,
-                                          "Drama": 18,
-                                          "Family": 10751,
-                                          "Fantasy": 14,
-                                          "History": 36,
-                                          "Horror": 27,
-                                          "Music": 10402,
-                                          "Mystery": 9648,
-                                          "Romance": 10749,
-                                          "Science Fiction": 878,
-                                          "TV Movie": 10770,
-                                          "Thriller": 53,
-                                          "War": 10752,
-                                          "Western": 37]
+
     
     static var selectedIndexPathArray = [Int]()
     
@@ -99,51 +61,22 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        guard let currentCell = tableView.cellForRow(at: indexPath) else {
-//            print("nothing selected 1")
-//            return
-//        }
-//
-//
-//
-//        let currentIndexPath = [indexPath.row]
-//
-//        if currentCell.accessoryType == .checkmark {
-//            currentCell.accessoryType = .none
-//            GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
-//        } else {
-//            currentCell.accessoryType = .checkmark
-//            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
-//            addToManagedGenreSet(forCell: currentCell)
-//        }
-//
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         guard let currentCell = tableView.cellForRow(at: indexPath) else {
-            print("nothing selected 1")
             return
         }
-        let currentIndexPath = [indexPath.row]
 
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
-//            GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
             changeManagedGenreSet(forCell: currentCell, add: false, indexPath: indexPath)
         } else {
             currentCell.accessoryType = .checkmark
-//            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
-//            addToManagedGenreSet(forCell: currentCell)
             changeManagedGenreSet(forCell: currentCell, add: true, indexPath: indexPath)
         }
 
     }
 
-    
-    
     class func addToGenreCodeSet(forCell cell: UITableViewCell) {
         
         guard let cellText = cell.textLabel?.text else {

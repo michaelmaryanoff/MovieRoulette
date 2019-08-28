@@ -16,6 +16,7 @@
 		CB165BD6230C6C2100688014 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB165BD4230C6C2100688014 /* LaunchScreen.storyboard */; };
 		CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D867C230C805C004FEFED /* TMDBClient.swift */; };
 		CB8117D623159498009A3D44 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8117D523159498009A3D44 /* DataController.swift */; };
+		CBBE09462316C1910092044B /* GenresConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBE09452316C1910092044B /* GenresConstants.swift */; };
 		CBC3F780230DEF3F00862D5B /* GenresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */; };
 		CBE5D59723108A8300C7E2E4 /* ReleaseWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */; };
 		CBF272A523144CC200B45E92 /* ActorSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */; };
@@ -34,6 +35,7 @@
 		CB165BD7230C6C2100688014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB7D867C230C805C004FEFED /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		CB8117D523159498009A3D44 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		CBBE09452316C1910092044B /* GenresConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresConstants.swift; sourceTree = "<group>"; };
 		CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresTableViewController.swift; sourceTree = "<group>"; };
 		CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseWindowViewController.swift; sourceTree = "<group>"; };
 		CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorSearchViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				CB165BCF230C6C2100688014 /* MovieRoulette.xcdatamodeld */,
 				CB7D867C230C805C004FEFED /* TMDBClient.swift */,
 				CB8117D523159498009A3D44 /* DataController.swift */,
+				CBBE09452316C1910092044B /* GenresConstants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				CBF272A523144CC200B45E92 /* ActorSearchViewController.swift in Sources */,
 				CBE5D59723108A8300C7E2E4 /* ReleaseWindowViewController.swift in Sources */,
 				CBC3F780230DEF3F00862D5B /* GenresTableViewController.swift in Sources */,
+				CBBE09462316C1910092044B /* GenresConstants.swift in Sources */,
 				CB165BD1230C6C2100688014 /* MovieRoulette.xcdatamodeld in Sources */,
 				CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */,
 				CB8117D623159498009A3D44 /* DataController.swift in Sources */,
