@@ -99,27 +99,50 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        guard let currentCell = tableView.cellForRow(at: indexPath) else {
+//            print("nothing selected 1")
+//            return
+//        }
+//
+//
+//
+//        let currentIndexPath = [indexPath.row]
+//
+//        if currentCell.accessoryType == .checkmark {
+//            currentCell.accessoryType = .none
+//            GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
+//        } else {
+//            currentCell.accessoryType = .checkmark
+//            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
+//            addToManagedGenreSet(forCell: currentCell)
+//        }
+//
+//    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         guard let currentCell = tableView.cellForRow(at: indexPath) else {
             print("nothing selected 1")
             return
         }
-        
-        
-        
         let currentIndexPath = [indexPath.row]
-        
+
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
-            GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
+//            GenresTableViewController.removeFromGenreCodeSet(forCell: currentCell)
+            changeManagedGenreSet(forCell: currentCell, add: false, indexPath: indexPath)
         } else {
             currentCell.accessoryType = .checkmark
-            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
-            addToManagedGenreSet(forCell: currentCell)
+//            GenresTableViewController.addToGenreCodeSet(forCell: currentCell)
+//            addToManagedGenreSet(forCell: currentCell)
+            changeManagedGenreSet(forCell: currentCell, add: true, indexPath: indexPath)
         }
-    
+
     }
+
+    
     
     class func addToGenreCodeSet(forCell cell: UITableViewCell) {
         
@@ -144,18 +167,19 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         guard let cellText = cell.textLabel?.text else {
             return
         }
-        
+        let newGenre =  Genre(context: dataController.viewContext)
         if add == true {
             for (key, value) in GenresTableViewController.genresDictionary {
                 if cellText == key {
-                    let newGenre =  Genre(context: dataController.viewContext)
+                    
                     newGenre.genreName = cellText
                     newGenre.genreCode = Int64(value)
                     GenresTableViewController.managedGenreSet.insert(newGenre)
                     do {
-                        try dataController.viewContext.save()
+                        try dataController.viewContext.save() 
                         print("newGenreName \(newGenre.genreName!)")
                         print("newGenreId: \(newGenre.genreCode)")
+                        print("After save set: \(GenresTableViewController.managedGenreSet)")
                     } catch  {
                         print("will not save in \(#function)")
                     }
@@ -164,13 +188,26 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
             //TODO: just pass through to main VC
         } else if add == false {
-            var cellIndexPath = indexPath.row
-            for item in GenresTableViewController.managedGenreSet {
-                if cell.textLabel?.text == "Hi" {
+            for (key, value) in GenresTableViewController.genresDictionary {
+                if cellText == key {
+                    for item in GenresTableViewController.managedGenreSet {
+                        if item.genreName == cellText {
+                        GenresTableViewController.managedGenreSet.remove(item)
+                        do {
+                            self.dataController.viewContext.delete(item)
+                            try self.dataController.viewContext.save()
+                            print("After delete set: \(GenresTableViewController.managedGenreSet)")
+                        } catch {
+                            print("could not delete!")
+                        }
+                        }
+                    }
+                    
+                    
                     
                 }
             }
-//            var genreToDelete = GenresTableViewController.managedGenreSet[cellIndexPath]
+        
             
             }
         }
