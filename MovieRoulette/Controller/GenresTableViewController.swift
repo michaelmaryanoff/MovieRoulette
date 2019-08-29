@@ -157,6 +157,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 extension GenresTableViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         print("\(#function) has been called")
+        print("The VC is \(viewController.title)")
         let newSelectionVC = viewController as? SelectionViewController
         if viewController == newSelectionVC {
             SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray

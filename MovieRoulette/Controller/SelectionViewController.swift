@@ -57,23 +57,20 @@ class SelectionViewController: UIViewController {
         
         print("SelectionViewController.managedGenreSet in controller itself: \(SelectionViewController.managedGenreArray)")
         
-        
         let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
+        
         if SelectionViewController.managedGenreArray.isEmpty {
             makeFetchRequest(fetchrequest)
         }
         
-        
         print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
         for item in SelectionViewController.managedGenreArray {
-            deleteEmptyGenres()
-            print("item in mGS - \(item.genreCode)")
-            print("item in mGS - \(item.genreName)")
+            deleteAllEmptyGenres()
         }
-        if SelectionViewController.managedGenreArray.count == 1 {
-            genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genre selected"
+        if GenresTableViewController.managedGenreArray.count == 1 {
+            genresSelectedLabel.text = "\(GenresTableViewController.managedGenreArray.count) genre selected"
         } else if SelectionViewController.managedGenreArray.count > 0 {
-            genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genres selected"
+            genresSelectedLabel.text = "\(GenresTableViewController.managedGenreArray.count) genres selected"
         } else {
             genresSelectedLabel.text = "No genres selected"
         }
@@ -90,7 +87,7 @@ class SelectionViewController: UIViewController {
         
     }
     
-    fileprivate func deleteEmptyGenres() {
+    fileprivate func deleteAllEmptyGenres() {
         for genre in SelectionViewController.managedGenreArray {
             if genre.genreCode == Int64(0) {
                 dataController.viewContext.delete(genre)
@@ -104,11 +101,22 @@ class SelectionViewController: UIViewController {
         }
     }
     
+    func deleteEmptyGenre(withGenre genre: Genre) -> Void {
+        if genre.genreCode == 0 {
+            dataController.viewContext.delete(genre)
+        }
+    }
+    
     fileprivate func makeFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
         
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            print("here is the result: \(result)")
+            
+            print("The result in SelectinoViewController is: \(result)")
+            
+            for item in result {
+                deleteEmptyGenre(withGenre: item)
+            }
             
             SelectionViewController.managedGenreArray = result
             
