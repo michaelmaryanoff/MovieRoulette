@@ -35,7 +35,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         self.navigationController?.delegate = self
         
-        print("Managed genre array is in viewDidLoad \(GenresTableViewController.managedGenreArray)")
+//        print("Managed genre array is in viewDidLoad \(GenresTableViewController.managedGenreArray)")
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -123,7 +123,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                                 GenresTableViewController.managedGenreArray.remove(at: genreIndex)
                                 self.dataController.viewContext.delete(item)
                                 GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count
-                                print("Count of GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count is \(GenresTableViewController.managedGenreArray.count)")
+//                                print("Count of GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count is \(GenresTableViewController.managedGenreArray.count)")
                             }
                     }
                 }

@@ -22,7 +22,7 @@ class SelectionViewController: UIViewController {
     
     static var managedGenreArray = [Genre]()
     
-    var numberOfGenresSelected = 0
+    static var managedGenreArrayCount = 0
     
     var moviesArray = [String]()
     
@@ -43,7 +43,15 @@ class SelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DispatchQueue.main.async {
+            if SelectionViewController.managedGenreArray.count == 1 {
+                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genre selected"
+            } else if SelectionViewController.managedGenreArray.count > 0 {
+                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genres selected"
+            } else {
+                self.genresSelectedLabel.text = "No genres selected"
+            }
+        }
         
     }
     
@@ -55,25 +63,20 @@ class SelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("SelectionViewController.managedGenreSet in controller itself: \(SelectionViewController.managedGenreArray)")
+        print("SelectionViewController.managedGenreArry in controller itself: \(SelectionViewController.managedGenreArray)")
         
         let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         
         if SelectionViewController.managedGenreArray.isEmpty {
             makeFetchRequest(fetchrequest)
         }
-        
-        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
+    
+//        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
         for item in SelectionViewController.managedGenreArray {
             deleteAllEmptyGenres()
         }
-        if GenresTableViewController.managedGenreArray.count == 1 {
-            genresSelectedLabel.text = "\(GenresTableViewController.managedGenreArray.count) genre selected"
-        } else if SelectionViewController.managedGenreArray.count > 0 {
-            genresSelectedLabel.text = "\(GenresTableViewController.managedGenreArray.count) genres selected"
-        } else {
-            genresSelectedLabel.text = "No genres selected"
-        }
+        
+        
         
         do {
             try dataController.viewContext.save()
@@ -112,7 +115,8 @@ class SelectionViewController: UIViewController {
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
             
-            print("The result in SelectinoViewController is: \(result)")
+//            print("The result in SelectinoViewController is: \(result)")
+            print("The result count of SelectionViewControllerCount is\(result.count)")
             
             for item in result {
                 deleteEmptyGenre(withGenre: item)
