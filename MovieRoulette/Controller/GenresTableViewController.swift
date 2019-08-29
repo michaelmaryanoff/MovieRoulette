@@ -17,22 +17,30 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
-    static var managedGenreSet: Set<Genre> = []
+    static var managedGenreSet = Set<Genre>()
     
     var fetchedResultsController: NSFetchedResultsController<Genre>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setting the delegate for the table view
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.navigationController?.delegate = self
         
+        // Creating a fetch request
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
-        makeFetchRequest(fetchRequest)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        
+        GenresTableViewController.managedGenreSet = []
+        // Fetch requesting but only if set is empty
+        if GenresTableViewController.managedGenreSet.isEmpty{
+            makeFetchRequest(fetchRequest)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
+        
         
     }
     
@@ -155,18 +163,23 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var setToBePassed = GenresTableViewController.managedGenreSet
-    }
-
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        SelectionViewController.managedGenreSet = GenresTableViewController.managedGenreSet
+//    }
 
 }
 
 extension GenresTableViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         print("\(#function) has been called")
-        print("viewController showed in \(#function): \(viewController)")
-        (viewController as? SelectionViewController)?.managedGenreSet = GenresTableViewController.managedGenreSet
+        let newSelectionVC = viewController as? SelectionViewController
+        let newGenresVC = viewController as? GenresTableViewController
+        if viewController == newSelectionVC {
+            SelectionViewController.managedGenreSet = GenresTableViewController.managedGenreSet
+            print("SelectionViewController.managedGenreSet in navigation function: \(SelectionViewController.managedGenreSet)")
+        } else {
+            print("this ain't it chief")
+        }
     }
-    
+
 }

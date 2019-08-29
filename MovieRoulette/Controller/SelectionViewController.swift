@@ -20,7 +20,7 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
-    var managedGenreSet: Set<Genre> = []
+    static var managedGenreSet = Set<Genre>()
     
     var numberOfGenresSelected = 0
     
@@ -43,8 +43,8 @@ class SelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
-        makeFetchRequest(fetchrequest)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,29 +54,36 @@ class SelectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("SelectionViewController.managedGenreSet in controller itself: \(SelectionViewController.managedGenreSet)")
         
-        print("managedGenreSet in SelectionVC: \(managedGenreSet)")
-        for item in managedGenreSet {
+        
+//        let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
+//        if SelectionViewController.managedGenreSet.isEmpty {
+//            makeFetchRequest(fetchrequest)
+//        }
+        
+        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreSet)")
+        for item in SelectionViewController.managedGenreSet {
             print("item in mGS - \(item.genreCode)")
             print("item in mGS - \(item.genreName)")
         }
-        if self.managedGenreSet.count == 1 {
-            genresSelectedLabel.text = "\(self.managedGenreSet.count) genre selected"
-        } else if self.managedGenreSet.count > 0 {
-            genresSelectedLabel.text = "\(self.managedGenreSet.count) genres selected"
+        if SelectionViewController.managedGenreSet.count == 1 {
+            genresSelectedLabel.text = "\(SelectionViewController.managedGenreSet.count) genre selected"
+        } else if SelectionViewController.managedGenreSet.count > 0 {
+            genresSelectedLabel.text = "\(SelectionViewController.managedGenreSet.count) genres selected"
         } else {
             genresSelectedLabel.text = "No genres selected"
         }
         
-//        do {
-//            try dataController.viewContext.save()
-//            print("saved in viewWillAppear")
-//        } catch  {
-//            print("will not save in \(#function)")
-//        }
+        do {
+            try dataController.viewContext.save()
+            print("saved in viewWillAppear")
+        } catch  {
+            print("will not save in \(#function)")
+        }
         
         print("viewWillAppear")
-        print("mangedGenreSet.count: \(managedGenreSet.count)")
+        print("mangedGenreSet.count: \(SelectionViewController.managedGenreSet.count)")
         
     }
     
@@ -88,7 +95,7 @@ class SelectionViewController: UIViewController {
             
             let arraySet = Set(result)
             
-            self.managedGenreSet = arraySet
+            SelectionViewController.managedGenreSet = arraySet
             
         }
     }
