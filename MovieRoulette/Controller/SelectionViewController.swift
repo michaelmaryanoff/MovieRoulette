@@ -44,18 +44,18 @@ class SelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        print("viewDidLoadCalled")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        print("viewDidAppearCalled")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        print("SelectionViewController.managedGenreArry in controller itself: \(SelectionViewController.managedGenreArray)")
+        print("viewwillAppearcalled")
+//        print("SelectionViewController.managedGenreArry in controller itself: \(SelectionViewController.managedGenreArray)")
         
         let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         

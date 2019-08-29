@@ -43,6 +43,15 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewwilldissapear")
+        
+                    SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
+        print("SelectionViewController.managedGenreArray \(SelectionViewController.managedGenreArray)")
+        print("GenresTableViewController.managedGenreArray \(GenresTableViewController.managedGenreArray)")
+    }
+    
 
     // MARK: - Table view data source methods
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,6 +118,11 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                     print("new genre array is \(GenresTableViewController.managedGenreArray)")
                     GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count
                     print("Count of GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count is \(GenresTableViewController.managedGenreArray.count)")
+                    do {
+                        try dataController.viewContext.save()
+                    } catch {
+                        print("could not save in \(#function)")
+                    }
                 }
                 
             }
@@ -123,6 +137,12 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                                 GenresTableViewController.managedGenreArray.remove(at: genreIndex)
                                 self.dataController.viewContext.delete(item)
                                 GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count
+                                do {
+                                    try dataController.viewContext.save()
+                                    print("new could is \(GenresTableViewController.managedGenreArray.count)")
+                                } catch {
+                                    print("could not save in \(#function)")
+                                }
 //                                print("Count of GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count is \(GenresTableViewController.managedGenreArray.count)")
                             }
                     }
@@ -157,10 +177,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 extension GenresTableViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         print("\(#function) has been called")
-        print("The VC is \(viewController.title)")
         let newSelectionVC = viewController as? SelectionViewController
         if viewController == newSelectionVC {
-            SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
+            print("there is a new thing happening in town")
+//            SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
             print("SelectionViewController.managedGenreSet in navigation function: \(SelectionViewController.managedGenreArray)")
         } else {
             print("this ain't it chief")
