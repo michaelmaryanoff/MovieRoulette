@@ -43,15 +43,7 @@ class SelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-            if SelectionViewController.managedGenreArray.count == 1 {
-                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genre selected"
-            } else if SelectionViewController.managedGenreArray.count > 0 {
-                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genres selected"
-            } else {
-                self.genresSelectedLabel.text = "No genres selected"
-            }
-        }
+        
         
     }
     
@@ -67,9 +59,9 @@ class SelectionViewController: UIViewController {
         
         let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         
-        if SelectionViewController.managedGenreArray.isEmpty {
+//        if SelectionViewController.managedGenreArray.isEmpty {
             makeFetchRequest(fetchrequest)
-        }
+//        }
     
 //        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
         for item in SelectionViewController.managedGenreArray {
@@ -123,6 +115,17 @@ class SelectionViewController: UIViewController {
             }
             
             SelectionViewController.managedGenreArray = result
+            print("result count is: \(result.count)")
+            
+            DispatchQueue.main.async {
+                if result.count == 1 {
+                    self.genresSelectedLabel.text = "\(result.count) genre selected"
+                } else if result.count > 0 {
+                    self.genresSelectedLabel.text = "\(result.count) genres selected"
+                } else {
+                    self.genresSelectedLabel.text = "No genres selected"
+                }
+            }
             
         }
     }
