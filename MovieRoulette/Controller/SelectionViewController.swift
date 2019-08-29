@@ -32,7 +32,7 @@ class SelectionViewController: UIViewController {
     
     var yearTo: Int = 2019
     
-    var yearRange = YearRange()
+    static var yearRange = YearRange()
     
     var actorId = Int()
     
@@ -60,10 +60,13 @@ class SelectionViewController: UIViewController {
         print("viewwillAppearcalled")
 //        print("SelectionViewController.managedGenreArry in controller itself: \(SelectionViewController.managedGenreArray)")
         
-        let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
+        let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
+        let yearRangeFetchRequest: NSFetchRequest<YearRange> = YearRange.fetchRequest()
+        
         
 //        if SelectionViewController.managedGenreArray.isEmpty {
-            makeFetchRequest(fetchrequest)
+            makeGenreFetchRequest(genreFetchrequest)
+            makeYearRangeFetchRequest(yearRangeFetchRequest)
 //        }
     
 //        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
@@ -105,7 +108,7 @@ class SelectionViewController: UIViewController {
         }
     }
     
-    fileprivate func makeFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
+    fileprivate func makeGenreFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
         
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
@@ -129,6 +132,31 @@ class SelectionViewController: UIViewController {
                     self.genresSelectedLabel.text = "No genres selected"
                 }
             }
+            
+        }
+    }
+    
+    fileprivate func makeYearRangeFetchRequest(_ fetchRequest: NSFetchRequest<YearRange>) {
+        
+        // Takes the results of the fetch request
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            
+            //            print("The result in SelectinoViewController is: \(result)")
+            print("The yearRange result of SelectionViewControllerCount is\(result)")
+            print("The count of yearRangeFetchRequest is \(result.count)")
+            
+            
+//            SelectionViewController.yearRange = result
+            
+            if let firstResult = result.first {
+                SelectionViewController.yearRange = firstResult
+            }
+            
+            
+            print("result count of yearRange is: \(result.count)")
+            print("SelectionViewController.yearRange.yearFrom: \(SelectionViewController.yearRange.yearFrom)")
+            
+            
             
         }
     }
@@ -222,7 +250,7 @@ class SelectionViewController: UIViewController {
             GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
         } else if segue.identifier == "chooseReleaseWindow" {
             let destinationVC = segue.destination as! ReleaseWindowViewController
-            destinationVC.dataController = dataController
+            ReleaseWindowViewController.dataController = dataController
         }
     }
     

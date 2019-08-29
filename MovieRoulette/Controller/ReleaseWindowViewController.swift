@@ -21,9 +21,9 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     
     static var yearTo: Int = 2019
     
-    static var releaseWindow = YearRange()
+    static var releaseWindow = YearRange(context: ReleaseWindowViewController.dataController.viewContext)
     
-    var dataController: DataController!
+    static var dataController: DataController!
 
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
     
@@ -33,6 +33,16 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         releaseYearPickerView.delegate = self
         releaseYearPickerView.delegate = self
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        do {
+            try ReleaseWindowViewController.dataController.viewContext.save()
+        } catch {
+            print("could not save this")
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -60,11 +70,36 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
             secondSectionValue = yearRangeInt
             }
         
-        ReleaseWindowViewController.yearFrom = min(firstSectionValue, secondSectionValue)
-        ReleaseWindowViewController.yearTo = max(firstSectionValue, secondSectionValue)
+        
+        
+//        ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
+//        ReleaseWindowViewController.releaseWindow.yearFrom = Int64(max(firstSectionValue, secondSectionValue))
+        
+        ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
+        ReleaseWindowViewController.releaseWindow.yearTo = Int64(max(firstSectionValue, secondSectionValue))
+        
         
         print("yearFrom: \(ReleaseWindowViewController.yearFrom)")
         print("yearTo: \(ReleaseWindowViewController.yearTo)")
+    }
+    
+}
+
+extension ReleaseWindowViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        print("\(#function) has been called in releasewindow vc")
+        let newSelectionVC = viewController as? SelectionViewController
+        if viewController == newSelectionVC {
+            SelectionViewController.yearRange.yearFrom = ReleaseWindowViewController.releaseWindow.yearFrom
+            SelectionViewController.yearRange.yearFrom = ReleaseWindowViewController.releaseWindow.yearTo
+        } else {
+            print("this ain't it chief")
+        }
+//        do {
+//            try dataController.viewContext.save()
+//        } catch {
+//            print("could not save")
+//        }
     }
     
 }
