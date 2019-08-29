@@ -17,8 +17,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
-    static var selectedIndexPathArray = [Int]()
-    
     static var managedGenreSet: Set<Genre> = []
     
     var fetchedResultsController: NSFetchedResultsController<Genre>!
@@ -28,9 +26,13 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.navigationController?.delegate = self
         
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         makeFetchRequest(fetchRequest)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         
     }
     
@@ -39,6 +41,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
             
+            for item in result {
+                print("the result in makeFetchRequest for GenresTableViewController is \(item.genreCode)")
+                print("the result in makeFetchRequest for GenresTableViewController is \(item.genreName ?? "could not find name")")
+            }
             
             let arraySet = Set(result)
             
@@ -58,28 +64,22 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)
-        
         
         cell.textLabel?.text = GenreConstants.genresArray[indexPath.row]
         
         for item in GenresTableViewController.managedGenreSet {
             if let itemString = item.genreName {
+
                 if cell.textLabel?.text == itemString {
+
                     cell.accessoryType = .checkmark
                 }
+
             }
-            
+
         }
-        
-        
-        
-        
-
-
         return cell
     }
     
@@ -90,8 +90,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
-        
-
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
             changeManagedGenreSet(forCell: currentCell, add: false, indexPath: indexPath)
@@ -102,14 +100,15 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     
-    // Adds to the managedGenreSet
-    
     // Reusable function that changes the context
     func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {
         guard let cellText = cell.textLabel?.text else {
             return
         }
+        
+        
         let newGenre =  Genre(context: dataController.viewContext)
+        
         if add == true {
             print("add true")
             for (key, value) in GenreConstants.genresDictionary {
@@ -118,10 +117,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                     newGenre.genreCode = Int64(value)
                     GenresTableViewController.managedGenreSet.insert(newGenre)
                     do {
-                        try dataController.viewContext.save() 
+                        try dataController.viewContext.save()
+                        print("GenresTableViewController.managedGenreSet after save \(GenresTableViewController.managedGenreSet)")
                         print("newGenreName \(newGenre.genreName!)")
                         print("newGenreId: \(newGenre.genreCode)")
-                        print("After save set: \(GenresTableViewController.managedGenreSet)")
                     } catch  {
                         print("will not save in \(#function)")
                     }
@@ -132,22 +131,25 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             print("add false")
             for (key, value) in GenreConstants.genresDictionary {
                 if cellText == key {
+                    print("cellText is \(cellText)")
                     for item in GenresTableViewController.managedGenreSet {
                         if item.genreName == cellText {
                             print("item for deletion is \(item)")
+//                            GenresTableViewController.managedGenreSet.remove(item)
+                            GenresTableViewController.managedGenreSet = GenresTableViewController.managedGenreSet.filter { $0.genreName != item.genreName }
                         do {
-                            GenresTableViewController.managedGenreSet.remove(item)
                             self.dataController.viewContext.delete(item)
                             try self.dataController.viewContext.save()
                             print("After delete set: \(GenresTableViewController.managedGenreSet)")
+                            print("count after delete set: \(GenresTableViewController.managedGenreSet.count)")
                         } catch {
                             print("could not delete!")
                         }
-                        }
                     }
-                    
                 }
+                    
             }
+        }
         
             
             }
@@ -162,6 +164,9 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
 extension GenresTableViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        print("\(#function) has been called")
+        print("viewController showed in \(#function): \(viewController)")
         (viewController as? SelectionViewController)?.managedGenreSet = GenresTableViewController.managedGenreSet
     }
+    
 }
