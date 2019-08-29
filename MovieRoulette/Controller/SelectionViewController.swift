@@ -20,7 +20,7 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
-    static var managedGenreSet = [Genre]()
+    static var managedGenreArray = [Genre]()
     
     var numberOfGenresSelected = 0
     
@@ -54,23 +54,26 @@ class SelectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("SelectionViewController.managedGenreSet in controller itself: \(SelectionViewController.managedGenreSet)")
+        
+        print("SelectionViewController.managedGenreSet in controller itself: \(SelectionViewController.managedGenreArray)")
         
         
-//        let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
-//        if SelectionViewController.managedGenreSet.isEmpty {
-//            makeFetchRequest(fetchrequest)
-//        }
+        let fetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
+        if SelectionViewController.managedGenreArray.isEmpty {
+            makeFetchRequest(fetchrequest)
+        }
         
-        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreSet)")
-        for item in SelectionViewController.managedGenreSet {
+        
+        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
+        for item in SelectionViewController.managedGenreArray {
+            deleteEmptyGenres()
             print("item in mGS - \(item.genreCode)")
             print("item in mGS - \(item.genreName)")
         }
-        if SelectionViewController.managedGenreSet.count == 1 {
-            genresSelectedLabel.text = "\(SelectionViewController.managedGenreSet.count) genre selected"
-        } else if SelectionViewController.managedGenreSet.count > 0 {
-            genresSelectedLabel.text = "\(SelectionViewController.managedGenreSet.count) genres selected"
+        if SelectionViewController.managedGenreArray.count == 1 {
+            genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genre selected"
+        } else if SelectionViewController.managedGenreArray.count > 0 {
+            genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genres selected"
         } else {
             genresSelectedLabel.text = "No genres selected"
         }
@@ -83,8 +86,22 @@ class SelectionViewController: UIViewController {
         }
         
         print("viewWillAppear")
-        print("mangedGenreSet.count: \(SelectionViewController.managedGenreSet.count)")
+        print("mangedGenreSet.count: \(SelectionViewController.managedGenreArray.count)")
         
+    }
+    
+    fileprivate func deleteEmptyGenres() {
+        for genre in SelectionViewController.managedGenreArray {
+            if genre.genreCode == Int64(0) {
+                dataController.viewContext.delete(genre)
+                do {
+                    try self.dataController.viewContext.save()
+                } catch {
+                    print("could not delete these photos")
+                }
+            }
+            
+        }
     }
     
     fileprivate func makeFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
@@ -93,7 +110,7 @@ class SelectionViewController: UIViewController {
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
             print("here is the result: \(result)")
             
-            SelectionViewController.managedGenreSet = result
+            SelectionViewController.managedGenreArray = result
             
         }
     }
@@ -184,6 +201,7 @@ class SelectionViewController: UIViewController {
         if segue.identifier == "chooseGenres" {
             let destinationVC = segue.destination as! GenresTableViewController
             destinationVC.dataController = dataController
+            GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
         } else if segue.identifier == "chooseReleaseWindow" {
             let controller = segue.destination as! ReleaseWindowViewController
         }
