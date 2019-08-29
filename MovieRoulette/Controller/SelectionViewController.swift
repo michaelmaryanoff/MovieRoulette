@@ -20,7 +20,7 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
-    static var managedGenreSet = Set<Genre>()
+    static var managedGenreSet = [Genre]()
     
     var numberOfGenresSelected = 0
     
@@ -93,9 +93,7 @@ class SelectionViewController: UIViewController {
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
             print("here is the result: \(result)")
             
-            let arraySet = Set(result)
-            
-            SelectionViewController.managedGenreSet = arraySet
+            SelectionViewController.managedGenreSet = result
             
         }
     }
@@ -106,7 +104,7 @@ class SelectionViewController: UIViewController {
             print("could not find source!")
             return
         }
-        let passedGenereCodeSet = GenresTableViewController.managedGenreSet
+        let passedGenereCodeSet = GenresTableViewController.managedGenreArray
         print("passedGenreCodeSet: \(passedGenereCodeSet)")
         for item in passedGenereCodeSet {
             var genreId = item.genreCode

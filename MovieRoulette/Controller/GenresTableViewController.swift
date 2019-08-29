@@ -17,7 +17,9 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
-    static var managedGenreSet = [Genre]
+    static var managedGenreArray = [Genre]()
+    
+    static var codeArray = [Int]()
     
     var fetchedResultsController: NSFetchedResultsController<Genre>!
 
@@ -29,18 +31,11 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         self.navigationController?.delegate = self
         
+        GenresTableViewController.managedGenreArray = []
         // Creating a fetch request
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
-        
-//        GenresTableViewController.managedGenreSet = []
+
         makeFetchRequest(fetchRequest)
-        // Fetch requesting but only if set is empty
-//        if GenresTableViewController.managedGenreSet.isEmpty{
-//
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
         
         
     }
@@ -54,11 +49,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                 print("the result in makeFetchRequest for GenresTableViewController is \(item.genreCode)")
                 print("the result in makeFetchRequest for GenresTableViewController is \(item.genreName ?? "could not find name")")
             }
-            
-            let arraySet = Set(result)
-            
-            GenresTableViewController.managedGenreSet = arraySet
-            
+            GenresTableViewController.managedGenreArray = result
         }
     }
     
@@ -78,12 +69,15 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.textLabel?.text = GenreConstants.genresArray[indexPath.row]
         
-        for item in GenresTableViewController.managedGenreSet {
+        for item in GenresTableViewController.managedGenreArray {
+            
             if let itemString = item.genreName {
 
                 if cell.textLabel?.text == itemString {
 
                     cell.accessoryType = .checkmark
+                } else {
+                    cell.accessoryType = .none
                 }
 
             }
@@ -111,6 +105,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     // Reusable function that changes the context
     func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {
+        
         guard let cellText = cell.textLabel?.text else {
             return
         }
@@ -121,13 +116,13 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         if add == true {
             print("add true")
             for (key, value) in GenreConstants.genresDictionary {
-                if cellText == key {
+                if cellText == key && !GenresTableViewController.doesArrayContain(genreName: cellText) {
                     newGenre.genreName = cellText
                     newGenre.genreCode = Int64(value)
-                    GenresTableViewController.managedGenreSet.insert(newGenre)
+                    GenresTableViewController.managedGenreArray.append(newGenre)
                     do {
                         try dataController.viewContext.save()
-                        print("GenresTableViewController.managedGenreSet after save \(GenresTableViewController.managedGenreSet)")
+                        print("GenresTableViewController.managedGenreSet after save \(GenresTableViewController.managedGenreArray)")
                         print("newGenreName \(newGenre.genreName!)")
                         print("newGenreId: \(newGenre.genreCode)")
                     } catch  {
@@ -141,16 +136,18 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             for (key, value) in GenreConstants.genresDictionary {
                 if cellText == key {
                     print("cellText is \(cellText)")
-                    for item in GenresTableViewController.managedGenreSet {
+                    for item in GenresTableViewController.managedGenreArray {
                         if item.genreName == cellText {
-                            print("item for deletion is \(item)")
-//                            GenresTableViewController.managedGenreSet.remove(item)
-                            GenresTableViewController.managedGenreSet = GenresTableViewController.managedGenreSet.filter { $0.genreName != item.genreName }
+                            let genreIndex = GenresTableViewController.managedGenreArray.firstIndex(of: item)
+                            if let genreIndex = genreIndex {
+                                GenresTableViewController.managedGenreArray.remove(at: genreIndex)
+                                self.dataController.viewContext.delete(item)
+                            }
                         do {
-                            self.dataController.viewContext.delete(item)
+                            
                             try self.dataController.viewContext.save()
-                            print("After delete set: \(GenresTableViewController.managedGenreSet)")
-                            print("count after delete set: \(GenresTableViewController.managedGenreSet.count)")
+                            print("After delete set: \(GenresTableViewController.managedGenreArray)")
+                            print("count after delete set: \(GenresTableViewController.managedGenreArray.count)")
                         } catch {
                             print("could not delete!")
                         }
@@ -164,6 +161,20 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     
+    class func doesArrayContain(genreName: String) -> Bool {
+        
+        var boolForReturn = Bool()
+        
+        for item in GenresTableViewController.managedGenreArray {
+            if item.genreName == genreName {
+                boolForReturn = true
+            } else {
+                boolForReturn = false
+            }
+        }
+        return boolForReturn
+    }
+    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        SelectionViewController.managedGenreSet = GenresTableViewController.managedGenreSet
 //    }
@@ -176,7 +187,7 @@ extension GenresTableViewController: UINavigationControllerDelegate {
         let newSelectionVC = viewController as? SelectionViewController
         let newGenresVC = viewController as? GenresTableViewController
         if viewController == newSelectionVC {
-            SelectionViewController.managedGenreSet = GenresTableViewController.managedGenreSet
+            SelectionViewController.managedGenreSet = GenresTableViewController.managedGenreArray
             print("SelectionViewController.managedGenreSet in navigation function: \(SelectionViewController.managedGenreSet)")
         } else {
             print("this ain't it chief")
