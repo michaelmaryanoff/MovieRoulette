@@ -17,7 +17,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmSelectionButton: UIButton!
     
-    static var managedGenreSet = Set<Genre>()
+    static var managedGenreSet = [Genre]
     
     var fetchedResultsController: NSFetchedResultsController<Genre>!
 
@@ -32,14 +32,15 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Creating a fetch request
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         
-        GenresTableViewController.managedGenreSet = []
+//        GenresTableViewController.managedGenreSet = []
+        makeFetchRequest(fetchRequest)
         // Fetch requesting but only if set is empty
-        if GenresTableViewController.managedGenreSet.isEmpty{
-            makeFetchRequest(fetchRequest)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
+//        if GenresTableViewController.managedGenreSet.isEmpty{
+//
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
         
         
     }
