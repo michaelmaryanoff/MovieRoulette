@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -19,6 +20,10 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     static var yearFrom: Int = 2019
     
     static var yearTo: Int = 2019
+    
+    static var releaseWindow = YearRange()
+    
+    var dataController: DataController!
 
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
     

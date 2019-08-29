@@ -32,6 +32,8 @@ class SelectionViewController: UIViewController {
     
     var yearTo: Int = 2019
     
+    var yearRange = YearRange()
+    
     var actorId = Int()
     
     var fetchedResultsController: NSFetchedResultsController<Genre>!
@@ -50,6 +52,7 @@ class SelectionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("viewDidAppearCalled")
+        print("\(SelectionViewController.managedGenreArray)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,7 +221,8 @@ class SelectionViewController: UIViewController {
             destinationVC.dataController = dataController
             GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
         } else if segue.identifier == "chooseReleaseWindow" {
-            let controller = segue.destination as! ReleaseWindowViewController
+            let destinationVC = segue.destination as! ReleaseWindowViewController
+            destinationVC.dataController = dataController
         }
     }
     
