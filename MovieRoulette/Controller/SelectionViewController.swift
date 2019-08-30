@@ -219,7 +219,7 @@ class SelectionViewController: UIViewController {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.presentAlertControllerDismiss(title: "No movies met these criteria.", message: "Please try again.")
+                        self.presentAlertControllerDismiss(title: "No movies met these criteria.", message: "Please try again.") 
                     }
                 }
                 
