@@ -36,20 +36,23 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         releaseYearPickerView.delegate = self
         
         print("Release window array: \(ReleaseWindowViewController.releaseWindowArray)")
-        DispatchQueue.main.async {
+        
+        
             if let releaseWindowFrom = ReleaseWindowViewController.releaseWindowArray.first {
                 let yearFrom = Int(releaseWindowFrom.yearFrom)
                 print("Year from is \(yearFrom)")
                 self.releaseYearPickerView.selectRow(yearFrom, inComponent: 0, animated: false)
                 self.releaseYearPickerView.reloadAllComponents()
             }
-
+            
             if let releaseWindowTo = ReleaseWindowViewController.releaseWindowArray.first {
                 let yearTo = Int(releaseWindowTo.yearTo)
                 self.releaseYearPickerView.selectRow(yearTo, inComponent: 1, animated: false)
                 self.releaseYearPickerView.reloadAllComponents()
             }
-        }
+        
+        
+        
         
         
         
@@ -123,8 +126,6 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-//        print("what look \(String(yearRange[row]))")
-        
         return String(yearRange[row])
     }
     
@@ -139,10 +140,7 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
             firstSectionValue = yearRangeInt
         } else if component == 1 {
             secondSectionValue = yearRangeInt
-            }
-        
-//        ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
-//        ReleaseWindowViewController.releaseWindow.yearFrom = Int64(max(firstSectionValue, secondSectionValue))
+        }
         
         ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
         ReleaseWindowViewController.releaseWindow.yearTo = Int64(max(firstSectionValue, secondSectionValue))
@@ -164,11 +162,6 @@ extension ReleaseWindowViewController: UINavigationControllerDelegate {
         } else {
             print("this ain't it chief")
         }
-//        do {
-//            try dataController.viewContext.save()
-//        } catch {
-//            print("could not save")
-//        }
     }
     
 }

@@ -201,11 +201,16 @@ class SelectionViewController: UIViewController {
     }
     
     @IBAction func spinForMovie(_ sender: Any) {
+        print("spin called")
         TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: yearFrom, to: yearTo, withActorCode: actorId) { (success, stringArray, error) in
             if success {
                 self.moviesArray = stringArray
                 if stringArray.count > 0 {
-                    let randomNumber = Int.random(in: 0...stringArray.count)
+                    print("Stringarray count" + "\(stringArray.count)")
+                    let randomNumber = Int.random(in: 1...stringArray.count)
+                    print("stringarray.count" + "\(0..<stringArray.count)")
+                    print("title at 19" + "\(stringArray[19])")
+                    print(randomNumber)
                     print("The movie you are watching tonight is \(self.moviesArray[randomNumber])")
                     let randomMovie = self.moviesArray[randomNumber]
                     print(self.moviesArray)
@@ -213,7 +218,9 @@ class SelectionViewController: UIViewController {
                         self.presentAlertControllerDismiss(title: "The movie you are watching tonight is...", message: "\(randomMovie)")
                     }
                 } else {
-                    print("there are no movies to choose from!")
+                    DispatchQueue.main.async {
+                        self.presentAlertControllerDismiss(title: "No movies met these criteria.", message: "Please try again.")
+                    }
                 }
                 
                 
