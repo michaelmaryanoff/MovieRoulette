@@ -16,19 +16,24 @@ import Foundation
 
 class SelectionViewController: UIViewController {
     
-    var dataController: DataController!
+    // MARK: - Variables
     
-    var genreCodeSet = Set<Int>()
-    
-    static var managedGenreArrayCount = 0
-    
+    // MARK: Non-Managed variables
     var moviesArray = [String]()
     
     var yearsArray = [Int]()
     
+    var genreCodeSet = Set<Int>()
+    
     var yearFrom: Int = 1960
     
     var yearTo: Int = 2019
+    
+    var actorId: Int?
+    
+    // MARK: - Managed Core Data variables
+    
+    var dataController: DataController!
     
     static var managedGenreArray = [Genre]()
     
@@ -36,18 +41,19 @@ class SelectionViewController: UIViewController {
     
     static var managedActorArray = [Actor]()
     
-    var actorId: Int?
-    
-    var fetchedResultsController: NSFetchedResultsController<Genre>!
+     var fetchedResultsController: NSFetchedResultsController<Genre>!
+   
+    // MARK: - Outlets
 
     @IBOutlet weak var spinForMovieButton: UIButton!
     @IBOutlet weak var chooseGenreButton: UIButton!
     @IBOutlet var chooseReleaseWindowButton: UIView!
-    @IBOutlet weak var actorsLabel: UILabel!
     
+    @IBOutlet weak var actorsLabel: UILabel!
     @IBOutlet weak var genresSelectedLabel: UILabel!
     @IBOutlet weak var releaseWindowLabel: UILabel!
     
+    // MARK: - View load functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,38 +68,31 @@ class SelectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewwillAppearcalled")
-//        print("SelectionViewController.managedGenreArry in controller itself: \(SelectionViewController.managedGenreArray)")
         
+        // MARK: Fetch requests
         let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         let yearRangeFetchRequest: NSFetchRequest<YearRange> = YearRange.fetchRequest()
         let actorFetchRequest: NSFetchRequest<Actor> = Actor.fetchRequest()
         
+        // MARK: Call to fetch requests
+        makeGenreFetchRequest(genreFetchrequest)
+        makeYearRangeFetchRequest(yearRangeFetchRequest)
+        makeActorFetchRequest(actorFetchRequest)
         
-//        if SelectionViewController.managedGenreArray.isEmpty {
-            makeGenreFetchRequest(genreFetchrequest)
-            makeYearRangeFetchRequest(yearRangeFetchRequest)
-            makeActorFetchRequest(actorFetchRequest)
-//        }
-    
-//        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
+        // Deletes all genres that are empty
         for item in SelectionViewController.managedGenreArray {
             deleteAllEmptyGenres()
         }
         
-        
-        
         do {
             try dataController.viewContext.save()
-            print("saved in viewWillAppear")
         } catch  {
             print("will not save in \(#function)")
         }
         
-        print("viewWillAppear")
-        print("mangedGenreSet.count: \(SelectionViewController.managedGenreArray.count)")
-        
     }
+    
+    // MARK: - Core Data functions
     
     fileprivate func deleteAllEmptyGenres() {
         for genre in SelectionViewController.managedGenreArray {
@@ -115,13 +114,10 @@ class SelectionViewController: UIViewController {
         }
     }
     
+    // MARK: Functions for making a fetch request of different types
     fileprivate func makeGenreFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
         
-        // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            
-//            print("The result in SelectinoViewController is: \(result)")
-            print("The result count of SelectionViewControllerCount is\(result.count)")
             
             for item in result {
                 deleteEmptyGenre(withGenre: item)
@@ -148,12 +144,6 @@ class SelectionViewController: UIViewController {
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
             
-            //            print("The result in SelectinoViewController is: \(result)")
-            print("The yearRange result of SelectionViewControllerCount is\(result)")
-            print("The count of yearRangeFetchRequest is \(result.count)")
-            
-            
-//            SelectionViewController.yearRange = result
             SelectionViewController.releaseWindowArray = result
             
             if result.count > 0 {
@@ -162,17 +152,6 @@ class SelectionViewController: UIViewController {
                 }
                 
             }
-            
-//            if let firstResult = result.first {
-//                print("first result is \(firstResult.yearFrom)")
-//
-//            }
-            
-            
-            print("result count of yearRange is: \(result.count)")
-            print("SelectionViewController.yearRange.yearFrom: \(SelectionViewController.releaseWindowArray.first?.yearFrom)")
-            
-            
             
         }
     }
@@ -193,14 +172,14 @@ class SelectionViewController: UIViewController {
                     if let actorName = firstResult.actorName {
                         actorsLabel.text = "Movies with \(actorName)"
                     }
-                    
                 }
-                
                 
             }
             
         }
     }
+    
+    // MARK: - IBActions
     
     @IBAction func confirmGenreSelection(_ unwindSegue: UIStoryboardSegue) {
         print("unwind called")
@@ -277,8 +256,6 @@ class SelectionViewController: UIViewController {
         self.present(alertController, animated: true)
     }
     
-    
-    
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
     }
@@ -299,8 +276,5 @@ class SelectionViewController: UIViewController {
         }
     }
     
-    func constructUrl(withTheseGenres genreCodes: Set<Int>?) {
-        
-    }
 }
 
