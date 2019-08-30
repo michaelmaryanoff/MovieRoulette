@@ -16,9 +16,7 @@ import Foundation
 
 class SelectionViewController: UIViewController {
     
-    // MARK: - Variables
-    
-    // MARK: Non-Managed variables
+    // MARK: - Non-Managed variables
     var moviesArray = [String]()
     
     var yearsArray = [Int]()

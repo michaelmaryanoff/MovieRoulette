@@ -33,6 +33,12 @@ class TMDBClient {
     }
     
     static func searchForMovies(withTheseGenres genreCodes: Set<Int>?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
+
+        
+        var yearFromQueryParam = ""
+        var yearToQueryParam = ""
+        var genreParams = ""
+        var actorQueryParam = ""
         
         // Makes sure that we have some genre codes to pass through
         guard let genreCodes = genreCodes else {
@@ -51,17 +57,10 @@ class TMDBClient {
             return
         }
         
-        guard let actorCode = actorCode else {
-            print("there is no actorcode")
-            return
-        }
+        if let actorCode = actorCode {
+            actorQueryParam = "&with_cast=\(actorCode)"
+        } 
         
-        var yearFromQueryParam = ""
-        var yearToQueryParam = ""
-        var genreParams = ""
-        var actorQueryParam = ""
-        
-
         for code in genreCodes {
             let newCodeParam = "&with_genres=\(code)"
             genreParams += newCodeParam
@@ -69,7 +68,7 @@ class TMDBClient {
         
         yearFromQueryParam = "&primary_release_date.gte=\(yearFrom)-01-01"
         yearToQueryParam = "&primary_release_date.lte=\(yearTo)-12-31"
-        actorQueryParam = "&with_cast=\(actorCode)"
+        
         
         // Forms a url to make a request to get a list of movies that meet the criteria
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
