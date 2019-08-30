@@ -20,7 +20,7 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
-    static var managedGenreArray = [Genre]()
+    
     
     static var managedGenreArrayCount = 0
     
@@ -32,7 +32,11 @@ class SelectionViewController: UIViewController {
     
     var yearTo: Int = 2019
     
-    static var yearRange = YearRange()
+    static var managedGenreArray = [Genre]()
+    
+    static var releaseWindowArray = [YearRange]()
+    
+    static var managedActorArray = [Actor]()
     
     var actorId = Int()
     
@@ -41,7 +45,10 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var spinForMovieButton: UIButton!
     @IBOutlet weak var chooseGenreButton: UIButton!
     @IBOutlet var chooseReleaseWindowButton: UIView!
+    @IBOutlet weak var actorsLabel: UILabel!
+    
     @IBOutlet weak var genresSelectedLabel: UILabel!
+    @IBOutlet weak var releaseWindowLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,11 +69,13 @@ class SelectionViewController: UIViewController {
         
         let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         let yearRangeFetchRequest: NSFetchRequest<YearRange> = YearRange.fetchRequest()
+        let actorFetchRequest: NSFetchRequest<Actor> = Actor.fetchRequest()
         
         
 //        if SelectionViewController.managedGenreArray.isEmpty {
             makeGenreFetchRequest(genreFetchrequest)
             makeYearRangeFetchRequest(yearRangeFetchRequest)
+            makeYearActorFetchRequest(actorFetchRequest)
 //        }
     
 //        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
@@ -147,16 +156,46 @@ class SelectionViewController: UIViewController {
             
             
 //            SelectionViewController.yearRange = result
+            SelectionViewController.releaseWindowArray = result
             
-            if let firstResult = result.first {
-                SelectionViewController.yearRange = firstResult
+            if result.count > 0 {
+                if let firstResult = result.first {
+                    releaseWindowLabel.text = "Between \(firstResult.yearFrom) and \(firstResult.yearTo)"
+                }
+                
             }
+            
+//            if let firstResult = result.first {
+//                print("first result is \(firstResult.yearFrom)")
+//
+//            }
             
             
             print("result count of yearRange is: \(result.count)")
-            print("SelectionViewController.yearRange.yearFrom: \(SelectionViewController.yearRange.yearFrom)")
+            print("SelectionViewController.yearRange.yearFrom: \(SelectionViewController.releaseWindowArray.first?.yearFrom)")
             
             
+            
+        }
+    }
+    
+    fileprivate func makeYearActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
+        
+        // Takes the results of the fetch request
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            print("The Actor result of SelectionViewControllerCount is\(result)")
+            print("The count of ActorFetchRequst is \(result.count)")
+            
+            SelectionViewController.managedActorArray = result
+            
+            if result.count > 0 {
+                if let firstResult = result.first {
+                    if let actorName = firstResult.actorName {
+                        actorsLabel.text = "Movies with \(actorName)"
+                    }
+                    
+                }
+            }
             
         }
     }
@@ -251,6 +290,10 @@ class SelectionViewController: UIViewController {
         } else if segue.identifier == "chooseReleaseWindow" {
             let destinationVC = segue.destination as! ReleaseWindowViewController
             ReleaseWindowViewController.dataController = dataController
+            ReleaseWindowViewController.releaseWindowArray = SelectionViewController.releaseWindowArray
+        } else if segue.identifier == "chooseActor" {
+            let destinationVC = segue.destination as! ActorSearchViewController
+            destinationVC.dataController = dataController
         }
     }
     

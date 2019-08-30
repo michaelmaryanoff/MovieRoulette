@@ -13,6 +13,9 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     
     var actors = [String]()
     var actorsIdArray = [Int]()
+    var managedActorsArray = [Actor]()
+    
+    var dataController: DataController!
     
     var selectedIndex = 0
     var selectedActorId = 0
@@ -51,6 +54,24 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         selectedIndex = indexPath.row
         let selectedActorInt = actorsIdArray[selectedIndex]
         self.selectedActorId = selectedActorInt
+        
+        for actor in managedActorsArray {
+            dataController.viewContext.delete(actor)
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print("could not save actor deletion")
+            }
+        }
+        
+        let newActor = Actor(context: dataController.viewContext)
+        newActor.actorName = actors[indexPath.row]
+        newActor.actorId = Int64(selectedActorInt)
+        do {
+            try dataController.viewContext.save()
+        } catch {
+            print("Could not save actor")
+        }
         performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorInt)
         
         
