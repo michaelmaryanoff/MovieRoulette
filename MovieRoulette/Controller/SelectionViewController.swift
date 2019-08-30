@@ -75,7 +75,7 @@ class SelectionViewController: UIViewController {
 //        if SelectionViewController.managedGenreArray.isEmpty {
             makeGenreFetchRequest(genreFetchrequest)
             makeYearRangeFetchRequest(yearRangeFetchRequest)
-            makeYearActorFetchRequest(actorFetchRequest)
+            makeActorFetchRequest(actorFetchRequest)
 //        }
     
 //        print("managedGenreSet in SelectionVC: \(SelectionViewController.managedGenreArray)")
@@ -179,7 +179,7 @@ class SelectionViewController: UIViewController {
         }
     }
     
-    fileprivate func makeYearActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
+    fileprivate func makeActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
         
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {

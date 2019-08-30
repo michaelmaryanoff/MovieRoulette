@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -66,9 +67,15 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
+        let actorFetchRequest: NSFetchRequest<Actor> = Actor.fetchRequest()
+        deleteAllInViewContext(actorFetchRequest)
+        
         let newActor = Actor(context: dataController.viewContext)
         newActor.actorName = actors[indexPath.row]
         newActor.actorId = Int64(selectedActorInt)
+        
+        
+        
         managedActorsArray.append(newActor)
         do {
             try dataController.viewContext.save()
@@ -82,8 +89,21 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func unwindToSelectionViewController (segue: UIStoryboardSegue) {
         performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorId)
     }
-
+    
+    fileprivate func deleteAllInViewContext(_ fetchRequest: NSFetchRequest<Actor>) {
+        
+        // Takes the results of the fetch request
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            for object in result {
+                dataController.viewContext.delete(object)
+            }
+            
+            
+        }
+    }
 }
+
+
 
 
 
