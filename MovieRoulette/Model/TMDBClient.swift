@@ -73,7 +73,7 @@ class TMDBClient {
         
         // Forms a url to make a request to get a list of movies that meet the criteria
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
-        
+        print("Url in query" + "\(url)")
         var titleStringArray = [String]()
         
         // Make the request with the url

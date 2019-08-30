@@ -20,8 +20,6 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
-    
-    
     static var managedGenreArrayCount = 0
     
     var moviesArray = [String]()
@@ -38,7 +36,7 @@ class SelectionViewController: UIViewController {
     
     static var managedActorArray = [Actor]()
     
-    var actorId = Int()
+    var actorId: Int?
     
     var fetchedResultsController: NSFetchedResultsController<Genre>!
 
@@ -190,11 +188,15 @@ class SelectionViewController: UIViewController {
             
             if result.count > 0 {
                 if let firstResult = result.first {
+                    actorId = Int(firstResult.actorId)
+                        
                     if let actorName = firstResult.actorName {
                         actorsLabel.text = "Movies with \(actorName)"
                     }
                     
                 }
+                
+                
             }
             
         }
