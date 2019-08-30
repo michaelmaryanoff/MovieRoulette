@@ -201,7 +201,7 @@ class SelectionViewController: UIViewController {
     }
     
     @IBAction func spinForMovie(_ sender: Any) {
-        TMDBClient.searchForMovies(withTheseGenres: genreCodeSet, from: yearFrom, to: yearTo, withActorCode: actorId) { (success, stringArray, error) in
+        TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: yearFrom, to: yearTo, withActorCode: actorId) { (success, stringArray, error) in
             if success {
                 self.moviesArray = stringArray
                 if stringArray.count > 0 {

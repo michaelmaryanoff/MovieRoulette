@@ -15,70 +15,51 @@ class TMDBClient {
     static let apiKey = "***REMOVED***"
     
     enum Endpoints {
+        
         static let base = "https://api.themoviedb.org/3"
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
         
-        case getGenres
-        
-        var stringValue: String {
-            switch self {
-            case .getGenres: return Endpoints.base + "/genre/movie/list" + Endpoints.apiKeyParam
-            }
-        }
-        
-        var url: URL {
-            return URL(string: stringValue)!
-        }
-        
     }
     
-    static func searchForMovies(withTheseGenres genreCodes: Set<Int>?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
+    static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
 
-        
+        // Creates a default empty string to pass through as a query parameter if there is nothing to query
         var yearFromQueryParam = ""
         var yearToQueryParam = ""
         var genreParams = ""
         var actorQueryParam = ""
         
-        // Makes sure that we have some genre codes to pass through
-        guard let genreCodes = genreCodes else {
-            print("there are no genre codes")
-            completion(false, [], nil)
-            return
+        // Checks to see if we have some information to pass through
+        if let genreCodes = genreCodes {
+            for code in genreCodes {
+                let newCodeParam = "&with_genres=\(code)"
+                genreParams += newCodeParam
+            }
         }
         
-        guard let yearFrom = yearFrom else {
-            print("there is no yearfrom")
-            return
+        if let yearFrom = yearFrom {
+            yearFromQueryParam = "&primary_release_date.gte=\(yearFrom)-01-01"
         }
         
-        guard let yearTo = yearTo else {
-            print("There is no yearTo")
-            return
+        if let yearTo = yearTo {
+            yearToQueryParam = "&primary_release_date.lte=\(yearTo)-12-31"
         }
         
         if let actorCode = actorCode {
             actorQueryParam = "&with_cast=\(actorCode)"
-        } 
-        
-        for code in genreCodes {
-            let newCodeParam = "&with_genres=\(code)"
-            genreParams += newCodeParam
         }
-        
-        yearFromQueryParam = "&primary_release_date.gte=\(yearFrom)-01-01"
-        yearToQueryParam = "&primary_release_date.lte=\(yearTo)-12-31"
-        
         
         // Forms a url to make a request to get a list of movies that meet the criteria
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
+        
         print("Url in query" + "\(url)")
+        
+        // Creates an empty string array to hold the list of URLs
         var titleStringArray = [String]()
         
         // Make the request with the url
         AF.request(url, method: .get).validate().responseJSON {
             (response) in
-            print(url)
 
             // A switch statement where we determine what to do with the results
             switch response.result {
@@ -107,31 +88,33 @@ class TMDBClient {
             }
 
         }
-        
-        print("titleStringArray all the way down here is` is \(titleStringArray)")
+    
     }
     
+    // A network call that searches for an actor Id in order to create a url query
     static func searchForActorID(query: String?, completion: @escaping (Bool, [String], [Int], Error?) -> Void) {
         
         guard let query = query else {
-            print("there was not query in \(#function)!")
+            print("there was no query in \(#function)!")
             return
         }
-        var queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+        // Formats the query string to pass through
+        let queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         
+        // Formats the url
         let url = Endpoints.base + "/search/person" + Endpoints.apiKeyParam + queryString
-        print(url)
-        var actorStringArray = [String]()
-        print(actorStringArray)
         
+        // Creates a string of actors and their corresponding Ids
+        var actorStringArray = [String]()
         var idStringArray = [Int]()
-        print(idStringArray)
-        var actorArray = [Actor]()
+        
+        // Creates an array of Actor NSManagedObjects, commentent out, might be unecessary
+//        var actorArray = [Actor]()
         
         AF.request(url).validate().responseJSON {
             (response) in
-            print("url for \(#function): \(url)")
             
+            // Handles the response
             switch response.result {
                 
             case .success(let value):
@@ -154,12 +137,8 @@ class TMDBClient {
                     idStringArray.append(newItem)
                 }
                 
-                print(actorStringArray)
-                print(idStringArray)
-                
                 completion(true, actorStringArray, idStringArray, nil)
                 
-            
             case .failure(let error):
                 print("Here was the error in \(#function): print \(error.localizedDescription)")
             }
