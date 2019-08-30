@@ -56,7 +56,9 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         self.selectedActorId = selectedActorInt
         
         for actor in managedActorsArray {
+            print("actor is \(actor)")
             dataController.viewContext.delete(actor)
+            managedActorsArray.removeAll()
             do {
                 try dataController.viewContext.save()
             } catch {
@@ -67,6 +69,7 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         let newActor = Actor(context: dataController.viewContext)
         newActor.actorName = actors[indexPath.row]
         newActor.actorId = Int64(selectedActorInt)
+        managedActorsArray.append(newActor)
         do {
             try dataController.viewContext.save()
         } catch {
