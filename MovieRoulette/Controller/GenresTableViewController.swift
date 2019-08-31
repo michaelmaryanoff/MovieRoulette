@@ -66,6 +66,12 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)
         
+        let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
+        
+        cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
+        cell.textLabel?.textColor = .white
+        cell.backgroundColor = Colors.pinkOrange
+        
         cell.textLabel?.text = GenreConstants.genresArray[indexPath.row]
         
         for item in GenresTableViewController.managedGenreArray {
@@ -143,7 +149,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                                 } catch {
                                     print("could not save in \(#function)")
                                 }
-//                                print("Count of GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count is \(GenresTableViewController.managedGenreArray.count)")
+                                
                             }
                     }
                 }
@@ -168,9 +174,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         print("Bool for return is \(boolForReturn)")
         return boolForReturn
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        SelectionViewController.managedGenreSet = GenresTableViewController.managedGenreSet
-//    }
 
 }
 
