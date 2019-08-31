@@ -31,6 +31,7 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         self.searchBar.delegate = self
         
+        tableView.backgroundColor = Colors.pinkOrange
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,6 +44,14 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "actorCell", for: indexPath)
+        
+        let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
+        
+        cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
+        cell.textLabel?.textColor = .white
+        cell.backgroundColor = Colors.pinkOrange
+        cell.textLabel?.shadowColor = .black
+        cell.textLabel?.shadowOffset = CGSize(width: 0.9, height: 0.9)
         
         let movieTitle = actors[indexPath.row]
         

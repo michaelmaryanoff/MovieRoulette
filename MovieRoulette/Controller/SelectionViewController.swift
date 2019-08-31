@@ -24,9 +24,9 @@ class SelectionViewController: UIViewController {
     
     var genreCodeSet = Set<Int>()
     
-    var yearFrom: Int = 1960
+    static var yearFrom: Int = 1960
     
-    var yearTo: Int = 2019
+    static var yearTo: Int = 2019
     
     var actorId: Int?
     
@@ -215,7 +215,7 @@ class SelectionViewController: UIViewController {
                     actorId = Int(firstResult.actorId)
                         
                     if let actorName = firstResult.actorName {
-                        actorsLabel.text = "Movies with \(actorName)"
+                        actorsLabel.text = "\(actorName)"
                     }
                 }
                 
@@ -228,16 +228,12 @@ class SelectionViewController: UIViewController {
     
     @IBAction func spinForMovie(_ sender: Any) {
         print("spin called")
-        TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: yearFrom, to: yearTo, withActorCode: actorId) { (success, stringArray, error) in
+        TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: SelectionViewController.yearFrom, to: SelectionViewController.yearTo, withActorCode: actorId) { (success, stringArray, error) in
             if success {
                 self.moviesArray = stringArray
                 if stringArray.count > 0 {
-                    print("Stringarray count" + "\(stringArray.count)")
                     let randomNumber = Int.random(in: 1...stringArray.count)
-                    print("stringarray.count" + "\(0..<stringArray.count)")
-                    print("title at 19" + "\(stringArray[19])")
                     print(randomNumber)
-                    print("The movie you are watching tonight is \(self.moviesArray[randomNumber])")
                     let randomMovie = self.moviesArray[randomNumber]
                     print(self.moviesArray)
                     DispatchQueue.main.async {
@@ -254,21 +250,7 @@ class SelectionViewController: UIViewController {
         }
     }
     
-    @IBAction func confirmReleaseWindow(_ undwindSegue: UIStoryboardSegue) {
-        print("unwind 2 called")
-        guard let releaseWindowViewController = undwindSegue.source as? ReleaseWindowViewController else {
-            print("could not find ReleaseWindowViewController!")
-            return
-        }
-        let passedYearFrom = ReleaseWindowViewController.yearFrom
-        let passedYearTo = ReleaseWindowViewController.yearTo
-        self.yearFrom = passedYearFrom
-        self.yearTo = passedYearTo
-        
-        print("self.yearTo): \(self.yearTo)")
-        print("self.yearTo): \(self.yearFrom)")
-    }
-    
+
     @IBAction func confirmActorSelection(_ unwindSegue: UIStoryboardSegue) {
         print("unwind 3 called")
         
@@ -301,6 +283,7 @@ class SelectionViewController: UIViewController {
             let destinationVC = segue.destination as! ReleaseWindowViewController
             ReleaseWindowViewController.dataController = dataController
             ReleaseWindowViewController.releaseWindowArray = SelectionViewController.releaseWindowArray
+            
         } else if segue.identifier == "chooseActor" {
             let destinationVC = segue.destination as! ActorSearchViewController
             destinationVC.dataController = dataController
