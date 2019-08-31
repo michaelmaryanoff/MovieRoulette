@@ -114,7 +114,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-yb-Rk9">
-                                <rect key="frame" x="119" y="694" width="177" height="55"/>
+                                <rect key="frame" x="118.5" y="694" width="177" height="55"/>
                                 <color key="backgroundColor" red="0.63921568627450975" green="0.18431372549019609" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="DLh-Y9-mqH"/>
@@ -296,4 +296,5 @@
             <point key="canvasLocation" x="1511.5942028985507" y="178.79464285714286"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.63921568630000003" green="0.1843137255" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
 </document>

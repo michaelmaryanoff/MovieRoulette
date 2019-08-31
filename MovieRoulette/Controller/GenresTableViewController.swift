@@ -65,6 +65,9 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
         cell.textLabel?.textColor = .white
         cell.backgroundColor = Colors.pinkOrange
+        cell.textLabel?.shadowColor = .black
+        cell.textLabel?.shadowOffset = CGSize(width: 0.9, height: 0.9)
+        
         
         cell.textLabel?.text = GenreConstants.genresArray[indexPath.row]
         

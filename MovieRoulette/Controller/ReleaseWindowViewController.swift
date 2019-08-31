@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Foundation
 
 class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -33,30 +34,19 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         super.viewDidLoad()
         
         releaseYearPickerView.delegate = self
-        releaseYearPickerView.delegate = self
         
-        print("Release window array: \(ReleaseWindowViewController.releaseWindowArray)")
+        if let releaseWindowFrom = ReleaseWindowViewController.releaseWindowArray.first {
+            let yearFrom = Int(releaseWindowFrom.yearFrom)
+            print("Year from is \(yearFrom)")
+            self.releaseYearPickerView.selectRow(yearFrom, inComponent: 0, animated: false)
+            self.releaseYearPickerView.reloadAllComponents()
+        }
         
-        
-            if let releaseWindowFrom = ReleaseWindowViewController.releaseWindowArray.first {
-                let yearFrom = Int(releaseWindowFrom.yearFrom)
-                print("Year from is \(yearFrom)")
-                self.releaseYearPickerView.selectRow(yearFrom, inComponent: 0, animated: false)
-                self.releaseYearPickerView.reloadAllComponents()
-            }
-            
-            if let releaseWindowTo = ReleaseWindowViewController.releaseWindowArray.first {
-                let yearTo = Int(releaseWindowTo.yearTo)
-                self.releaseYearPickerView.selectRow(yearTo, inComponent: 1, animated: false)
-                self.releaseYearPickerView.reloadAllComponents()
-            }
-        
-        
-        
-        
-        
-        
-        
+        if let releaseWindowTo = ReleaseWindowViewController.releaseWindowArray.first {
+            let yearTo = Int(releaseWindowTo.yearTo)
+            self.releaseYearPickerView.selectRow(yearTo, inComponent: 1, animated: false)
+            self.releaseYearPickerView.reloadAllComponents()
+        }
         
     }
     
@@ -126,9 +116,11 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
+        
+        
         return String(yearRange[row])
     }
-    
+
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
@@ -149,6 +141,8 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         print("yearFrom: \(ReleaseWindowViewController.yearFrom)")
         print("yearTo: \(ReleaseWindowViewController.yearTo)")
     }
+    
+    
     
 }
 

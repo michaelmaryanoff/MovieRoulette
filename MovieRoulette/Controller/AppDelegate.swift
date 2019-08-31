@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         dataController.load()
         
+        let barButtonAppearance = UIBarButtonItem.appearance()
+        
+        
         return true
     }
 
