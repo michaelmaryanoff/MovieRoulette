@@ -93,6 +93,9 @@ class SelectionViewController: UIViewController {
         chooseActorButton.backgroundColor = backgroundColor
         chooseActorButton.setTitleColor(titleColor, for: .normal)
         
+        spinForMovieButton.layer.cornerRadius = cornerRadius
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

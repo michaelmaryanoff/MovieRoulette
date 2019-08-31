@@ -34,10 +34,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-VC-W0p">
-                                <rect key="frame" x="103" y="284" width="224" height="75"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Select Genres" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phh-dn-uXp">
+                                <rect key="frame" x="78.5" y="123" width="257" height="72"/>
+                                <color key="backgroundColor" red="0.0" green="0.0078431372549019607" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="mYu-d4-jfb"/>
+                                    <constraint firstAttribute="height" constant="72" id="23E-RI-TVO"/>
+                                    <constraint firstAttribute="width" constant="257" id="VFz-hC-3VF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-VC-W0p">
+                                <rect key="frame" x="106" y="203" width="200" height="60"/>
+                                <color key="backgroundColor" red="0.63921568630000003" green="0.1843137255" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="mYu-d4-jfb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <state key="normal" title="Choose Genres">
@@ -48,12 +60,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-Ob-ZQU">
-                                <rect key="frame" x="118.5" y="489" width="177" height="64"/>
+                                <rect key="frame" x="106" y="388" width="200" height="60"/>
+                                <color key="backgroundColor" red="0.63921568630000003" green="0.1843137255" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="U7q-S7-flK"/>
-                                    <constraint firstAttribute="width" constant="177" id="zLd-Je-Zh7"/>
+                                    <constraint firstAttribute="height" constant="60" id="U7q-S7-flK"/>
+                                    <constraint firstAttribute="width" constant="200" id="zLd-Je-Zh7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <state key="normal" title="Choose Window">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -62,23 +75,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select release window" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7e-Pi-DxY">
-                                <rect key="frame" x="73" y="389" width="277" height="92"/>
+                                <rect key="frame" x="72.5" y="308" width="270" height="72"/>
+                                <color key="backgroundColor" red="0.0" green="0.0078431372550000003" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="277" id="H6K-0o-nMT"/>
-                                    <constraint firstAttribute="height" constant="92" id="JpX-qv-2gB"/>
+                                    <constraint firstAttribute="width" constant="270" id="H6K-0o-nMT"/>
+                                    <constraint firstAttribute="height" constant="72" id="JpX-qv-2gB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z81-Nz-NJ8">
-                                <rect key="frame" x="98" y="674" width="218" height="69"/>
+                                <rect key="frame" x="106" y="576" width="200" height="60"/>
+                                <color key="backgroundColor" red="0.63921568630000003" green="0.1843137255" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="69" id="4Hc-Bx-Avz"/>
-                                    <constraint firstAttribute="width" constant="218" id="ncI-nw-EvK"/>
+                                    <constraint firstAttribute="height" constant="60" id="4Hc-Bx-Avz"/>
+                                    <constraint firstAttribute="width" constant="200" id="ncI-nw-EvK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <state key="normal" title="Choose Actor">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -86,30 +101,20 @@
                                     <segue destination="oZg-JT-3o3" kind="show" identifier="chooseActor" id="qk3-sZ-EDk"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Select Genres" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phh-dn-uXp">
-                                <rect key="frame" x="68.5" y="171" width="277" height="105"/>
-                                <color key="backgroundColor" red="0.0" green="0.0078431372549019607" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="105" id="23E-RI-TVO"/>
-                                    <constraint firstAttribute="width" constant="277" id="VFz-hC-3VF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select an actor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs7-cX-lyW">
-                                <rect key="frame" x="93" y="590" width="228" height="76"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an actor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs7-cX-lyW">
+                                <rect key="frame" x="92" y="492" width="228" height="76"/>
+                                <color key="backgroundColor" red="0.0" green="0.0078431372550000003" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="EJ8-JX-bPo"/>
                                     <constraint firstAttribute="width" constant="228" id="oaN-yM-93j"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-yb-Rk9">
-                                <rect key="frame" x="118.5" y="765" width="177" height="55"/>
+                                <rect key="frame" x="119" y="694" width="177" height="55"/>
                                 <color key="backgroundColor" red="0.63921568627450975" green="0.18431372549019609" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="DLh-Y9-mqH"/>
@@ -128,26 +133,26 @@
                         <constraints>
                             <constraint firstItem="gUR-Ob-ZQU" firstAttribute="top" secondItem="y7e-Pi-DxY" secondAttribute="bottom" constant="8" id="05Z-kE-kFH"/>
                             <constraint firstItem="phh-dn-uXp" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="2fZ-SB-9zr"/>
-                            <constraint firstItem="3FB-yb-Rk9" firstAttribute="top" secondItem="Z81-Nz-NJ8" secondAttribute="bottom" constant="22" id="8dW-V7-CpS"/>
-                            <constraint firstItem="phh-dn-uXp" firstAttribute="top" secondItem="DcV-Wp-obf" secondAttribute="top" constant="83" id="CqS-rJ-9LH"/>
-                            <constraint firstItem="JPQ-VC-W0p" firstAttribute="leading" secondItem="DcV-Wp-obf" secondAttribute="leading" constant="103" id="G13-rR-Dx3"/>
+                            <constraint firstItem="3FB-yb-Rk9" firstAttribute="top" secondItem="Z81-Nz-NJ8" secondAttribute="bottom" constant="58" id="8dW-V7-CpS"/>
+                            <constraint firstItem="phh-dn-uXp" firstAttribute="top" secondItem="DcV-Wp-obf" secondAttribute="top" constant="35" id="CqS-rJ-9LH"/>
+                            <constraint firstItem="JPQ-VC-W0p" firstAttribute="leading" secondItem="DcV-Wp-obf" secondAttribute="leading" constant="106" id="G13-rR-Dx3"/>
                             <constraint firstItem="Z81-Nz-NJ8" firstAttribute="top" secondItem="Fs7-cX-lyW" secondAttribute="bottom" constant="8" id="NKD-9c-P1z"/>
                             <constraint firstItem="JPQ-VC-W0p" firstAttribute="top" secondItem="phh-dn-uXp" secondAttribute="bottom" constant="8" symbolic="YES" id="PlU-JL-biI"/>
-                            <constraint firstItem="Fs7-cX-lyW" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="U8z-OZ-TzM"/>
-                            <constraint firstItem="gUR-Ob-ZQU" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="ULk-Kl-g40"/>
-                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="top" secondItem="JPQ-VC-W0p" secondAttribute="bottom" constant="30" id="cvE-MG-raT"/>
+                            <constraint firstItem="Fs7-cX-lyW" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" constant="-1" id="U8z-OZ-TzM"/>
+                            <constraint firstItem="gUR-Ob-ZQU" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" constant="-1" id="ULk-Kl-g40"/>
+                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="top" secondItem="JPQ-VC-W0p" secondAttribute="bottom" constant="45" id="cvE-MG-raT"/>
                             <constraint firstItem="3FB-yb-Rk9" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="fH5-Ne-g6p"/>
-                            <constraint firstItem="DcV-Wp-obf" firstAttribute="trailing" secondItem="JPQ-VC-W0p" secondAttribute="trailing" constant="87" id="mqO-gN-QrG"/>
-                            <constraint firstItem="Fs7-cX-lyW" firstAttribute="top" secondItem="gUR-Ob-ZQU" secondAttribute="bottom" constant="37" id="pHp-uu-N0F"/>
-                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" constant="4.5" id="rfY-M4-D4c"/>
-                            <constraint firstItem="Z81-Nz-NJ8" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="yCl-WS-uwN"/>
+                            <constraint firstItem="DcV-Wp-obf" firstAttribute="trailing" secondItem="JPQ-VC-W0p" secondAttribute="trailing" constant="108" id="mqO-gN-QrG"/>
+                            <constraint firstItem="Fs7-cX-lyW" firstAttribute="top" secondItem="gUR-Ob-ZQU" secondAttribute="bottom" constant="44" id="pHp-uu-N0F"/>
+                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" constant="0.5" id="rfY-M4-D4c"/>
+                            <constraint firstItem="Z81-Nz-NJ8" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" constant="-1" id="yCl-WS-uwN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DcV-Wp-obf"/>
                     </view>
                     <navigationItem key="navigationItem" id="115-85-kAz"/>
                     <connections>
                         <outlet property="actorsLabel" destination="Fs7-cX-lyW" id="dYE-Bv-Nx1"/>
-                        <outlet property="chooseActorButton" destination="Z81-Nz-NJ8" id="WF5-2F-KtU"/>
+                        <outlet property="chooseActorButton" destination="Z81-Nz-NJ8" id="i0S-0Y-FTB"/>
                         <outlet property="chooseGenreButton" destination="JPQ-VC-W0p" id="j47-9q-M51"/>
                         <outlet property="chooseReleaseWindowButton" destination="gUR-Ob-ZQU" id="RkP-Uv-SHz"/>
                         <outlet property="genresSelectedLabel" destination="phh-dn-uXp" id="oRZ-oh-CW2"/>
