@@ -202,6 +202,7 @@
                         <viewLayoutGuide key="safeArea" id="Id3-0u-Lt4"/>
                     </view>
                     <connections>
+                        <outlet property="releaseWindowLabel" destination="hou-CC-Iku" id="DQt-ZD-L5B"/>
                         <outlet property="releaseYearPickerView" destination="Dx0-Qb-C0E" id="n9n-CQ-hdo"/>
                     </connections>
                 </viewController>

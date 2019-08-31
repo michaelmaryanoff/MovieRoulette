@@ -30,8 +30,13 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
 
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
     
+    @IBOutlet weak var releaseWindowLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        releaseWindowLabel.layer.cornerRadius = 7
+        releaseWindowLabel.backgroundColor = Colors.darkPurple
+        releaseWindowLabel.clipsToBounds = true
         
         releaseYearPickerView.delegate = self
         self.navigationController?.delegate = self
