@@ -15,7 +15,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     var dataController: DataController!
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var confirmSelectionButton: UIButton!
     
     static var managedGenreArray = [Genre]()
     
@@ -35,8 +34,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         self.navigationController?.delegate = self
         
-//        print("Managed genre array is in viewDidLoad \(GenresTableViewController.managedGenreArray)")
-        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -45,11 +42,8 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewwilldissapear")
         
-                    SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
-        print("SelectionViewController.managedGenreArray \(SelectionViewController.managedGenreArray)")
-        print("GenresTableViewController.managedGenreArray \(GenresTableViewController.managedGenreArray)")
+        SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
     }
     
 
@@ -112,7 +106,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         
-        let newGenre =  Genre(context: dataController.viewContext)
+        let newGenre = Genre(context: dataController.viewContext)
         
         if add == true {
             print("add true")
@@ -183,7 +177,6 @@ extension GenresTableViewController: UINavigationControllerDelegate {
         let newSelectionVC = viewController as? SelectionViewController
         if viewController == newSelectionVC {
             print("there is a new thing happening in town")
-//            SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
             print("SelectionViewController.managedGenreSet in navigation function: \(SelectionViewController.managedGenreArray)")
         } else {
             print("this ain't it chief")

@@ -226,27 +226,6 @@ class SelectionViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @IBAction func confirmGenreSelection(_ unwindSegue: UIStoryboardSegue) {
-        print("unwind called")
-        guard let genresTableViewController = unwindSegue.source as? GenresTableViewController else {
-            print("could not find source!")
-            return
-        }
-        let passedGenereCodeSet = GenresTableViewController.managedGenreArray
-        print("passedGenreCodeSet: \(passedGenereCodeSet)")
-        for item in passedGenereCodeSet {
-            var genreId = item.genreCode
-            self.genreCodeSet.insert(Int(genreId))
-        }
-        print("genreCodeSet after passing: \(self.genreCodeSet)")
-        if genreCodeSet.count > 0 {
-            genresSelectedLabel.text = "\(genreCodeSet.count) genres selected"
-        } else if genreCodeSet.count == 1 {
-            genresSelectedLabel.text = "\(genreCodeSet.count) genre selected"
-        }
-        
-    }
-    
     @IBAction func spinForMovie(_ sender: Any) {
         print("spin called")
         TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: yearFrom, to: yearTo, withActorCode: actorId) { (success, stringArray, error) in
