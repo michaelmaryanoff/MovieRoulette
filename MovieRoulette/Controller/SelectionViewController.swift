@@ -13,6 +13,7 @@ import UIKit
 import Alamofire
 import CoreData
 import Foundation
+import QuartzCore
 
 class SelectionViewController: UIViewController {
     
@@ -43,10 +44,14 @@ class SelectionViewController: UIViewController {
    
     // MARK: - Outlets
 
+    // Buttons
     @IBOutlet weak var spinForMovieButton: UIButton!
     @IBOutlet weak var chooseGenreButton: UIButton!
-    @IBOutlet var chooseReleaseWindowButton: UIView!
+    @IBOutlet weak var chooseReleaseWindowButton: UIButton!
+    @IBOutlet weak var chooseActorButton: UIButton!
     
+    
+    // Labels
     @IBOutlet weak var actorsLabel: UILabel!
     @IBOutlet weak var genresSelectedLabel: UILabel!
     @IBOutlet weak var releaseWindowLabel: UILabel!
@@ -56,12 +61,51 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         
         print("viewDidLoadCalled")
+        setUpLabels(withCornerRadius: 7, withBackgroundColor: Colors.darkPurple)
+        setUpButtons(withCornerRadius: 7, withBackgroundColor: Colors.pinkOrange, titleColor: .black)
+    }
+    
+    func setUpLabels(withCornerRadius cornerRadius: CGFloat, withBackgroundColor backgroundColor: UIColor) {
+        genresSelectedLabel.layer.cornerRadius = cornerRadius
+        genresSelectedLabel.backgroundColor = backgroundColor
+        genresSelectedLabel.clipsToBounds = true
+        
+        releaseWindowLabel.layer.cornerRadius = cornerRadius
+        releaseWindowLabel.backgroundColor = backgroundColor
+        releaseWindowLabel.clipsToBounds = true
+        
+        actorsLabel.layer.cornerRadius = cornerRadius
+        actorsLabel.backgroundColor = backgroundColor
+        actorsLabel.clipsToBounds = true
+        
+    }
+    
+    func setUpButtons(withCornerRadius cornerRadius: CGFloat, withBackgroundColor backgroundColor: UIColor, titleColor: UIColor) {
+        chooseGenreButton.layer.cornerRadius = cornerRadius
+        chooseGenreButton.backgroundColor = backgroundColor
+        chooseGenreButton.setTitleColor(titleColor, for: .normal)
+        
+        chooseReleaseWindowButton.layer.cornerRadius = cornerRadius
+        chooseReleaseWindowButton.backgroundColor = backgroundColor
+        chooseReleaseWindowButton.setTitleColor(titleColor, for: .normal)
+        
+        chooseActorButton.layer.cornerRadius = cornerRadius
+        chooseActorButton.backgroundColor = backgroundColor
+        chooseActorButton.setTitleColor(titleColor, for: .normal)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("viewDidAppearCalled")
         print("\(SelectionViewController.managedGenreArray)")
+
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
