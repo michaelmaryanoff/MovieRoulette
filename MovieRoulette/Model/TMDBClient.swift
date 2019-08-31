@@ -52,15 +52,14 @@ class TMDBClient {
         // Forms a url to make a request to get a list of movies that meet the criteria
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
         
-        print("Url in query" + "\(url)")
-        
         // Creates an empty string array to hold the list of URLs
         var titleStringArray = [String]()
         
         // Make the request with the url
         AF.request(url, method: .get).validate().responseJSON {
             (response) in
-
+            
+            print("url" + "\(url)")
             // A switch statement where we determine what to do with the results
             switch response.result {
 
@@ -84,7 +83,6 @@ class TMDBClient {
 
                 case .failure(let error):
                 print("Here was the error in \(#function): print \(error.localizedDescription)")
-             
             }
 
         }
@@ -98,6 +96,7 @@ class TMDBClient {
             print("there was no query in \(#function)!")
             return
         }
+        
         // Formats the query string to pass through
         let queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         
@@ -108,8 +107,6 @@ class TMDBClient {
         var actorStringArray = [String]()
         var idStringArray = [Int]()
         
-        // Creates an array of Actor NSManagedObjects, commentent out, might be unecessary
-//        var actorArray = [Actor]()
         
         AF.request(url).validate().responseJSON {
             (response) in
@@ -141,6 +138,7 @@ class TMDBClient {
                 
             case .failure(let error):
                 print("Here was the error in \(#function): print \(error.localizedDescription)")
+                completion(false, [], [], error)
             }
         }
     }

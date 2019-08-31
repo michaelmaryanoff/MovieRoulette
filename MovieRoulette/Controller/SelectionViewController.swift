@@ -229,15 +229,18 @@ class SelectionViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func spinForMovie(_ sender: Any) {
-        print("spin called")
+        
         TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: SelectionViewController.yearFrom, to: SelectionViewController.yearTo, withActorCode: actorId) { (success, stringArray, error) in
+            
+            if error != nil {
+                self.presentAlertControllerDismiss(title: "Thre was an error.", message: "\(error!.localizedDescription)")
+            }
+            
             if success {
                 self.moviesArray = stringArray
                 if stringArray.count > 0 {
-                    let randomNumber = Int.random(in: 1...stringArray.count)
-                    print(randomNumber)
+                    let randomNumber = Int.random(in: 0..<stringArray.count)
                     let randomMovie = self.moviesArray[randomNumber]
-                    print(self.moviesArray)
                     DispatchQueue.main.async {
                         self.presentAlertControllerDismiss(title: "The movie you are watching tonight is...", message: "\(randomMovie)")
                     }
@@ -254,22 +257,15 @@ class SelectionViewController: UIViewController {
     
 
     @IBAction func confirmActorSelection(_ unwindSegue: UIStoryboardSegue) {
-        print("unwind 3 called")
         
         guard let actorSearchViewController = unwindSegue.source as? ActorSearchViewController else {
-            print("could not find actorSearchViewController")
             return
         }
         let passedActorId = actorSearchViewController.selectedActorId
         self.actorId = passedActorId
-        print("new actor id in SelectionViewController \(self.actorId)")
     }
     
-    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        self.present(alertController, animated: true)
-    }
+
     
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
@@ -290,6 +286,12 @@ class SelectionViewController: UIViewController {
             let destinationVC = segue.destination as! ActorSearchViewController
             destinationVC.dataController = dataController
         }
+    }
+    
+    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alertController, animated: true)
     }
     
 }

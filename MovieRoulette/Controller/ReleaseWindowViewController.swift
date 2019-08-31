@@ -29,81 +29,37 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     static var dataController: DataController!
 
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
-    
     @IBOutlet weak var releaseWindowLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        releaseYearPickerView.delegate = self
         
         releaseWindowLabel.layer.cornerRadius = 7
         releaseWindowLabel.backgroundColor = Colors.darkPurple
         releaseWindowLabel.clipsToBounds = true
         
-        releaseYearPickerView.delegate = self
+        
         self.navigationController?.delegate = self
         
-        if let releaseWindowFrom = ReleaseWindowViewController.releaseWindowArray.first {
-            let yearFrom = Int(releaseWindowFrom.yearFrom)
-            print("Year from is \(yearFrom)")
-            self.releaseYearPickerView.selectRow(yearFrom, inComponent: 0, animated: false)
-            self.releaseYearPickerView.reloadAllComponents()
-        }
-
-        if let releaseWindowTo = ReleaseWindowViewController.releaseWindowArray.first {
-            let yearTo = Int(releaseWindowTo.yearTo)
-            self.releaseYearPickerView.selectRow(yearTo, inComponent: 1, animated: false)
-            self.releaseYearPickerView.reloadAllComponents()
-        }
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DispatchQueue.main.async {
-            if let releaseWindowFrom = ReleaseWindowViewController.releaseWindowArray.first {
-                let yearFrom = Int(releaseWindowFrom.yearFrom)
-                print("Year from is \(yearFrom)")
-                self.releaseYearPickerView.selectRow(2000, inComponent: 0, animated: false)
-                self.releaseYearPickerView.reloadAllComponents()
-            }
-
-            if let releaseWindowTo = ReleaseWindowViewController.releaseWindowArray.first {
-                let yearTo = Int(releaseWindowTo.yearTo)
-                self.releaseYearPickerView.selectRow(yearTo, inComponent: 1, animated: false)
-                self.releaseYearPickerView.reloadAllComponents()
-            }
-        }
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        DispatchQueue.main.async {
-            if let releaseWindowFrom = ReleaseWindowViewController.releaseWindowArray.first {
-                let yearFrom = Int(releaseWindowFrom.yearFrom)
-                print("Year from is \(yearFrom)")
-                self.releaseYearPickerView.selectRow(2000, inComponent: 0, animated: false)
-                self.releaseYearPickerView.reloadAllComponents()
-            }
-
-            if let releaseWindowTo = ReleaseWindowViewController.releaseWindowArray.first {
-                let yearTo = Int(releaseWindowTo.yearTo)
-                self.releaseYearPickerView.selectRow(yearTo, inComponent: 1, animated: false)
-                self.releaseYearPickerView.reloadAllComponents()
-            }
-        }
-        
         
     }
     
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        print("Release window array: \(ReleaseWindowViewController.releaseWindowArray)")
         
         do {
             try ReleaseWindowViewController.dataController.viewContext.save()
@@ -128,8 +84,6 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        print("Picker view is \(pickerView.selectedRow(inComponent: 0))")
-        
         let yearRangeInt = Int(yearRange[row])
         
         if component == 0 {
@@ -137,19 +91,11 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         } else if component == 1 {
             secondSectionValue = yearRangeInt
         }
-        
-        print("First section value" + "\(firstSectionValue)")
-        print("min of firstsection" + "\(Int64(min(firstSectionValue, secondSectionValue)))")
-        print("Max of firstsection" + "\(Int64(max(firstSectionValue, secondSectionValue)))")
-        
-        
+    
         ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
         ReleaseWindowViewController.releaseWindow.yearTo = Int64(max(firstSectionValue, secondSectionValue))
         SelectionViewController.yearFrom = Int(ReleaseWindowViewController.releaseWindow.yearFrom)
         SelectionViewController.yearTo = Int(ReleaseWindowViewController.releaseWindow.yearTo)
-        
-        print("yearFrom: \(ReleaseWindowViewController.releaseWindow.yearFrom)")
-        print("yearTo: \(ReleaseWindowViewController.releaseWindow.yearTo)")
     }
     
     
@@ -166,7 +112,7 @@ extension ReleaseWindowViewController: UINavigationControllerDelegate {
             SelectionViewController.yearFrom = Int(ReleaseWindowViewController.releaseWindow.yearFrom)
             SelectionViewController.yearTo = Int(ReleaseWindowViewController.releaseWindow.yearTo)
         } else {
-            print("this ain't it chief")
+            print("We are not using this segue")
         }
     }
     

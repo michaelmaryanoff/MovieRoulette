@@ -118,9 +118,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                     newGenre.genreName = cellText
                     newGenre.genreCode = Int64(value)
                     GenresTableViewController.managedGenreArray.append(newGenre)
-                    print("new genre array is \(GenresTableViewController.managedGenreArray)")
                     GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count
-                    print("Count of GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count is \(GenresTableViewController.managedGenreArray.count)")
                     do {
                         try dataController.viewContext.save()
                     } catch {
@@ -142,7 +140,6 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                                 GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count
                                 do {
                                     try dataController.viewContext.save()
-                                    print("new could is \(GenresTableViewController.managedGenreArray.count)")
                                 } catch {
                                     print("could not save in \(#function)")
                                 }
@@ -176,13 +173,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
 extension GenresTableViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        print("\(#function) has been called")
         let newSelectionVC = viewController as? SelectionViewController
         if viewController == newSelectionVC {
-            print("there is a new thing happening in town")
-            print("SelectionViewController.managedGenreSet in navigation function: \(SelectionViewController.managedGenreArray)")
         } else {
-            print("this ain't it chief")
+            print("We are using a different segue.")
         }
         do {
             try dataController.viewContext.save()

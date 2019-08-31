@@ -66,7 +66,6 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         self.selectedActorId = selectedActorInt
         
         for actor in managedActorsArray {
-            print("actor is \(actor)")
             dataController.viewContext.delete(actor)
             managedActorsArray.removeAll()
             do {
@@ -82,8 +81,6 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         let newActor = Actor(context: dataController.viewContext)
         newActor.actorName = actors[indexPath.row]
         newActor.actorId = Int64(selectedActorInt)
-        
-        
         
         managedActorsArray.append(newActor)
         do {
@@ -112,19 +109,24 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     }
 }
 
-
-
-
-
 extension ActorSearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
+            if actorStringArray.isEmpty && !searchText.isEmpty {
+                self.presentAlertControllerDismiss(title: "Could not find actors.", message: "Please check interent connection.")
+            }
             self.actors = actorStringArray
             self.actorsIdArray = idIntArray
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alertController, animated: true)
     }
 }
