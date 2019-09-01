@@ -242,15 +242,24 @@ class SelectionViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func spinForMovie(_ sender: Any) {
+    
+        self.beginAnimating()
+        
+        self.moviesArray = []
         
         TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: SelectionViewController.yearFrom, to: SelectionViewController.yearTo, withActorCode: actorId) { (success, stringArray, error) in
             
+            self.beginAnimating()
+            
+            self.moviesArray = []
+            
             if CheckConnectivity.isConnectedToInternet == false {
                 self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
+                self.endAnimating()
                 return
             }
             
-            self.beginAnimating()
+            
             
             if error != nil {
                 self.presentAlertControllerDismiss(title: "There was an error.", message: "\(error!.localizedDescription)")
@@ -259,7 +268,7 @@ class SelectionViewController: UIViewController {
             if success {
                 self.endAnimating()
                 self.moviesArray = stringArray
-                if stringArray.count > 0 {
+                if moviesArray.count > 0 {
                     let randomNumber = Int.random(in: 0..<stringArray.count)
                     let randomMovie = self.moviesArray[randomNumber]
                     DispatchQueue.main.async {
