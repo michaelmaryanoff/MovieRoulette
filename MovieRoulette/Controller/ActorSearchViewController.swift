@@ -45,19 +45,23 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "actorCell", for: indexPath)
         
-        let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
         
-        cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
-        cell.textLabel?.textColor = .white
-        cell.backgroundColor = Colors.pinkOrange
-        cell.textLabel?.shadowColor = .black
-        cell.textLabel?.shadowOffset = CGSize(width: 0.9, height: 0.9)
+        setupCellCharacteristics(forCell: cell)
         
         let movieTitle = actors[indexPath.row]
         
         cell.textLabel?.text = movieTitle
         
         return cell
+    }
+    
+    func setupCellCharacteristics(forCell cell: UITableViewCell) {
+        let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
+        cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
+        cell.textLabel?.textColor = .white
+        cell.backgroundColor = Colors.pinkOrange
+        cell.textLabel?.shadowColor = .black
+        cell.textLabel?.shadowOffset = CGSize(width: 0.9, height: 0.9)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -113,9 +117,13 @@ extension ActorSearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
-            if actorStringArray.isEmpty && !searchText.isEmpty {
-                self.presentAlertControllerDismiss(title: "Could not find actors.", message: "Please check interent connection.")
+            
+            
+            if CheckConnectivity.isConnectedToInternet == false {
+                self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
+                return
             }
+            
             self.actors = actorStringArray
             self.actorsIdArray = idIntArray
             DispatchQueue.main.async {
