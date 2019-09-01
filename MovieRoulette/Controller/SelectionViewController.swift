@@ -259,6 +259,7 @@ class SelectionViewController: UIViewController {
                 return
             }
             
+            print("String array from call" + " " + "\(stringArray)")
             
             
             if error != nil {
@@ -267,8 +268,9 @@ class SelectionViewController: UIViewController {
             
             if success {
                 self.endAnimating()
+                self.moviesArray = []
                 self.moviesArray = stringArray
-                if moviesArray.count > 0 {
+                if self.moviesArray.count > 0 {
                     let randomNumber = Int.random(in: 0..<stringArray.count)
                     let randomMovie = self.moviesArray[randomNumber]
                     DispatchQueue.main.async {

@@ -22,13 +22,6 @@ class TMDBClient {
     }
     
     static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
-
-        
-        guard let networkReachable = NetworkReachabilityManager()?.isReachable else {
-            print("Guard in network reachable")
-            return
-        }
-        
         
         // Creates a default empty string to pass through as a query parameter if there is nothing to query
         var yearFromQueryParam = ""
@@ -60,6 +53,7 @@ class TMDBClient {
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
     
                 AF.request(url, method: .get).responseJSON {
+                    
                     (response) in
         
                     // A switch statement where we determine what to do with the results
@@ -69,6 +63,7 @@ class TMDBClient {
                     case .success(let value):
                         
                         var titleStringArray = [String]()
+                        
                         titleStringArray = []
         
                         let json = JSON(value)
@@ -77,12 +72,15 @@ class TMDBClient {
                         let jsonArrayMap = json["results"].arrayValue.map {
                             $0["title"].stringValue
                         }
+                        
+                        print("JsonArrayMap" + " " + "\(jsonArrayMap)")
         
                         // Creating a string array of titles
                         for item in jsonArrayMap {
                             titleStringArray.append(item)
                         }
-                        print(jsonArrayMap)
+                        
+                        
                         completion(true, titleStringArray, nil)
         
                         case .failure(let error):
