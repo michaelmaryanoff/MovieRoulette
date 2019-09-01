@@ -245,14 +245,18 @@ class SelectionViewController: UIViewController {
         
         TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: SelectionViewController.yearFrom, to: SelectionViewController.yearTo, withActorCode: actorId) { (success, stringArray, error) in
             
-            print("made the network call")
+            if CheckConnectivity.isConnectedToInternet == false {
+                self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
+                return
+            }
+            
+            self.beginAnimating()
             
             if error != nil {
                 self.presentAlertControllerDismiss(title: "There was an error.", message: "\(error!.localizedDescription)")
             }
             
             if success {
-            
                 self.endAnimating()
                 self.moviesArray = stringArray
                 if stringArray.count > 0 {

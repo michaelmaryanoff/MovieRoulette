@@ -23,6 +23,13 @@ class TMDBClient {
     
     static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
 
+        
+        guard let networkReachable = NetworkReachabilityManager()?.isReachable else {
+            print("Guard in network reachable")
+            return
+        }
+        
+        
         // Creates a default empty string to pass through as a query parameter if there is nothing to query
         var yearFromQueryParam = ""
         var yearToQueryParam = ""
@@ -51,42 +58,40 @@ class TMDBClient {
         
         // Forms a url to make a request to get a list of movies that meet the criteria
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
+    
+                AF.request(url, method: .get).responseJSON {
+                    (response) in
         
-        // Creates an empty string array to hold the list of URLs
-        var titleStringArray = [String]()
+                    // A switch statement where we determine what to do with the results
+                    switch response.result {
         
-        // Make the request with the url
-        AF.request(url, method: .get).validate().responseJSON {
-            (response) in
-            
-            print("url" + "\(url)")
-            // A switch statement where we determine what to do with the results
-            switch response.result {
-
-            // What to do if we get some valid json data
-            case .success(let value):
-                let json = JSON(value)
-
-                // Getting an array of titles
-                let jsonArrayMap = json["results"].arrayValue.map {
-                    $0["title"].stringValue
+                    // What to do if we get some valid json data
+                    case .success(let value):
+                        
+                        var titleStringArray = [String]()
+                        titleStringArray = []
+        
+                        let json = JSON(value)
+        
+                        // Getting an array of titles
+                        let jsonArrayMap = json["results"].arrayValue.map {
+                            $0["title"].stringValue
+                        }
+        
+                        // Creating a string array of titles
+                        for item in jsonArrayMap {
+                            titleStringArray.append(item)
+                        }
+                        print(jsonArrayMap)
+                        completion(true, titleStringArray, nil)
+        
+                        case .failure(let error):
+                        print("Here was the error in \(#function): print \(error.localizedDescription)")
+                        completion(false, [], error)
+                    }
+        
                 }
 
-                // Creating a string array of titles
-                for item in jsonArrayMap {
-                    titleStringArray.append(item)
-                }
-                print(jsonArrayMap)
-                completion(true, titleStringArray, nil)
-
-                // Generating a random number using the titleStringArray as the upper limit
-
-                case .failure(let error):
-                print("Here was the error in \(#function): print \(error.localizedDescription)")
-                completion(false, [], error)
-            }
-
-        }
     
     }
     
@@ -112,11 +117,18 @@ class TMDBClient {
         AF.request(url).validate().responseJSON {
             (response) in
             
+          
+            
             // Handles the response
             switch response.result {
                 
             case .success(let value):
+                
+                print("Value is" + " " + "\(value)")
+                
                 let json = JSON(value)
+                
+                print("json is" + " " + "\(json)")
                 
                 let jsonArrayNameMap = json["results"].arrayValue.map {
                     $0["name"].stringValue
@@ -145,3 +157,4 @@ class TMDBClient {
     }
     
 }
+
