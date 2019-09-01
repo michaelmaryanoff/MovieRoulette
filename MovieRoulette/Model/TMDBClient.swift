@@ -83,6 +83,7 @@ class TMDBClient {
 
                 case .failure(let error):
                 print("Here was the error in \(#function): print \(error.localizedDescription)")
+                completion(false, [], error)
             }
 
         }

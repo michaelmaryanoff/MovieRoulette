@@ -56,6 +56,9 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var genresSelectedLabel: UILabel!
     @IBOutlet weak var releaseWindowLabel: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var backgroundIndicatorView: UIView!
     // MARK: - View load functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +66,19 @@ class SelectionViewController: UIViewController {
         print("viewDidLoadCalled")
         setUpLabels(withCornerRadius: 7, withBackgroundColor: Colors.darkPurple)
         setUpButtons(withCornerRadius: 7, withBackgroundColor: Colors.pinkOrange, titleColor: .black)
+        setupActivityIndicator(uiView: backgroundIndicatorView, activityIndicator: activityIndicator)
+        
+    }
+    
+    func setupActivityIndicator(uiView: UIView, activityIndicator: UIActivityIndicatorView) {
+        uiView.backgroundColor = Colors.richBlue
+        uiView.alpha = 0.7
+        uiView.clipsToBounds = true
+        uiView.layer.cornerRadius = 8
+        uiView.isHidden = true
+        
+        activityIndicator.style = .whiteLarge
+        activityIndicator.isHidden = true
     }
     
     func setUpLabels(withCornerRadius cornerRadius: CGFloat, withBackgroundColor backgroundColor: UIColor) {
@@ -101,7 +117,6 @@ class SelectionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("viewDidAppearCalled")
-        print("\(SelectionViewController.managedGenreArray)")
 
     }
     
@@ -207,8 +222,6 @@ class SelectionViewController: UIViewController {
         
         // Takes the results of the fetch request
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            print("The Actor result of SelectionViewControllerCount is\(result)")
-            print("The count of ActorFetchRequst is \(result.count)")
             
             SelectionViewController.managedActorArray = result
             
@@ -232,11 +245,15 @@ class SelectionViewController: UIViewController {
         
         TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: SelectionViewController.yearFrom, to: SelectionViewController.yearTo, withActorCode: actorId) { (success, stringArray, error) in
             
+            print("made the network call")
+            
             if error != nil {
-                self.presentAlertControllerDismiss(title: "Thre was an error.", message: "\(error!.localizedDescription)")
+                self.presentAlertControllerDismiss(title: "There was an error.", message: "\(error!.localizedDescription)")
             }
             
             if success {
+            
+                self.endAnimating()
                 self.moviesArray = stringArray
                 if stringArray.count > 0 {
                     let randomNumber = Int.random(in: 0..<stringArray.count)
@@ -272,6 +289,7 @@ class SelectionViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
         // Adapted from Stack Overflow post
         if segue.identifier == "chooseGenres" {
             let destinationVC = segue.destination as! GenresTableViewController
@@ -294,5 +312,21 @@ class SelectionViewController: UIViewController {
         self.present(alertController, animated: true)
     }
     
+}
+
+// MARK: - Viewfunctions
+extension SelectionViewController {
+    
+    func beginAnimating () {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        backgroundIndicatorView.isHidden = false
+    }
+    
+    func endAnimating() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        backgroundIndicatorView.isHidden = true
+    }
 }
 
