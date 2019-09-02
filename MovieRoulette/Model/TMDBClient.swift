@@ -84,7 +84,8 @@ class TMDBClient {
                         completion(true, titleStringArray, nil)
         
                         case .failure(let error):
-                        print("Here was the error in \(#function): print \(error.localizedDescription)")
+                        print("Here was the error in \(#function): \(error.localizedDescription)")
+                        
                         completion(false, [], error)
                     }
         
@@ -101,11 +102,17 @@ class TMDBClient {
             return
         }
         
+        if query.isEmpty {
+            print("no query")
+            return
+        }
+        
         // Formats the query string to pass through
         let queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         
         // Formats the url
         let url = Endpoints.base + "/search/person" + Endpoints.apiKeyParam + queryString
+        print("url is actor" + " " + "\(url)")
         
         // Creates a string of actors and their corresponding Ids
         var actorStringArray = [String]()
@@ -122,11 +129,7 @@ class TMDBClient {
                 
             case .success(let value):
                 
-                print("Value is" + " " + "\(value)")
-                
                 let json = JSON(value)
-                
-                print("json is" + " " + "\(json)")
                 
                 let jsonArrayNameMap = json["results"].arrayValue.map {
                     $0["name"].stringValue
@@ -148,7 +151,14 @@ class TMDBClient {
                 completion(true, actorStringArray, idStringArray, nil)
                 
             case .failure(let error):
-                print("Here was the error in \(#function): print \(error.localizedDescription)")
+                
+                if let responseStatusCode = response.response?.statusCode {
+                    if responseStatusCode == 422 {
+                        print("could not find any actors with that name")
+                    }
+                    
+                }
+                print("error.asAFError?.errorDescription" + " " + "\(error.asAFError?.errorDescription)")
                 completion(false, [], [], error)
             }
         }

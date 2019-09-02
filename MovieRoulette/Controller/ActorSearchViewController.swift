@@ -22,14 +22,14 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     var selectedActorId = 0
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var actorSearchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.searchBar.delegate = self
+        self.actorSearchBar.delegate = self
         
         tableView.backgroundColor = Colors.pinkOrange
     }
@@ -43,12 +43,18 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "actorCell", for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "actorCell", for: indexPath) as! CustomActorCell
         
         setupCellCharacteristics(forCell: cell)
+        cell.beginAnimating()
         
         let movieTitle = actors[indexPath.row]
+        
+        if movieTitle.isEmpty {
+            cell.beginAnimating()
+        } else {
+            cell.endAnimating()
+        }
         
         cell.textLabel?.text = movieTitle
         
@@ -114,18 +120,29 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
 }
 
 extension ActorSearchViewController: UISearchBarDelegate {
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("did end")
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        
+
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
-            
-            
+
             if CheckConnectivity.isConnectedToInternet == false {
                 self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
                 return
             }
-            
+        
+
             self.actors = actorStringArray
             self.actorsIdArray = idIntArray
+            
+            if actorStringArray.isEmpty && !searchText.isEmpty {
+                self.presentAlertControllerDismiss(title: "Could not find any actors.", message: "Please try again.")
+            }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
