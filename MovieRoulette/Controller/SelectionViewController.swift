@@ -216,9 +216,20 @@ class SelectionViewController: UIViewController {
             
             if result.count > 0 {
                 if let firstResult = result.first {
-                    releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
-                    SelectionViewController.yearTo = Int(firstResult.yearTo)
-                    SelectionViewController.yearFrom = Int(firstResult.yearFrom)
+                    
+                    // Adapted from Stack Overflow post
+                    if (UIScreen.main.bounds.width == 320) {
+                        print("got here")
+                        
+                        releaseWindowLabel.text = "Window has been chosen"
+                        
+                    } else {
+                        releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
+                        
+                        SelectionViewController.yearTo = Int(firstResult.yearTo)
+                        SelectionViewController.yearFrom = Int(firstResult.yearFrom)
+                    }
+                    
                 }
                 
             }

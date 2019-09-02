@@ -61,11 +61,11 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Release Dates" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7e-Pi-DxY">
-                                <rect key="frame" x="72" y="218" width="231" height="54"/>
+                                <rect key="frame" x="46" y="218" width="283" height="54"/>
                                 <color key="backgroundColor" red="0.0" green="0.0078431372550000003" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="Fbo-Rt-foR"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="231" id="WdE-f5-CVL"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="283" id="WdE-f5-CVL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,15 +129,18 @@
                                     <action selector="spinForMovie:" destination="tzt-m6-IiU" eventType="touchUpInside" id="hOV-7d-lzc"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOl-Jx-1K9">
-                                <rect key="frame" x="107" y="303.5" width="120" height="119"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOl-Jx-1K9">
+                                <rect key="frame" x="127.5" y="306" width="120" height="119"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yz4-wf-7Eq">
                                         <rect key="frame" x="50" y="49" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="119" id="SkG-h7-fAw"/>
+                                    <constraint firstAttribute="width" constant="120" id="hS7-aY-OfM"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -147,7 +150,9 @@
                             <constraint firstItem="gUR-Ob-ZQU" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="8qe-o6-owZ"/>
                             <constraint firstItem="Z81-Nz-NJ8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Fs7-cX-lyW" secondAttribute="bottom" constant="8" id="Aho-iE-D1V"/>
                             <constraint firstItem="3FB-yb-Rk9" firstAttribute="top" secondItem="Z81-Nz-NJ8" secondAttribute="bottom" constant="25" id="BRg-8e-4ae"/>
+                            <constraint firstItem="cOl-Jx-1K9" firstAttribute="centerY" secondItem="DcV-Wp-obf" secondAttribute="centerY" id="FhW-fF-20y"/>
                             <constraint firstItem="Fs7-cX-lyW" firstAttribute="top" secondItem="gUR-Ob-ZQU" secondAttribute="bottom" priority="750" constant="45" id="H9t-gc-WIV"/>
+                            <constraint firstItem="cOl-Jx-1K9" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="JFa-1J-QV3"/>
                             <constraint firstItem="Z81-Nz-NJ8" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="MfV-R9-lHs"/>
                             <constraint firstItem="y7e-Pi-DxY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JPQ-VC-W0p" secondAttribute="bottom" constant="27" id="MoL-La-sKW"/>
                             <constraint firstItem="phh-dn-uXp" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="Nfv-gt-QoW"/>
