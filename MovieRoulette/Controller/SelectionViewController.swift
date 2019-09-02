@@ -218,8 +218,8 @@ class SelectionViewController: UIViewController {
                 if let firstResult = result.first {
                     
                     // Adapted from Stack Overflow post
+                    // This solves a bug where releasewindowlabel displays incorrectly on small device screens
                     if (UIScreen.main.bounds.width == 320) {
-                        print("got here")
                         
                         releaseWindowLabel.text = "Window has been chosen"
                         

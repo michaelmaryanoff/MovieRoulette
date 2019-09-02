@@ -155,7 +155,17 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
 
 extension ActorSearchViewController: UISearchBarDelegate {
     
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if CheckConnectivity.isConnectedToInternet == false {
+            DispatchQueue.main.async {
+                self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
+                self.changeActivityIndicatorState(isAnimating: false)
+            }
+            
+        }
+        
+
         
         self.changeActivityIndicatorState(isAnimating: true)
 
@@ -169,9 +179,9 @@ extension ActorSearchViewController: UISearchBarDelegate {
             if CheckConnectivity.isConnectedToInternet == false {
                 DispatchQueue.main.async {
                     self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
+                    self.changeActivityIndicatorState(isAnimating: false)
                 }
                 
-                return
             }
             
             if actorStringArray.isEmpty && !searchText.isEmpty {

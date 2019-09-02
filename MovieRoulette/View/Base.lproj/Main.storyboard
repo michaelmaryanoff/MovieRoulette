@@ -241,35 +241,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KZT-OW-klS">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="QIj-FA-SeV"/>
+                                    <constraint firstAttribute="height" constant="56" id="nwp-ov-7Cv"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-TI-Zbm">
-                                <rect key="frame" x="0.0" y="-63" width="375" height="730"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="730" id="wtX-In-2y5"/>
+                                    <constraint firstAttribute="height" constant="547" id="wtX-In-2y5"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="actorCell" id="cLO-0o-FPP" customClass="CustomActorCell" customModule="MovieRoulette" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="actorCell" rowHeight="20" id="cLO-0o-FPP" customClass="CustomActorCell" customModule="MovieRoulette" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cLO-0o-FPP" id="dCC-gG-c9X">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZT-OW-klS">
-                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Lrv-TI-Zbm" firstAttribute="top" secondItem="KZT-OW-klS" secondAttribute="bottom" id="0HH-E5-StW"/>
+                            <constraint firstItem="Lrv-TI-Zbm" firstAttribute="top" secondItem="KZT-OW-klS" secondAttribute="bottom" id="5ca-Yw-HK5"/>
+                            <constraint firstItem="KZT-OW-klS" firstAttribute="leading" secondItem="mN2-M9-CLJ" secondAttribute="leading" id="6Xx-Yp-VSI"/>
                             <constraint firstItem="Lrv-TI-Zbm" firstAttribute="bottom" secondItem="mN2-M9-CLJ" secondAttribute="bottom" id="N4R-kD-LE3"/>
                             <constraint firstAttribute="trailing" secondItem="Lrv-TI-Zbm" secondAttribute="trailing" id="Oq8-Xm-n4n"/>
-                            <constraint firstItem="Lrv-TI-Zbm" firstAttribute="leading" secondItem="KZT-OW-klS" secondAttribute="leading" id="Xfm-v7-eIl"/>
-                            <constraint firstItem="Lrv-TI-Zbm" firstAttribute="trailing" secondItem="KZT-OW-klS" secondAttribute="trailing" id="vhJ-Ee-BYC"/>
+                            <constraint firstItem="KZT-OW-klS" firstAttribute="top" secondItem="mN2-M9-CLJ" secondAttribute="top" id="RCz-ny-gLD"/>
+                            <constraint firstItem="mN2-M9-CLJ" firstAttribute="trailing" secondItem="KZT-OW-klS" secondAttribute="trailing" id="Sor-pf-FsJ"/>
                             <constraint firstItem="Lrv-TI-Zbm" firstAttribute="leading" secondItem="kWx-xq-Dt3" secondAttribute="leading" id="xlf-wD-Sdj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mN2-M9-CLJ"/>
@@ -285,7 +290,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcc-ho-li1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="9uB-PH-ysz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1728.985507246377" y="986.38392857142856"/>
+            <point key="canvasLocation" x="1728.8" y="986.35682158920542"/>
         </scene>
         <!--Genres Table View Controller-->
         <scene sceneID="S97-ox-uX7">
