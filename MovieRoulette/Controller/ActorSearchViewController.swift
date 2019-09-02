@@ -167,15 +167,18 @@ extension ActorSearchViewController: UISearchBarDelegate {
             }
             
             if CheckConnectivity.isConnectedToInternet == false {
-                self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
+                DispatchQueue.main.async {
+                    self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
+                }
+                
                 return
             }
             
             if actorStringArray.isEmpty && !searchText.isEmpty {
-                self.presentAlertControllerDismiss(title: "Could not find any actors.", message: "Please try again.")
                 DispatchQueue.main.async {
-                    
+                    self.presentAlertControllerDismiss(title: "Could not find any actors.", message: "Please try again.")
                 }
+                
                 
             }
         
