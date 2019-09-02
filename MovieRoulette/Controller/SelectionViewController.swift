@@ -28,6 +28,8 @@ class SelectionViewController: UIViewController {
     
     static var yearTo: Int = 2019
     
+    
+    
     var actorId: Int?
     
     // MARK: - Managed Core Data variables
@@ -44,6 +46,7 @@ class SelectionViewController: UIViewController {
    
     // MARK: - Outlets
 
+    
     // Buttons
     @IBOutlet weak var spinForMovieButton: UIButton!
     @IBOutlet weak var chooseGenreButton: UIButton!
@@ -59,6 +62,7 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var backgroundIndicatorView: UIView!
+    
     // MARK: - View load functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +71,9 @@ class SelectionViewController: UIViewController {
         setUpLabels(withCornerRadius: 7, withBackgroundColor: Colors.darkPurple)
         setUpButtons(withCornerRadius: 7, withBackgroundColor: Colors.pinkOrange, titleColor: .black)
         setupActivityIndicator(uiView: backgroundIndicatorView, activityIndicator: activityIndicator)
+        
+        self.view.bringSubviewToFront(backgroundIndicatorView)
+        
         
     }
     
