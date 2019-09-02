@@ -215,7 +215,7 @@ class SelectionViewController: UIViewController {
             
             if result.count > 0 {
                 if let firstResult = result.first {
-                    releaseWindowLabel.text = "Between \(firstResult.yearFrom) and \(firstResult.yearTo)"
+                    releaseWindowLabel.text = "From \(firstResult.yearFrom) to \(firstResult.yearTo)"
                     SelectionViewController.yearTo = Int(firstResult.yearTo)
                     SelectionViewController.yearFrom = Int(firstResult.yearFrom)
                 }
