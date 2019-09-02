@@ -21,6 +21,8 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     var selectedIndex = 0
     var selectedActorId = 0
     
+    var activityView = UIActivityIndicatorView(style: .whiteLarge)
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var actorSearchBar: UISearchBar!
     
@@ -32,7 +34,17 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         self.actorSearchBar.delegate = self
         
         tableView.backgroundColor = Colors.pinkOrange
+        self.view.addSubview(self.activityView)
+        
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+    // MARK: - Table view functions
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -43,23 +55,28 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "actorCell", for: indexPath) as! CustomActorCell
         
         setupCellCharacteristics(forCell: cell)
-        cell.beginAnimating()
         
-        let movieTitle = actors[indexPath.row]
-        
-        if movieTitle.isEmpty {
-            cell.beginAnimating()
-        } else {
-            cell.endAnimating()
+        if let cellText = cell.textLabel?.text {
+            if !cellText.isEmpty {
+                print("we got some cell text")
+                
+            }
+            
         }
+        let movieTitle = actors[indexPath.row]
         
         cell.textLabel?.text = movieTitle
         
+        
+        
         return cell
     }
+    
+
     
     func setupCellCharacteristics(forCell cell: UITableViewCell) {
         let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
@@ -102,6 +119,23 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         
         
     }
+    
+    //MARK: - View helpers
+    
+    // Adapted from Stack Overflow
+    func changeActivityIndicatorState(isAnimating: Bool) {
+        switch isAnimating {
+        case true:
+            self.activityView.center = self.view.center
+            self.activityView.hidesWhenStopped = true
+            activityView.startAnimating()
+        case false:
+            activityView.stopAnimating()
+            
+        }
+        
+    }
+    
     @IBAction func unwindToSelectionViewController (segue: UIStoryboardSegue) {
         performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorId)
     }
@@ -120,33 +154,43 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
 }
 
 extension ActorSearchViewController: UISearchBarDelegate {
-
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("did end")
-    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        
+        self.changeActivityIndicatorState(isAnimating: true)
 
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
-
+        
+            
+            if !actorStringArray.isEmpty {
+                self.changeActivityIndicatorState(isAnimating: false)
+            }
+            
             if CheckConnectivity.isConnectedToInternet == false {
                 self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
                 return
             }
-        
-
-            self.actors = actorStringArray
-            self.actorsIdArray = idIntArray
             
             if actorStringArray.isEmpty && !searchText.isEmpty {
                 self.presentAlertControllerDismiss(title: "Could not find any actors.", message: "Please try again.")
+                DispatchQueue.main.async {
+                    
+                }
+                
             }
+        
+            self.actors = actorStringArray
+            self.actorsIdArray = idIntArray
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                
             }
+
+            
+            
         }
+        
     }
     
     public func presentAlertControllerDismiss(title: String, message: String) -> Void {
