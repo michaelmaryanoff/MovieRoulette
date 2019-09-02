@@ -196,6 +196,7 @@ class SelectionViewController: UIViewController {
             DispatchQueue.main.async {
                 if result.count == 1 {
                     self.genresSelectedLabel.text = "\(result.count) genre selected"
+                    print("\(result.count) genre selected")
                 } else if result.count > 0 {
                     self.genresSelectedLabel.text = "\(result.count) genres selected"
                 } else {
@@ -215,7 +216,7 @@ class SelectionViewController: UIViewController {
             
             if result.count > 0 {
                 if let firstResult = result.first {
-                    releaseWindowLabel.text = "From \(firstResult.yearFrom) to \(firstResult.yearTo)"
+                    releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
                     SelectionViewController.yearTo = Int(firstResult.yearTo)
                     SelectionViewController.yearFrom = Int(firstResult.yearFrom)
                 }

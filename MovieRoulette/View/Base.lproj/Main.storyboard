@@ -34,23 +34,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Genres" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phh-dn-uXp">
-                                <rect key="frame" x="79" y="92" width="217" height="75"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Genres" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phh-dn-uXp">
+                                <rect key="frame" x="79" y="92" width="217" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.0078431372549019607" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="217" id="QLo-4q-scp"/>
-                                    <constraint firstAttribute="height" constant="75" id="Tos-Yd-dH7"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="217" id="Dxc-gY-BJh"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="qjF-qP-5zV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-VC-W0p">
-                                <rect key="frame" x="96" y="183" width="181" height="61"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-VC-W0p">
+                                <rect key="frame" x="97" y="150" width="181" height="41"/>
                                 <color key="backgroundColor" red="0.63921568630000003" green="0.1843137255" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="PlB-g5-55L"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="181" id="d8C-P4-wgE"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="181" id="PpS-4q-c69"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="41" id="kla-7S-bPI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <state key="normal" title="Choose Genres">
@@ -61,11 +61,11 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Dates" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7e-Pi-DxY">
-                                <rect key="frame" x="44" y="256" width="287" height="72"/>
+                                <rect key="frame" x="72" y="218" width="231" height="47"/>
                                 <color key="backgroundColor" red="0.0" green="0.0078431372550000003" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="8el-Sz-GEJ"/>
-                                    <constraint firstAttribute="width" constant="287" id="LvX-Az-aSo"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="47" id="Fbo-Rt-foR"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="231" id="WdE-f5-CVL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -73,7 +73,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z81-Nz-NJ8">
-                                <rect key="frame" x="86" y="573" width="200" height="60"/>
+                                <rect key="frame" x="88" y="479" width="200" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.63921568630000003" green="0.1843137255" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
@@ -84,8 +84,8 @@
                                     <segue destination="oZg-JT-3o3" kind="show" identifier="chooseActor" id="qk3-sZ-EDk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-yb-Rk9">
-                                <rect key="frame" x="98" y="691" width="177" height="55"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-yb-Rk9" userLabel="Spin Button">
+                                <rect key="frame" x="137" y="519" width="101" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.63921568627450975" green="0.18431372549019609" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
@@ -96,15 +96,6 @@
                                     <action selector="spinForMovie:" destination="tzt-m6-IiU" eventType="touchUpInside" id="hOV-7d-lzc"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select an actor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs7-cX-lyW">
-                                <rect key="frame" x="44" y="489" width="286" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0078431372550000003" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOl-Jx-1K9">
                                 <rect key="frame" x="107" y="303.5" width="120" height="119"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -115,12 +106,12 @@
                                     </activityIndicatorView>
                                 </subviews>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-Ob-ZQU">
-                                <rect key="frame" x="87.5" y="336" width="200" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-Ob-ZQU" userLabel="Date Range Button">
+                                <rect key="frame" x="87.5" y="273" width="200" height="37"/>
                                 <color key="backgroundColor" red="0.63921568630000003" green="0.1843137255" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="1rJ-xE-k49"/>
-                                    <constraint firstAttribute="height" constant="60" id="ZMc-JF-xR6"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="4TD-fa-BN2"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="s4a-9B-Vbi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <state key="normal" title="Date Range">
@@ -130,17 +121,34 @@
                                     <segue destination="hf4-vJ-vVq" kind="show" identifier="chooseReleaseWindow" id="PBg-Lz-Uoi"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Select an actor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs7-cX-lyW" userLabel="Select Actors Label">
+                                <rect key="frame" x="72" y="355" width="231" height="67"/>
+                                <color key="backgroundColor" red="0.0" green="0.0078431372550000003" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="231" id="VAY-AS-69c"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="67" id="jMO-F8-WUf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gUR-Ob-ZQU" firstAttribute="top" secondItem="y7e-Pi-DxY" secondAttribute="bottom" constant="8" id="Dy4-Mf-yHY"/>
-                            <constraint firstItem="phh-dn-uXp" firstAttribute="top" secondItem="DcV-Wp-obf" secondAttribute="top" constant="28" id="K4m-G3-wY3"/>
-                            <constraint firstItem="JPQ-VC-W0p" firstAttribute="top" secondItem="phh-dn-uXp" secondAttribute="bottom" constant="16" id="W4A-nU-iWC"/>
-                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="ZMZ-g9-YG8"/>
-                            <constraint firstItem="JPQ-VC-W0p" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" constant="-1" id="fn0-nD-3Va"/>
-                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="top" secondItem="JPQ-VC-W0p" secondAttribute="bottom" constant="18" id="kgt-It-aX7"/>
-                            <constraint firstItem="phh-dn-uXp" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="mVG-3q-pPf"/>
-                            <constraint firstItem="gUR-Ob-ZQU" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="mdh-AY-NLJ"/>
+                            <constraint firstItem="JPQ-VC-W0p" firstAttribute="top" secondItem="phh-dn-uXp" secondAttribute="bottom" constant="8" id="5qk-fV-wKl"/>
+                            <constraint firstItem="phh-dn-uXp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DcV-Wp-obf" secondAttribute="top" constant="28" id="6kV-8F-jsb"/>
+                            <constraint firstItem="gUR-Ob-ZQU" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="8qe-o6-owZ"/>
+                            <constraint firstItem="Fs7-cX-lyW" firstAttribute="top" secondItem="gUR-Ob-ZQU" secondAttribute="bottom" priority="750" constant="45" id="H9t-gc-WIV"/>
+                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JPQ-VC-W0p" secondAttribute="bottom" constant="27" id="MoL-La-sKW"/>
+                            <constraint firstItem="phh-dn-uXp" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="Nfv-gt-QoW"/>
+                            <constraint firstItem="phh-dn-uXp" firstAttribute="top" secondItem="DcV-Wp-obf" secondAttribute="top" priority="750" constant="28" id="dxZ-k6-VQh"/>
+                            <constraint firstItem="JPQ-VC-W0p" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="l4C-ai-xK1"/>
+                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="top" secondItem="JPQ-VC-W0p" secondAttribute="bottom" priority="750" constant="27" id="oA5-qL-OlS"/>
+                            <constraint firstItem="y7e-Pi-DxY" firstAttribute="centerX" secondItem="DcV-Wp-obf" secondAttribute="centerX" id="piE-CR-m8z"/>
+                            <constraint firstItem="gUR-Ob-ZQU" firstAttribute="top" secondItem="y7e-Pi-DxY" secondAttribute="bottom" priority="750" constant="8" id="qMr-iZ-0Nh"/>
+                            <constraint firstItem="Fs7-cX-lyW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gUR-Ob-ZQU" secondAttribute="bottom" constant="45" id="wWu-Kg-2gv"/>
+                            <constraint firstItem="gUR-Ob-ZQU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y7e-Pi-DxY" secondAttribute="bottom" constant="8" id="xcr-DF-fTI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DcV-Wp-obf"/>
                     </view>
