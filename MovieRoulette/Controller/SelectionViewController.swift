@@ -67,9 +67,7 @@ class SelectionViewController: UIViewController {
         initialViewSetup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    fileprivate func setupFetchRequest() {
         // MARK: Fetch requests
         let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         let yearRangeFetchRequest: NSFetchRequest<YearRange> = YearRange.fetchRequest()
@@ -90,7 +88,12 @@ class SelectionViewController: UIViewController {
         } catch  {
             print("will not save in \(#function)")
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        setupFetchRequest()
     }
     
     // MARK: - Core Data functions
@@ -256,45 +259,7 @@ class SelectionViewController: UIViewController {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
-        // Adapted from Stack Overflow post
-        if segue.identifier == "chooseGenres" {
-            let destinationVC = segue.destination as! GenresTableViewController
-            destinationVC.dataController = dataController
-            GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
-        } else if segue.identifier == "chooseReleaseWindow" {
-            let destinationVC = segue.destination as! ReleaseWindowViewController
-            ReleaseWindowViewController.dataController = dataController
-            ReleaseWindowViewController.releaseWindowArray = SelectionViewController.releaseWindowArray
-            
-        } else if segue.identifier == "chooseActor" {
-            let destinationVC = segue.destination as! ActorSearchViewController
-            destinationVC.dataController = dataController
-        }
-    }
-    
-    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        self.present(alertController, animated: true)
-    }
-    
-}
 
-// MARK: - Viewfunctions
-extension SelectionViewController {
     
-    func beginAnimating () {
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
-        backgroundIndicatorView.isHidden = false
-    }
-    
-    func endAnimating() {
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
-        backgroundIndicatorView.isHidden = true
-    }
 }
 

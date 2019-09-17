@@ -11,6 +11,7 @@ import UIKit
 
 extension SelectionViewController {
     
+    //MARK - View functions
     func initialViewSetup() {
         setUpLabels(withCornerRadius: 7, withBackgroundColor: Colors.darkPurple)
         setUpButtons(withCornerRadius: 7, withBackgroundColor: Colors.pinkOrange, titleColor: .black)
@@ -60,7 +61,42 @@ extension SelectionViewController {
         
         spinForMovieButton.layer.cornerRadius = cornerRadius
         
+    }
+    
+    func beginAnimating () {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        backgroundIndicatorView.isHidden = false
+    }
+    
+    func endAnimating() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        backgroundIndicatorView.isHidden = true
+    }
+    
+    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alertController, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        // Adapted from Stack Overflow post
+        if segue.identifier == "chooseGenres" {
+            let destinationVC = segue.destination as! GenresTableViewController
+            destinationVC.dataController = dataController
+            GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
+        } else if segue.identifier == "chooseReleaseWindow" {
+            let destinationVC = segue.destination as! ReleaseWindowViewController
+            ReleaseWindowViewController.dataController = dataController
+            ReleaseWindowViewController.releaseWindowArray = SelectionViewController.releaseWindowArray
+            
+        } else if segue.identifier == "chooseActor" {
+            let destinationVC = segue.destination as! ActorSearchViewController
+            destinationVC.dataController = dataController
+        }
     }
     
     
