@@ -67,6 +67,15 @@ class SelectionViewController: UIViewController {
         initialViewSetup()
     }
     
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupFetchRequest()
+    }
+    
+    // MARK: - Core Data functions
     fileprivate func setupFetchRequest() {
         // MARK: Fetch requests
         let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
@@ -79,9 +88,7 @@ class SelectionViewController: UIViewController {
         makeActorFetchRequest(actorFetchRequest)
         
         // Deletes all genres that are empty
-        for item in SelectionViewController.managedGenreArray {
-            deleteAllEmptyGenres()
-        }
+        deleteAllEmptyGenres()
         
         do {
             try dataController.viewContext.save()
@@ -89,14 +96,6 @@ class SelectionViewController: UIViewController {
             print("will not save in \(#function)")
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setupFetchRequest()
-    }
-    
-    // MARK: - Core Data functions
     
     fileprivate func deleteAllEmptyGenres() {
         for genre in SelectionViewController.managedGenreArray {
