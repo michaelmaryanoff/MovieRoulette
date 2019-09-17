@@ -12,16 +12,26 @@ import Alamofire
 
 class TMDBClient {
     
+    
     static let apiKey = "***REMOVED***"
     
     enum Endpoints {
-        
         static let base = "https://api.themoviedb.org/3"
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
-        
     }
     
+    enum QueryComponentType: String {
+        case yearFrom = "primary_release_date.gte"
+        case yearTo = "primary_release_date.lte"
+        case withGenres = "with_genres"
+        case withCast = "with_cast"
+    }
+    
+    
     static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
+        
+        
+        
         
         // Creates a default empty string to pass through as a query parameter if there is nothing to query
         var yearFromQueryParam = ""
