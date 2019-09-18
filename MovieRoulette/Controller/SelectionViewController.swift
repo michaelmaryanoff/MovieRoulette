@@ -117,7 +117,22 @@ class SelectionViewController: UIViewController {
         }
     }
     
+    func makeFetchRequest<FetchType: NSManagedObject>(_ fetchRequest: NSFetchRequest<FetchType>) {
+        
+    }
+    
+    
+    
     // MARK: Functions for making a fetch request of different types
+    
+    func makeFetchRequest(_ fetchRequest: NSFetchRequest<NSManagedObject>) {
+        // TODO: You will need to store the results of this as an array and then do something with it afterwards
+        // Maybe make this a guard statement and have this function return [NSManagedObject]
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            
+        }
+        
+    }
     fileprivate func makeGenreFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
         
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
@@ -129,16 +144,15 @@ class SelectionViewController: UIViewController {
             SelectionViewController.managedGenreArray = result
             print("result count is: \(result.count)")
             
-            DispatchQueue.main.async {
-                if result.count == 1 {
-                    self.genresSelectedLabel.text = "\(result.count) genre selected"
-                    print("\(result.count) genre selected")
-                } else if result.count > 0 {
-                    self.genresSelectedLabel.text = "\(result.count) genres selected"
-                } else {
-                    self.genresSelectedLabel.text = "No genres selected"
-                }
+            switch result.count {
+            case 1:
+                self.genresSelectedLabel.text = "\(result.count) genre selected"
+            case let count where count > 0:
+                self.genresSelectedLabel.text = "\(result.count) genres selected"
+            default:
+                self.genresSelectedLabel.text = "No genres selected"
             }
+
             
         }
     }
