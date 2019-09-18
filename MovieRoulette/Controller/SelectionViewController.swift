@@ -87,13 +87,13 @@ class SelectionViewController: UIViewController {
         makeYearRangeFetchRequest(yearRangeFetchRequest)
         makeActorFetchRequest(actorFetchRequest)
         
-        // Deletes all genres that are empty
+        // Deletes all genres that have "0" as a genre code
         deleteAllEmptyGenres()
         
         do {
             try dataController.viewContext.save()
         } catch  {
-            print("will not save in \(#function)")
+            print("There was a problem saving in in \(#function)")
         }
     }
     
@@ -116,12 +116,6 @@ class SelectionViewController: UIViewController {
             dataController.viewContext.delete(genre)
         }
     }
-    
-    func makeFetchRequest<FetchType: NSManagedObject>(_ fetchRequest: NSFetchRequest<FetchType>) {
-        
-    }
-    
-    
     
     // MARK: Functions for making a fetch request of different types
     
