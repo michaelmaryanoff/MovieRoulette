@@ -197,8 +197,6 @@ class SelectionViewController: UIViewController {
                 }
                 
             }
-            
-        
     }
     
     // MARK: - IBActions
@@ -255,6 +253,7 @@ class SelectionViewController: UIViewController {
         guard let actorSearchViewController = unwindSegue.source as? ActorSearchViewController else {
             return
         }
+        
         let passedActorId = actorSearchViewController.selectedActorId
         self.actorId = passedActorId
     }
