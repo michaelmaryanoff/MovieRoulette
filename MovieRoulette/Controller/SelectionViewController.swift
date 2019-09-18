@@ -157,22 +157,19 @@ class SelectionViewController: UIViewController {
     fileprivate func makeYearRangeFetchRequest(_ fetchRequest: NSFetchRequest<YearRange>) {
         
         // Takes the results of the fetch request
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+        let result = makeFetchRequest(fetchRequest)
             
             SelectionViewController.releaseWindowArray = result
             
             if result.count > 0 {
                 if let firstResult = result.first {
                     
-                    // Adapted from Stack Overflow post
-                    // This solves a bug where releasewindowlabel displays incorrectly on small device screens
+                    // This solves a bug where release window
+                    // displayed incorrectly on small device screens
                     if (UIScreen.main.bounds.width == 320) {
-                        
                         releaseWindowLabel.text = "Window has been chosen"
-                        
                     } else {
                         releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
-                        
                         SelectionViewController.yearTo = Int(firstResult.yearTo)
                         SelectionViewController.yearFrom = Int(firstResult.yearFrom)
                     }
@@ -180,14 +177,13 @@ class SelectionViewController: UIViewController {
                 }
                 
             }
-            
-        }
+        
     }
     
     fileprivate func makeActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
         
         // Takes the results of the fetch request
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+        let result = makeFetchRequest(fetchRequest)
             
             SelectionViewController.managedActorArray = result
             
@@ -202,7 +198,7 @@ class SelectionViewController: UIViewController {
                 
             }
             
-        }
+        
     }
     
     // MARK: - IBActions
