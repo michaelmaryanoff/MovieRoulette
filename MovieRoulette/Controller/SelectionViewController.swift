@@ -119,24 +119,29 @@ class SelectionViewController: UIViewController {
     
     // MARK: Functions for making a fetch request of different types
     
-    func makeFetchRequest(_ fetchRequest: NSFetchRequest<NSManagedObject>) {
+    func makeFetchRequest<MangedObject: NSManagedObject>(_ fetchRequest: NSFetchRequest<MangedObject>) -> [MangedObject] {
         // TODO: You will need to store the results of this as an array and then do something with it afterwards
         // Maybe make this a guard statement and have this function return [NSManagedObject]
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            
+        
+        do {
+            let result = try dataController.viewContext.fetch(fetchRequest)
+            return result
+        } catch {
+            print("could not fetch requested objects")
+            return []
         }
         
     }
+    
     fileprivate func makeGenreFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
         
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+        let result = makeFetchRequest(fetchRequest)
             
             for item in result {
                 deleteEmptyGenre(withGenre: item)
             }
             
             SelectionViewController.managedGenreArray = result
-            print("result count is: \(result.count)")
             
             switch result.count {
             case 1:
@@ -146,9 +151,7 @@ class SelectionViewController: UIViewController {
             default:
                 self.genresSelectedLabel.text = "No genres selected"
             }
-
-            
-        }
+        
     }
     
     fileprivate func makeYearRangeFetchRequest(_ fetchRequest: NSFetchRequest<YearRange>) {
