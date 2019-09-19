@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// Custom cell for the ActorSearchViewController
 class CustomActorCell: UITableViewCell {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
