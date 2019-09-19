@@ -183,6 +183,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
 }
 
+//MARK: - Extensions
 // Extension that handles the segue
 extension GenresTableViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {

@@ -12,59 +12,49 @@ import Foundation
 
 class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    //MARK: - Variables
+    
+    // Non-managed variables
     var yearRange: [Int] = Array(1900...2019).reversed()
-    
     var firstSectionValue: Int = 2019
-    
     var secondSectionValue: Int = 2019
-    
     static var yearFrom: Int = 2019
-    
     static var yearTo: Int = 2019
     
+    // Managed variables
     static var releaseWindow = YearRange(context: ReleaseWindowViewController.dataController.viewContext)
-    
     static var releaseWindowArray = [YearRange]()
-    
     static var dataController: DataController!
-
+    
+    // IBOUtlets
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
     @IBOutlet weak var releaseWindowLabel: UILabel!
     
+    //MARK: - view loading functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Defines delegates
         releaseYearPickerView.delegate = self
+        self.navigationController?.delegate = self
         
+        // Sets up label
         releaseWindowLabel.layer.cornerRadius = 7
         releaseWindowLabel.backgroundColor = Colors.darkPurple
         releaseWindowLabel.clipsToBounds = true
         
         
-        self.navigationController?.delegate = self
-        
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-    }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        // Ensures that the viewContext saves when navigating away from view
         do {
             try ReleaseWindowViewController.dataController.viewContext.save()
         } catch {
-            print("could not save this")
+            print("Could not save context")
         }
     }
     
@@ -72,6 +62,7 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         return 2
     }
     
+    //MARK: - Picker View functions
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return yearRange.count
     }
@@ -91,7 +82,8 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         } else if component == 1 {
             secondSectionValue = yearRangeInt
         }
-    
+        
+        // Ensures that "yearFrom" is always less than "yearTo"
         ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
         ReleaseWindowViewController.releaseWindow.yearTo = Int64(max(firstSectionValue, secondSectionValue))
         SelectionViewController.yearFrom = Int(ReleaseWindowViewController.releaseWindow.yearFrom)
