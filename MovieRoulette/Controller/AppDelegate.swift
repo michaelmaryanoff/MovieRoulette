@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // Uses dependency injection to share the DataController between classes
         let navigationController = window?.rootViewController as! UINavigationController
         let selectionViewController = navigationController.topViewController as! SelectionViewController
         selectionViewController.dataController = dataController

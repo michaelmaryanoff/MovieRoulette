@@ -12,20 +12,22 @@ import Foundation
 
 class GenresTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    //MARK: - Variables
+    
+    // Managed variables
+    static var managedGenreArray = [Genre]()
+    static var managedGenreArrayCount = 0
+    var fetchedResultsController: NSFetchedResultsController<Genre>!
     var dataController: DataController!
     
-    @IBOutlet weak var tableView: UITableView!
-    
-    static var managedGenreArray = [Genre]()
-    
-    static var managedGenreArrayCount = 0
-    
+    // Non-managed variables
     static var codeArray = [Int]()
-    
     static var genresArray = [String]()
     
-    var fetchedResultsController: NSFetchedResultsController<Genre>!
-
+    // IBOutlets
+    @IBOutlet weak var tableView: UITableView!
+    
+    // View loading functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,10 +41,14 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
     }
+
+    
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        // Ensures that the marked genres are passed through to the SelectionViewController
         SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
     }
     
@@ -60,8 +66,9 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)
         
+        // Sets up a custom font for the cell text
         let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
-        
+
         cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
         cell.textLabel?.textColor = .white
         cell.backgroundColor = Colors.pinkOrange
@@ -71,6 +78,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.textLabel?.text = GenreConstants.genresArray[indexPath.row]
         
+        // If the fetch request loads a genre, the cell is checked
         for item in GenresTableViewController.managedGenreArray {
             
             if let itemString = item.genreName {
@@ -87,10 +95,11 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         guard let currentCell = tableView.cellForRow(at: indexPath) else {
-            print("cannot with current cell")
+            print("Cannot find current cell")
             return
         }
         
+        // Code for handling the checking and unchecking of a cell
         if currentCell.accessoryType == .checkmark {
             currentCell.accessoryType = .none
             changeManagedGenreSet(forCell: currentCell, add: false, indexPath: indexPath)
@@ -101,7 +110,10 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     
-    // Reusable function that changes the context
+    //MARK: - ViewContext functions
+    
+    
+    // Function that writes or deletes from the view context depending on what cell is selected
     func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {
         
         guard let cellText = cell.textLabel?.text else {
@@ -155,6 +167,7 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     
+    // Function that indicates whether or not a genre is present in an array
     class func doesArrayContain(genreName: String) -> Bool {
         var boolForReturn = Bool()
         
@@ -165,12 +178,12 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
                 boolForReturn = false
             }
         }
-        print("Bool for return is \(boolForReturn)")
         return boolForReturn
     }
 
 }
 
+// Extension that handles the segue
 extension GenresTableViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         let newSelectionVC = viewController as? SelectionViewController
