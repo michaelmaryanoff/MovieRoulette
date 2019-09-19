@@ -10,6 +10,8 @@ import Foundation
 
 struct GenreConstants {
     
+    // TMDB Genres used to populate GenresTableViewController
+    // These values are hard coded to avoid unecessary API Requests
     static let genresArray = ["Action",
                               "Adventure",
                               "Animation",
