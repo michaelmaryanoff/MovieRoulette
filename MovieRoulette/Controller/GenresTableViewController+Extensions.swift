@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension GenresTableViewController {
+extension GenresTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Table view data source methods
     func numberOfSections(in tableView: UITableView) -> Int {
