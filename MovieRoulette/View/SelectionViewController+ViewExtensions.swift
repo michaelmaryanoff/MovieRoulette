@@ -11,7 +11,7 @@ import UIKit
 
 extension SelectionViewController {
     
-    //MARK - View functions
+    //MARK: - View setup functions
     func initialViewSetup() {
         setUpLabels(withCornerRadius: 7, withBackgroundColor: Colors.darkPurple)
         setUpButtons(withCornerRadius: 7, withBackgroundColor: Colors.pinkOrange, titleColor: .black)
@@ -63,6 +63,8 @@ extension SelectionViewController {
         
     }
     
+    
+    // MARK: - Animation functions
     func beginAnimating () {
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
@@ -73,12 +75,6 @@ extension SelectionViewController {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
         backgroundIndicatorView.isHidden = true
-    }
-    
-    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        self.present(alertController, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -98,6 +94,15 @@ extension SelectionViewController {
             destinationVC.dataController = dataController
         }
     }
+    
+    
+    public func presentAlertControllerDismiss(title: String, message: String) -> Void {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alertController, animated: true)
+    }
+    
+
     
     
 }
