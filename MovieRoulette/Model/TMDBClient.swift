@@ -12,14 +12,16 @@ import Alamofire
 
 class TMDBClient {
     
-    
+    // Holds the raw API key data
     static let apiKey = "***REMOVED***"
     
+    // Static endpoints to be used for each requests
     enum Endpoints {
         static let base = "https://api.themoviedb.org/3"
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
     }
     
+    // TODO: Create a switch on this to be used with URLComponents() later on
     enum QueryComponentType: String {
         case yearFrom = "primary_release_date.gte"
         case yearTo = "primary_release_date.lte"
@@ -31,15 +33,13 @@ class TMDBClient {
     static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
         
         
-        
-        
         // Creates a default empty string to pass through as a query parameter if there is nothing to query
         var yearFromQueryParam = ""
         var yearToQueryParam = ""
         var genreParams = ""
         var actorQueryParam = ""
         
-        // Checks to see if we have some information to pass through
+        // Checks to see if we have some genre codes to pass through
         if let genreCodes = genreCodes {
             for code in genreCodes {
                 let newCodeParam = "&with_genres=\(code)"
@@ -61,7 +61,8 @@ class TMDBClient {
         
         // Forms a url to make a request to get a list of movies that meet the criteria
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
-    
+        
+                // Make the request with the formed URL
                 AF.request(url, method: .get).responseJSON {
                     
                     (response) in
@@ -72,6 +73,7 @@ class TMDBClient {
                     // What to do if we get some valid json data
                     case .success(let value):
                         
+                        // Creates a temporary string array to be passed through the completion handler
                         var titleStringArray = [String]()
                         
                         titleStringArray = []
@@ -82,10 +84,8 @@ class TMDBClient {
                         let jsonArrayMap = json["results"].arrayValue.map {
                             $0["title"].stringValue
                         }
-                        
-                        print("JsonArrayMap" + " " + "\(jsonArrayMap)")
         
-                        // Creating a string array of titles
+                        // Appends movies to string array
                         for item in jsonArrayMap {
                             titleStringArray.append(item)
                         }
@@ -93,9 +93,9 @@ class TMDBClient {
                         
                         completion(true, titleStringArray, nil)
         
-                        case .failure(let error):
-                        print("Here was the error in \(#function): \(error.localizedDescription)")
+                    case .failure(let error):
                         
+                        print("Here was the error in \(#function): \(error.localizedDescription)")
                         completion(false, [], error)
                     }
         
@@ -107,6 +107,7 @@ class TMDBClient {
     // A network call that searches for an actor Id in order to create a url query
     static func searchForActorID(query: String?, completion: @escaping (Bool, [String], [Int], Error?) -> Void) {
         
+        // Makese sure that we actually have an actor to pass through
         guard let query = query else {
             print("there was no query in \(#function)!")
             return
@@ -118,21 +119,20 @@ class TMDBClient {
         }
         
         // Formats the query string to pass through
+        // Creates an empty string if there is no query
         let queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         
         // Formats the url
         let url = Endpoints.base + "/search/person" + Endpoints.apiKeyParam + queryString
         print("url is actor" + " " + "\(url)")
         
-        // Creates a string of actors and their corresponding Ids
+        // Creates a temporary string of actors and their corresponding Ids
         var actorStringArray = [String]()
         var idStringArray = [Int]()
         
         
         AF.request(url).validate().responseJSON {
             (response) in
-            
-          
             
             // Handles the response
             switch response.result {
