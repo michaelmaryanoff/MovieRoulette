@@ -12,35 +12,34 @@ import CoreData
 
 class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    //MARK: - Variables
+    
+    // Non-managed variables
     var actors = [String]()
     var actorsIdArray = [Int]()
-    var managedActorsArray = [Actor]()
-    
-    var dataController: DataController!
-    
     var selectedIndex = 0
     var selectedActorId = 0
-    
     var activityView = UIActivityIndicatorView(style: .whiteLarge)
     
+    // Managed variables
+    var managedActorsArray = [Actor]()
+    var dataController: DataController!
+    
+    // IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var actorSearchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Sets up delegates
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.actorSearchBar.delegate = self
         
+        // Sets up table view
         tableView.backgroundColor = Colors.pinkOrange
         self.view.addSubview(self.activityView)
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
     }
     
@@ -60,13 +59,6 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         
         setupCellCharacteristics(forCell: cell)
         
-        if let cellText = cell.textLabel?.text {
-            if !cellText.isEmpty {
-                print("we got some cell text")
-                
-            }
-            
-        }
         let movieTitle = actors[indexPath.row]
         
         cell.textLabel?.text = movieTitle
@@ -76,16 +68,8 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-
     
-    func setupCellCharacteristics(forCell cell: UITableViewCell) {
-        let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
-        cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
-        cell.textLabel?.textColor = .white
-        cell.backgroundColor = Colors.pinkOrange
-        cell.textLabel?.shadowColor = .black
-        cell.textLabel?.shadowOffset = CGSize(width: 0.9, height: 0.9)
-    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
@@ -120,9 +104,17 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-    //MARK: - View helpers
+    // Sets up the view for the cell
+    func setupCellCharacteristics(forCell cell: UITableViewCell) {
+        let fontDescriptor = UIFontDescriptor(fontAttributes: [.family: "Arial Rounded MT Bold"])
+        cell.textLabel?.font = UIFont(descriptor: fontDescriptor, size: 16)
+        cell.textLabel?.textColor = .white
+        cell.backgroundColor = Colors.pinkOrange
+        cell.textLabel?.shadowColor = .black
+        cell.textLabel?.shadowOffset = CGSize(width: 0.9, height: 0.9)
+    }
     
-    // Adapted from Stack Overflow
+    //MARK: - View helper functions
     func changeActivityIndicatorState(isAnimating: Bool) {
         switch isAnimating {
         case true:
@@ -153,6 +145,8 @@ class ActorSearchViewController: UIViewController, UITableViewDelegate, UITableV
     }
 }
 
+
+//MARK: - Search bar deleage functions
 extension ActorSearchViewController: UISearchBarDelegate {
     
     
@@ -164,9 +158,7 @@ extension ActorSearchViewController: UISearchBarDelegate {
             }
             
         }
-        
 
-        
         self.changeActivityIndicatorState(isAnimating: true)
 
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
@@ -205,6 +197,7 @@ extension ActorSearchViewController: UISearchBarDelegate {
         }
         
     }
+    
     
     public func presentAlertControllerDismiss(title: String, message: String) -> Void {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
