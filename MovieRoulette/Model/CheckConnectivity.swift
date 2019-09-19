@@ -10,8 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-//Adapted from stackoverflow post
-
+// This class allows for a quick connectivity check before making a request
 class CheckConnectivity {
     class var isConnectedToInternet:Bool {
         return NetworkReachabilityManager()?.isReachable ?? false
