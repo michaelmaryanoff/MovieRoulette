@@ -70,3 +70,20 @@ extension GenresTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
 }
+
+// MARK: - Segue extension
+extension GenresTableViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        let newSelectionVC = viewController as? SelectionViewController
+        if viewController == newSelectionVC {
+        } else {
+            print("We are using a different segue.")
+        }
+        do {
+            try dataController.viewContext.save()
+        } catch {
+            print("could not save")
+        }
+    }
+    
+}
