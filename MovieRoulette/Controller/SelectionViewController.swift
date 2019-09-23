@@ -19,25 +19,16 @@ class SelectionViewController: UIViewController {
     
     // MARK: - Non-Managed variables
     var moviesArray = [String]()
-    
     var yearsArray = [Int]()
-    
     var genreCodeSet = Set<Int>()
-    
     static var yearFrom: Int = 1960
-    
     static var yearTo: Int = 2019
-    
     var actorId: Int?
     
     // MARK: - Managed Core Data variables
-    
     var dataController: DataController!
-    
     static var managedGenreArray = [Genre]()
-    
     static var releaseWindowArray = [YearRange]()
-    
     static var managedActorArray = [Actor]()
     
      var fetchedResultsController: NSFetchedResultsController<Genre>!
@@ -60,14 +51,11 @@ class SelectionViewController: UIViewController {
     
     // MARK: - View load functions
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialViewSetup()
     }
-    
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,6 +65,7 @@ class SelectionViewController: UIViewController {
     
     // MARK: - Core Data functions
     fileprivate func setupFetchRequest() {
+        
         // MARK: Fetch requests
         let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         let yearRangeFetchRequest: NSFetchRequest<YearRange> = YearRange.fetchRequest()
