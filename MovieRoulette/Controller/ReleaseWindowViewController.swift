@@ -39,11 +39,7 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
         self.navigationController?.delegate = self
         
         // Sets up label
-        releaseWindowLabel.layer.cornerRadius = 7
-        releaseWindowLabel.backgroundColor = Colors.darkPurple
-        releaseWindowLabel.clipsToBounds = true
-        
-        
+        setupReleaseWindowLabel(label: releaseWindowLabel)
         
     }
     
