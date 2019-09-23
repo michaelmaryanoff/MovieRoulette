@@ -20,6 +20,7 @@
 		CB308F1E233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */; };
 		CB308F202339372D007919C6 /* ActorSearchViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */; };
 		CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */; };
+		CB308F2423393A31007919C6 /* PresentAlertControllerDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */; };
 		CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D867C230C805C004FEFED /* TMDBClient.swift */; };
 		CB8117D623159498009A3D44 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8117D523159498009A3D44 /* DataController.swift */; };
 		CBBC16F8231C7979004D1EE9 /* CheckConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */; };
@@ -49,6 +50,7 @@
 		CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReleaseWindowViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorSearchViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorSearchViewController+ViewExtensions.swift"; sourceTree = "<group>"; };
+		CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAlertControllerDismiss.swift; sourceTree = "<group>"; };
 		CB7D867C230C805C004FEFED /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		CB8117D523159498009A3D44 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnectivity.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */,
 				CB165BC8230C6C2100688014 /* AppDelegate.swift */,
 				CB308F1C2339304F007919C6 /* Extension */,
+				CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */,
 				CB8117D623159498009A3D44 /* DataController.swift in Sources */,
 				CB165BCB230C6C2100688014 /* SelectionViewController.swift in Sources */,
+				CB308F2423393A31007919C6 /* PresentAlertControllerDismiss.swift in Sources */,
 				CB308F202339372D007919C6 /* ActorSearchViewController+Extensions.swift in Sources */,
 				CB165BC9230C6C2100688014 /* AppDelegate.swift in Sources */,
 				CB26A3C6233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift in Sources */,

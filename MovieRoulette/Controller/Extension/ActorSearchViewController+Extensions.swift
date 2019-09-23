@@ -66,7 +66,6 @@ extension ActorSearchViewController: UITableViewDelegate, UITableViewDataSource 
         }
         performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorInt)
         
-        
     }
     
     // Sets up the view for the cell
