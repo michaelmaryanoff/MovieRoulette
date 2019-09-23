@@ -17,21 +17,58 @@ class TMDBClient {
     
     // Static endpoints to be used for each requests
     enum Endpoints {
+        static let host = "api.themoviedb.org"
         static let base = "https://api.themoviedb.org/3"
+        static let discoverPath = "/3/discover/movie"
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
     }
     
-    // TODO: Create a switch on this to be used with URLComponents() later on
-    enum QueryComponentType: String {
-        case yearFrom = "primary_release_date.gte"
-        case yearTo = "primary_release_date.lte"
-        case withGenres = "with_genres"
-        case withCast = "with_cast"
+    static func formulateMovieSearchURL(withTheseGenres genreCodes: [Int]?, yearFrom: Int?, yearTo: Int?, withActorCode actorCode: Int?) {
+        
+        // Initializers
+        var components = URLComponents()
+        var queryComponents = [URLQueryItem]()
+        
+        // Forming the base URL
+        components.scheme = "https"
+        components.host = TMDBClient.Endpoints.host
+        components.path = TMDBClient.Endpoints.discoverPath
+        
+        // Adds the required API key
+        let apiKeyForURL = URLQueryItem(name: "api_key", value: TMDBClient.apiKey)
+        queryComponents.append(apiKeyForURL)
+        
+        // Loops through genre codes array and appends
+        // codes to url query
+        if let genreCodes = genreCodes {
+            for code in genreCodes {
+                let genreQueryItem = URLQueryItem(name: "with_genres", value: "\(code)")
+                queryComponents.append(genreQueryItem)
+            }
+        }
+        
+        if let yearFrom = yearFrom {
+            let yearFromQueryItem = URLQueryItem(name: "primary_release_date.gte", value: "\(yearFrom)-01-01")
+            queryComponents.append(yearFromQueryItem)
+        }
+        
+        if let yearTo = yearTo {
+            let yearToQueryItem = URLQueryItem(name: "primary_release_date.lte", value: "\(yearTo)-12-31")
+            queryComponents.append(yearToQueryItem)
+        }
+        
+        if let actorCode = actorCode {
+            let actorCodeQueryItem = URLQueryItem(name: "with_cast", value: String(actorCode))
+            queryComponents.append(actorCodeQueryItem)
+        }
+       
+        components.queryItems = queryComponents
+        
+        print("query components" + " " + "\(components.url)")
+        
     }
     
-    
     static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
-        
         
         // Creates a default empty string to pass through as a query parameter if there is nothing to query
         var yearFromQueryParam = ""
@@ -62,6 +99,7 @@ class TMDBClient {
         // Forms a url to make a request to get a list of movies that meet the criteria
         let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
         
+        print("url is" + " " + "\(url)")
                 // Make the request with the formed URL
                 AF.request(url, method: .get).responseJSON {
                     

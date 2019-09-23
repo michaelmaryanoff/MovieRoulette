@@ -55,6 +55,7 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         
         initialViewSetup()
+        TMDBClient.formulateMovieSearchURL(withTheseGenres: [12, 35, 16], yearFrom: 1960, yearTo: 1980, withActorCode: 510)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -207,9 +208,6 @@ class SelectionViewController: UIViewController {
                 self.endAnimating()
                 return
             }
-            
-            print("String array from call" + " " + "\(stringArray)")
-            
             
             if error != nil {
                 self.presentAlertControllerDismiss(title: "There was an error.", message: "\(error!.localizedDescription)")
