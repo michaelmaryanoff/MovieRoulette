@@ -79,5 +79,6 @@ extension ActorSearchViewController: UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.shadowOffset = CGSize(width: 0.9, height: 0.9)
     }
     
-    
 }
+
+

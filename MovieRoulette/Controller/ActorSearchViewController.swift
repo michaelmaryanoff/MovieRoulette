@@ -29,6 +29,7 @@ class ActorSearchViewController: UIViewController  {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var actorSearchBar: UISearchBar!
     
+    //MARK: - Life cycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,20 +45,6 @@ class ActorSearchViewController: UIViewController  {
     }
     
 
-    
-    //MARK: - View helper functions
-    func changeActivityIndicatorState(isAnimating: Bool) {
-        switch isAnimating {
-        case true:
-            self.activityView.center = self.view.center
-            self.activityView.hidesWhenStopped = true
-            activityView.startAnimating()
-        case false:
-            activityView.stopAnimating()
-            
-        }
-        
-    }
     
     @IBAction func unwindToSelectionViewController (segue: UIStoryboardSegue) {
         performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorId)
