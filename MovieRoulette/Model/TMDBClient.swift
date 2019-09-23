@@ -23,7 +23,7 @@ class TMDBClient {
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
     }
     
-    static func formulateMovieSearchURL(withTheseGenres genreCodes: [Int]?, yearFrom: Int?, yearTo: Int?, withActorCode actorCode: Int?) {
+    static func formulateMovieSearchURL(withTheseGenres genreCodes: [Int]?, yearFrom: Int?, yearTo: Int?, withActorCode actorCode: Int?) -> URL {
         
         // Initializers
         var components = URLComponents()
@@ -64,11 +64,18 @@ class TMDBClient {
        
         components.queryItems = queryComponents
         
-        print("query components" + " " + "\(components.url)")
         
+        guard let url = components.url else {
+            print("could not form url!")
+            return URL(string: "")!
+        }
+        return url
     }
     
     static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
+        
+        let newURL = TMDBClient.formulateMovieSearchURL(withTheseGenres: genreCodes, yearFrom: yearFrom, yearTo: yearTo, withActorCode: actorCode)
+        print("newURL" + " " + "\(newURL)")
         
         // Creates a default empty string to pass through as a query parameter if there is nothing to query
         var yearFromQueryParam = ""
