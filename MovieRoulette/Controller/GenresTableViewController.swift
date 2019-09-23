@@ -10,12 +10,11 @@ import UIKit
 import CoreData
 import Foundation
 
-class GenresTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GenresTableViewController: UIViewController {
     
-    //MARK: - Variables
+    // MARK: - Variables
     
-    // Managed variables
-    static var managedGenreArray = [Genre]()
+    // Non-managed variables
     static var managedGenreArrayCount = 0
     var fetchedResultsController: NSFetchedResultsController<Genre>!
     var dataController: DataController!
@@ -24,10 +23,15 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
     static var codeArray = [Int]()
     static var genresArray = [String]()
     
+    // Managed variables
+    static var managedGenreArray = [Genre]()
+    var dataController: DataController!
+    var fetchedResultsController: NSFetchedResultsController<Genre>!
+    
     // IBOutlets
     @IBOutlet weak var tableView: UITableView!
-    
-    // View loading functions
+
+    // MARK: - Lifecycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,10 +114,8 @@ class GenresTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     
-    //MARK: - ViewContext functions
     
-    
-    // Function that writes or deletes from the view context depending on what cell is selected
+    // Reusable function that changes the view context
     func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {
         
         guard let cellText = cell.textLabel?.text else {

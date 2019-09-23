@@ -22,6 +22,7 @@
 		CBBC16FA231C82E0004D1EE9 /* CustomActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBC16F9231C82E0004D1EE9 /* CustomActorCell.swift */; };
 		CBBE09462316C1910092044B /* GenresConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBE09452316C1910092044B /* GenresConstants.swift */; };
 		CBC3F780230DEF3F00862D5B /* GenresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */; };
+		CBCE5693233448A8003F76BC /* GenresTableViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCE5692233448A8003F76BC /* GenresTableViewController+Extensions.swift */; };
 		CBE5D59723108A8300C7E2E4 /* ReleaseWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */; };
 		CBF272A523144CC200B45E92 /* ActorSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		CBBC16F9231C82E0004D1EE9 /* CustomActorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActorCell.swift; sourceTree = "<group>"; };
 		CBBE09452316C1910092044B /* GenresConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresConstants.swift; sourceTree = "<group>"; };
 		CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresTableViewController.swift; sourceTree = "<group>"; };
+		CBCE5692233448A8003F76BC /* GenresTableViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GenresTableViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseWindowViewController.swift; sourceTree = "<group>"; };
 		CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorSearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +119,7 @@
 			children = (
 				CB165BCA230C6C2100688014 /* SelectionViewController.swift */,
 				CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */,
+				CBCE5692233448A8003F76BC /* GenresTableViewController+Extensions.swift */,
 				CB165BC8230C6C2100688014 /* AppDelegate.swift */,
 				CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */,
 				CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */,
@@ -273,6 +276,7 @@
 				CB165BCB230C6C2100688014 /* SelectionViewController.swift in Sources */,
 				CB165BC9230C6C2100688014 /* AppDelegate.swift in Sources */,
 				CB26A3C6233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift in Sources */,
+				CBCE5693233448A8003F76BC /* GenresTableViewController+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
