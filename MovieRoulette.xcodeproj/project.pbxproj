@@ -103,6 +103,16 @@
 			path = MovieRoulette;
 			sourceTree = "<group>";
 		};
+		CB308F1C2339304F007919C6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CBCE5692233448A8003F76BC /* GenresTableViewController+Extensions.swift */,
+				CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */,
+				CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		CB7D8679230C8028004FEFED /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,8 +121,6 @@
 				CB165BD4230C6C2100688014 /* LaunchScreen.storyboard */,
 				CB2994772319F3520082C44C /* Colors.swift */,
 				CBBC16F9231C82E0004D1EE9 /* CustomActorCell.swift */,
-				CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */,
-				CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -120,9 +128,9 @@
 		CB7D867A230C803B004FEFED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CB308F1C2339304F007919C6 /* Extension */,
 				CB165BCA230C6C2100688014 /* SelectionViewController.swift */,
 				CBC3F77F230DEF3F00862D5B /* GenresTableViewController.swift */,
-				CBCE5692233448A8003F76BC /* GenresTableViewController+Extensions.swift */,
 				CB165BC8230C6C2100688014 /* AppDelegate.swift */,
 				CBE5D59623108A8300C7E2E4 /* ReleaseWindowViewController.swift */,
 				CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */,
