@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Foundation
 
-class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ReleaseWindowViewController: UIViewController {
     
     //MARK: - Variables
     
@@ -30,7 +30,7 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
     @IBOutlet weak var releaseWindowLabel: UILabel!
     
-    //MARK: - view loading functions
+    //MARK: - Lifecycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,40 +53,6 @@ class ReleaseWindowViewController: UIViewController, UIPickerViewDataSource, UIP
             print("Could not save context")
         }
     }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
-    //MARK: - Picker View functions
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return yearRange.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-        return String(yearRange[row])
-    }
-
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        let yearRangeInt = Int(yearRange[row])
-        
-        if component == 0 {
-            firstSectionValue = yearRangeInt
-        } else if component == 1 {
-            secondSectionValue = yearRangeInt
-        }
-        
-        // Ensures that "yearFrom" is always less than "yearTo"
-        ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
-        ReleaseWindowViewController.releaseWindow.yearTo = Int64(max(firstSectionValue, secondSectionValue))
-        SelectionViewController.yearFrom = Int(ReleaseWindowViewController.releaseWindow.yearFrom)
-        SelectionViewController.yearTo = Int(ReleaseWindowViewController.releaseWindow.yearTo)
-    }
-    
-    
     
 }
 
