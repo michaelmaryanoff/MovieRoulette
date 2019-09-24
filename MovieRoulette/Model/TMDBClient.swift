@@ -52,11 +52,11 @@ class TMDBClient {
     // MARK: - Search functions
     static func formulateMovieSearchURL(withTheseGenres genreCodes: [Int]?, yearFrom: Int?, yearTo: Int?, withActorCode actorCode: Int?) -> URL {
         
-        // Initializers
+        // Base url
         var components = formulateBaseComponents(searchType: .spin)
-        var queryComponents = [URLQueryItem]()
-        
+
         // Adds the required API key
+        var queryComponents = [URLQueryItem]()
         let apiKeyForURL = URLQueryItem(name: "api_key", value: TMDBClient.apiKey)
         queryComponents.append(apiKeyForURL)
         
