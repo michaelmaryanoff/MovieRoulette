@@ -147,7 +147,7 @@ class TMDBClient {
     // A network call that searches for an actor Id in order to create a url query
     static func searchForActorID(query: String?, completion: @escaping (Bool, [String], [Int], Error?) -> Void) {
         
-        // Makese sure that we actually have an actor to pass through
+        // Makese sure that we actually have a search to pass through
         guard let query = query else {
             print("there was no query in \(#function)!")
             return
@@ -158,18 +158,21 @@ class TMDBClient {
             return
         }
         
-        // Formats the query string to pass through
-        // Creates an empty string if there is no query
-        let queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+        // Formats URL using URL components
+        var urlComponents = TMDBClient.formulateBaseComponents(searchType: .searchForActor)
+        let queryItemForSearch = URLQueryItem(name: "query", value: "\(query)")
+        let apiKeyForURL = URLQueryItem(name: "api_key", value: TMDBClient.apiKey)
+        urlComponents.queryItems = [apiKeyForURL, queryItemForSearch]
         
-        // Formats the url
-        let url = EndpointConstants.base + "/search/person" + EndpointConstants.apiKeyParam + queryString
-        print("url is actor" + " " + "\(url)")
+        // Ensures there is a valid string to format the query
+        guard let url = urlComponents.url?.absoluteString else {
+            print("Could not form URL")
+            return
+        }
         
         // Creates a temporary string of actors and their corresponding Ids
         var actorStringArray = [String]()
         var idStringArray = [Int]()
-        
         
         AF.request(url).validate().responseJSON {
             (response) in
