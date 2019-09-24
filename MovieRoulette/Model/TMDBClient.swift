@@ -64,7 +64,6 @@ class TMDBClient {
        
         components.queryItems = queryComponents
         
-        
         guard let url = components.url else {
             print("could not form url!")
             return URL(string: "")!
@@ -72,39 +71,12 @@ class TMDBClient {
         return url
     }
     
-    static func searchForMovies(withTheseGenres genreCodes: [Int]?, from yearFrom: Int?, to yearTo: Int?, withActorCode actorCode: Int?, completion: @escaping(Bool, [String], Error?) -> Void) {
+    static func searchForMovies(url: URL?, completion: @escaping(Bool, [String], Error?) -> Void) {
         
-        let newURL = TMDBClient.formulateMovieSearchURL(withTheseGenres: genreCodes, yearFrom: yearFrom, yearTo: yearTo, withActorCode: actorCode)
-        print("newURL" + " " + "\(newURL)")
-        
-        // Creates a default empty string to pass through as a query parameter if there is nothing to query
-        var yearFromQueryParam = ""
-        var yearToQueryParam = ""
-        var genreParams = ""
-        var actorQueryParam = ""
-        
-        // Checks to see if we have some genre codes to pass through
-        if let genreCodes = genreCodes {
-            for code in genreCodes {
-                let newCodeParam = "&with_genres=\(code)"
-                genreParams += newCodeParam
-            }
+        guard let url = url else {
+            print("Could not load url!")
+            return
         }
-        
-        if let yearFrom = yearFrom {
-            yearFromQueryParam = "&primary_release_date.gte=\(yearFrom)-01-01"
-        }
-        
-        if let yearTo = yearTo {
-            yearToQueryParam = "&primary_release_date.lte=\(yearTo)-12-31"
-        }
-        
-        if let actorCode = actorCode {
-            actorQueryParam = "&with_cast=\(actorCode)"
-        }
-        
-        // Forms a url to make a request to get a list of movies that meet the criteria
-        let url = Endpoints.base + "/discover/movie" + Endpoints.apiKeyParam + genreParams + yearFromQueryParam + yearToQueryParam + actorQueryParam
         
         print("url is" + " " + "\(url)")
                 // Make the request with the formed URL
@@ -213,7 +185,7 @@ class TMDBClient {
                     }
                     
                 }
-                print("error.asAFError?.errorDescription" + " " + "\(error.asAFError?.errorDescription)")
+                print("error.asAFError?.errorDescription" + " " + "\(String(describing: error.asAFError?.errorDescription))")
                 completion(false, [], [], error)
             }
         }

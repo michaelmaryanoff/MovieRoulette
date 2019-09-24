@@ -55,7 +55,6 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         
         initialViewSetup()
-        TMDBClient.formulateMovieSearchURL(withTheseGenres: [12, 35, 16], yearFrom: 1960, yearTo: 1980, withActorCode: 510)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -197,7 +196,9 @@ class SelectionViewController: UIViewController {
         
         self.moviesArray = []
         
-        TMDBClient.searchForMovies(withTheseGenres: Array(genreCodeSet), from: SelectionViewController.yearFrom, to: SelectionViewController.yearTo, withActorCode: actorId) { (success, stringArray, error) in
+        let url = TMDBClient.formulateMovieSearchURL(withTheseGenres: Array(genreCodeSet), yearFrom: SelectionViewController.yearFrom, yearTo: SelectionViewController.yearTo, withActorCode: actorId)
+        
+        TMDBClient.searchForMovies(url: url) { (success, stringArray, error) in
             
             self.beginAnimating()
             
