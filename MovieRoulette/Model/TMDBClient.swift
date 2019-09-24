@@ -22,21 +22,39 @@ class TMDBClient {
         static let host = "api.themoviedb.org"
         static let base = "https://api.themoviedb.org/3"
         static let discoverPath = "/3/discover/movie"
+        static let searchForActorPath = "/3/search/person"
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
     }
+    
+    enum SearchType {
+        case spin
+        case searchForActor
+    }
+    
+    static func formulateBaseComponents(searchType: SearchType) -> URLComponents {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = TMDBClient.EndpointConstants.host
+        
+        switch searchType {
+        case .spin:
+            components.path = TMDBClient.EndpointConstants.discoverPath
+        case .searchForActor:
+            components.path = TMDBClient.EndpointConstants.searchForActorPath
+        }
+        
+        return components
+        
+    }
+    
     
     
     // MARK: - Search functions
     static func formulateMovieSearchURL(withTheseGenres genreCodes: [Int]?, yearFrom: Int?, yearTo: Int?, withActorCode actorCode: Int?) -> URL {
         
         // Initializers
-        var components = URLComponents()
+        var components = formulateBaseComponents(searchType: .spin)
         var queryComponents = [URLQueryItem]()
-        
-        // Forming the base URL
-        components.scheme = "https"
-        components.host = TMDBClient.EndpointConstants.host
-        components.path = TMDBClient.EndpointConstants.discoverPath
         
         // Adds the required API key
         let apiKeyForURL = URLQueryItem(name: "api_key", value: TMDBClient.apiKey)
