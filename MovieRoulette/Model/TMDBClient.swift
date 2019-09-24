@@ -12,17 +12,21 @@ import Alamofire
 
 class TMDBClient {
     
+    // MARK: - Constants
+    
     // Holds the raw API key data
     static let apiKey = "***REMOVED***"
     
     // Static endpoints to be used for each requests
-    enum Endpoints {
+    enum EndpointConstants {
         static let host = "api.themoviedb.org"
         static let base = "https://api.themoviedb.org/3"
         static let discoverPath = "/3/discover/movie"
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
     }
     
+    
+    // MARK: - Search functions
     static func formulateMovieSearchURL(withTheseGenres genreCodes: [Int]?, yearFrom: Int?, yearTo: Int?, withActorCode actorCode: Int?) -> URL {
         
         // Initializers
@@ -31,8 +35,8 @@ class TMDBClient {
         
         // Forming the base URL
         components.scheme = "https"
-        components.host = TMDBClient.Endpoints.host
-        components.path = TMDBClient.Endpoints.discoverPath
+        components.host = TMDBClient.EndpointConstants.host
+        components.path = TMDBClient.EndpointConstants.discoverPath
         
         // Adds the required API key
         let apiKeyForURL = URLQueryItem(name: "api_key", value: TMDBClient.apiKey)
@@ -79,6 +83,7 @@ class TMDBClient {
         }
         
         print("url is" + " " + "\(url)")
+        
                 // Make the request with the formed URL
                 AF.request(url, method: .get).responseJSON {
                     
@@ -140,7 +145,7 @@ class TMDBClient {
         let queryString = "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         
         // Formats the url
-        let url = Endpoints.base + "/search/person" + Endpoints.apiKeyParam + queryString
+        let url = EndpointConstants.base + "/search/person" + EndpointConstants.apiKeyParam + queryString
         print("url is actor" + " " + "\(url)")
         
         // Creates a temporary string of actors and their corresponding Ids
