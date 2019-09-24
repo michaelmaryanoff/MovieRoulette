@@ -20,10 +20,8 @@ class TMDBClient {
     // Static endpoints to be used for each requests
     enum EndpointConstants {
         static let host = "api.themoviedb.org"
-        static let base = "https://api.themoviedb.org/3"
         static let discoverPath = "/3/discover/movie"
         static let searchForActorPath = "/3/search/person"
-        static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
     }
     
     enum SearchType {
