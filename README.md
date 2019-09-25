@@ -1,7 +1,7 @@
 # **Movie Roulette**
 
 ## Description:
-"Movie Roulette" is an app to use when you can't figure out what to watch. The user inputs a set of three parameters (genre, release window, and actor). The user will then hit the "spin" button and the app will then find a list of movies meeting those criteria using the TMDB.org API and will generate a random movie to watch that night.
+"Movie Roulette" is an app to use when you can't figure out what to watch. The user inputs a set of three parameters (genre, release window, and actor). The user will then hit the "spin" button and the app will then find a list of movies meeting those criteria using the TMDB.org API and will generate a random movie to watch.
 
 # **App implementation**
 
