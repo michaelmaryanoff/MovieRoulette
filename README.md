@@ -1,12 +1,11 @@
 # **Movie Roulette**
 
-## Description
-An app that helps you figure out what to watch by choosing a random movie that meets custom criteria.
+Movie Roulette is the perfect app when you can't figure out what to watch! It will choose a random movie for you that meets custom criteria.
 
 ## Features
-Using the [TMDB](https://www.themoviedb.org/) movie database, Movie Roulette will find a list of movies that meet three sets of custom criteria: genres, release window, and actor.
+Using the [TMDB](https://www.themoviedb.org/) movie database, Movie Roulette will find a list of movies that meets a set of three custom criteria: genres, release window, and actor.
 
-When prompted by the "spin" button, it will select a movie at random from a list of movies that meet these criteria.
+When prompted by the "spin" button, it will choose a random movie for you.
 
 ## Requirements
 * Xcode 10.2.1
