@@ -9,11 +9,8 @@
 
 // This is the main ViewController
 
-import UIKit
 import Alamofire
 import CoreData
-import Foundation
-import QuartzCore
 
 class SelectionViewController: UIViewController {
     

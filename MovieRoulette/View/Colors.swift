@@ -6,7 +6,6 @@
 //  Copyright © 2019 Michael Maryanoff. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 // Creates colors to be accessed globally in order to maintain a consistent color theme
