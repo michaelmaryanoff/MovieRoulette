@@ -14,7 +14,7 @@ class TMDBClient {
     // MARK: - Constants
     
     // Holds the raw API key data
-    static let apiKey = "***REMOVED***"
+    static let apiKey = "YOUR_API_KEY"
     
     // Static endpoints to be used for each requests
     enum EndpointConstants {
