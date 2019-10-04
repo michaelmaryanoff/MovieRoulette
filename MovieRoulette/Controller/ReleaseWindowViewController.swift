@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Foundation
 
 class ReleaseWindowViewController: UIViewController {
     
