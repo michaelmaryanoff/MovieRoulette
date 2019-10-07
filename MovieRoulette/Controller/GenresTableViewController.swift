@@ -42,7 +42,6 @@ class GenresTableViewController: UIViewController {
         
     }
 
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -50,14 +49,12 @@ class GenresTableViewController: UIViewController {
         SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
     }
     
-    
     // Reusable function that changes the view context
     func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {
         
         guard let cellText = cell.textLabel?.text else {
             return
         }
-        
         
         let newGenre = Genre(context: dataController.viewContext)
         
@@ -100,7 +97,6 @@ class GenresTableViewController: UIViewController {
                     
             }
         }
-        
             
             }
         }
