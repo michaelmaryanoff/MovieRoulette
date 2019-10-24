@@ -47,6 +47,9 @@ class GenresTableViewController: UIViewController {
         
         // Ensures that the marked genres are passed through to the SelectionViewController
         SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
+        SelectionViewController.genreCount = GenresTableViewController.managedGenreArray.count
+        print("GenresTableViewController.managedGenreArray in \(#function)" + " " + "\(GenresTableViewController.managedGenreArray)")
+        print("SelectionViewController.managedGenreArray in \(#function)" + " " + "\(SelectionViewController.managedGenreArray)")
     }
     
     // Reusable function that changes the view context
@@ -76,7 +79,7 @@ class GenresTableViewController: UIViewController {
             }
         } else if add == false {
             print("add false")
-            for (key, value) in GenreConstants.genresDictionary {
+            for (key, _) in GenreConstants.genresDictionary {
                 if cellText == key {
                     for item in GenresTableViewController.managedGenreArray {
                         if item.genreName == cellText {

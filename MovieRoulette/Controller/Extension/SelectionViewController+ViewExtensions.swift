@@ -95,4 +95,20 @@ extension SelectionViewController {
         }
     }
     
+    // MARK: - Helper funcitons
+    
+    func createGenreSet(managedArray: [Genre]) -> Set<Int> {
+        
+        var genreSet = Set<Int>()
+        
+        for item in managedArray {
+            let extractedCode = Int(item.genreCode)
+            genreSet.insert(extractedCode)
+        }
+        print(genreSet)
+        return genreSet
+    }
+    
+    
+    
 }

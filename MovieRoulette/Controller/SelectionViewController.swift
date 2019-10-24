@@ -22,6 +22,7 @@ class SelectionViewController: UIViewController {
     static var yearFrom: Int = 1960
     static var yearTo: Int = 2019
     var actorId: Int?
+    static var genreCount = 0
     
     // MARK: - Managed Core Data variables
     var dataController: DataController!
@@ -53,12 +54,31 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         
         initialViewSetup()
+        print("didload")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("willappear")
+        
+        print("SelectionViewController.managedGenreArray in SelectionVC \(#function)" + " " + "\(SelectionViewController.managedGenreArray)")
+        print("SelectionViewController.managedGenreArray.count" + " " + "\(SelectionViewController.managedGenreArray.count)")
         
         setupFetchRequest()
+        
+        genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
+        
+        DispatchQueue.main.async {
+            switch SelectionViewController.managedGenreArray.count {
+            case 1:
+                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genre selected"
+            case let count where count > 0:
+                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genres selected"
+            default:
+                self.genresSelectedLabel.text = "No genres selected"
+            }
+        }
+        
     }
     
     // MARK: - Core Data functions
@@ -130,14 +150,7 @@ class SelectionViewController: UIViewController {
             
             SelectionViewController.managedGenreArray = result
             
-            switch result.count {
-            case 1:
-                self.genresSelectedLabel.text = "\(result.count) genre selected"
-            case let count where count > 0:
-                self.genresSelectedLabel.text = "\(result.count) genres selected"
-            default:
-                self.genresSelectedLabel.text = "No genres selected"
-            }
+        
         
     }
     
@@ -195,6 +208,7 @@ class SelectionViewController: UIViewController {
         self.moviesArray = []
         
         let url = TMDBClient.formulateMovieSearchURL(withTheseGenres: Array(genreCodeSet), yearFrom: SelectionViewController.yearFrom, yearTo: SelectionViewController.yearTo, withActorCode: actorId)
+        print("url" + " " + "\(url)")
         
         TMDBClient.searchForMovies(url: url) { (success, stringArray, error) in
             
@@ -249,8 +263,6 @@ class SelectionViewController: UIViewController {
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
     }
-    
 
-    
 }
 
