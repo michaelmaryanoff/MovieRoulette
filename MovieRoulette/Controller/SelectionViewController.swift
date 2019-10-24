@@ -61,19 +61,20 @@ class SelectionViewController: UIViewController {
         super.viewWillAppear(animated)
         print("willappear")
         
-        print("SelectionViewController.managedGenreArray in SelectionVC \(#function)" + " " + "\(SelectionViewController.managedGenreArray)")
-        print("SelectionViewController.managedGenreArray.count" + " " + "\(SelectionViewController.managedGenreArray.count)")
+//        print("SelectionViewController.managedGenreArray in SelectionVC \(#function)" + " " + "\(SelectionViewController.managedGenreArray)")
+//        print("SelectionViewController.managedGenreArray.count" + " " + "\(SelectionViewController.managedGenreArray.count)")
         
         setupFetchRequest()
         
         genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
         
+        
         DispatchQueue.main.async {
-            switch SelectionViewController.managedGenreArray.count {
+            switch self.genreCodeSet.count {
             case 1:
-                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genre selected"
+                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genre selected"
             case let count where count > 0:
-                self.genresSelectedLabel.text = "\(SelectionViewController.managedGenreArray.count) genres selected"
+                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genres selected"
             default:
                 self.genresSelectedLabel.text = "No genres selected"
             }

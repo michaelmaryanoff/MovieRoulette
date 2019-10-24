@@ -102,10 +102,13 @@ extension SelectionViewController {
         var genreSet = Set<Int>()
         
         for item in managedArray {
-            let extractedCode = Int(item.genreCode)
-            genreSet.insert(extractedCode)
+            if item.genreCode != 0 {
+                let extractedCode = Int(item.genreCode)
+                genreSet.insert(extractedCode)
+            }
+            
         }
-        print(genreSet)
+        print("the genre set is" + " " + "\(genreSet)")
         return genreSet
     }
     
