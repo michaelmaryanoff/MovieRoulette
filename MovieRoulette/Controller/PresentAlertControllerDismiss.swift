@@ -14,5 +14,6 @@ public func presentAlertControllerDismiss(title: String, message: String) -> Voi
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
     self.present(alertController, animated: true)
+    }
 }
-}
+
