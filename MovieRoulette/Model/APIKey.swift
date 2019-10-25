@@ -10,5 +10,5 @@ import Foundation
 
 struct APIKey {
     
-    static let apiKey = "YOUR_API_KEY"
+    static let apiKey = "***REMOVED***"
 }
