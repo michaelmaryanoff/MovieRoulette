@@ -41,14 +41,15 @@ class GenresTableViewController: UIViewController {
         
     }
 
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Ensures that the marked genres are passed through to the SelectionViewController
         SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
+        SelectionViewController.genreCount = GenresTableViewController.managedGenreArray.count
+        print("GenresTableViewController.managedGenreArray in \(#function)" + " " + "\(GenresTableViewController.managedGenreArray)")
+        print("SelectionViewController.managedGenreArray in \(#function)" + " " + "\(SelectionViewController.managedGenreArray)")
     }
-    
     
     // Reusable function that changes the view context
     func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {
@@ -56,7 +57,6 @@ class GenresTableViewController: UIViewController {
         guard let cellText = cell.textLabel?.text else {
             return
         }
-        
         
         let newGenre = Genre(context: dataController.viewContext)
         
@@ -78,7 +78,7 @@ class GenresTableViewController: UIViewController {
             }
         } else if add == false {
             print("add false")
-            for (key, value) in GenreConstants.genresDictionary {
+            for (key, _) in GenreConstants.genresDictionary {
                 if cellText == key {
                     for item in GenresTableViewController.managedGenreArray {
                         if item.genreName == cellText {
@@ -99,7 +99,6 @@ class GenresTableViewController: UIViewController {
                     
             }
         }
-        
             
             }
         }
