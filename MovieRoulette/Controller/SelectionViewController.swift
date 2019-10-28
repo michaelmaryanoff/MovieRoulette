@@ -171,7 +171,7 @@ class SelectionViewController: UIViewController {
                     if (UIScreen.main.bounds.width == 320) {
                         releaseWindowLabel.text = "Window has been chosen"
                     } else {
-                        releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
+                        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
                         SelectionViewController.yearTo = Int(firstResult.yearTo)
                         SelectionViewController.yearFrom = Int(firstResult.yearFrom)
                     }
