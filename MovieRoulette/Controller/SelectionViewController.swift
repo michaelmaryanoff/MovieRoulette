@@ -29,7 +29,9 @@ class SelectionViewController: UIViewController {
     static var releaseWindowArray = [YearRange]()
     static var managedActorArray = [Actor]()
     
-     var fetchedResultsController: NSFetchedResultsController<Genre>!
+    var fetchedResultsController: NSFetchedResultsController<Genre>!
+    
+    // MARK: - Outles
     
     // Buttons
     @IBOutlet weak var spinForMovieButton: UIButton!
