@@ -29,7 +29,9 @@ class SelectionViewController: UIViewController {
     static var releaseWindowArray = [YearRange]()
     static var managedActorArray = [Actor]()
     
-     var fetchedResultsController: NSFetchedResultsController<Genre>!
+    var fetchedResultsController: NSFetchedResultsController<Genre>!
+    
+    // MARK: - Outles
     
     // Buttons
     @IBOutlet weak var spinForMovieButton: UIButton!
@@ -59,9 +61,6 @@ class SelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("willappear")
-        
-//        print("SelectionViewController.managedGenreArray in SelectionVC \(#function)" + " " + "\(SelectionViewController.managedGenreArray)")
-//        print("SelectionViewController.managedGenreArray.count" + " " + "\(SelectionViewController.managedGenreArray.count)")
         
         setupFetchRequest()
         
@@ -169,7 +168,7 @@ class SelectionViewController: UIViewController {
                     if (UIScreen.main.bounds.width == 320) {
                         releaseWindowLabel.text = "Window has been chosen"
                     } else {
-                        releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
+                        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
                         SelectionViewController.yearTo = Int(firstResult.yearTo)
                         SelectionViewController.yearFrom = Int(firstResult.yearFrom)
                     }

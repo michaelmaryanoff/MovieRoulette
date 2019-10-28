@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+// View extensions
 extension ReleaseWindowViewController {
     
    func setupReleaseWindowLabel(label: UILabel) {
