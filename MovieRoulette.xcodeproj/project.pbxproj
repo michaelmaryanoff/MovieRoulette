@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC9B3F5C0BC6B3373BC2528B /* Pods_MovieRoulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A61C2279B6CB72FBB70005C0 /* Pods_MovieRoulette.framework */; };
+		CB0194BD23679D36006DBB42 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0194BC23679D36006DBB42 /* APIKey.swift */; };
 		CB165BC9230C6C2100688014 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB165BC8230C6C2100688014 /* AppDelegate.swift */; };
 		CB165BCB230C6C2100688014 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB165BCA230C6C2100688014 /* SelectionViewController.swift */; };
 		CB165BCE230C6C2100688014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB165BCC230C6C2100688014 /* Main.storyboard */; };
@@ -16,8 +17,6 @@
 		CB165BD6230C6C2100688014 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB165BD4230C6C2100688014 /* LaunchScreen.storyboard */; };
 		CB26A3C6233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */; };
 		CB2994782319F3520082C44C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2994772319F3520082C44C /* Colors.swift */; };
-		CB2B6476234801D2000373FA /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2B6475234801D2000373FA /* APIKey.swift */; };
-		CB2CD1C42367871600C5809E /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2CD1C32367871600C5809E /* APIKey.swift */; };
 		CB308F1B23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */; };
 		CB308F1E233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */; };
 		CB308F202339372D007919C6 /* ActorSearchViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */; };
@@ -38,6 +37,7 @@
 		3F4FE7A9D71535A97C2AE24C /* Pods-MovieRoulette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRoulette.debug.xcconfig"; path = "Target Support Files/Pods-MovieRoulette/Pods-MovieRoulette.debug.xcconfig"; sourceTree = "<group>"; };
 		A61C2279B6CB72FBB70005C0 /* Pods_MovieRoulette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieRoulette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30FAB110298E297E357873C /* Pods-MovieRoulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRoulette.release.xcconfig"; path = "Target Support Files/Pods-MovieRoulette/Pods-MovieRoulette.release.xcconfig"; sourceTree = "<group>"; };
+		CB0194BC23679D36006DBB42 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CB165BC5230C6C2100688014 /* MovieRoulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRoulette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB165BC8230C6C2100688014 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB165BCA230C6C2100688014 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
@@ -48,8 +48,6 @@
 		CB165BD7230C6C2100688014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectionViewController+ViewExtensions.swift"; sourceTree = "<group>"; };
 		CB2994772319F3520082C44C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		CB2B6475234801D2000373FA /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		CB2CD1C32367871600C5809E /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReleaseWindowViewController+ViewExtensions.swift"; sourceTree = "<group>"; };
 		CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReleaseWindowViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorSearchViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -162,8 +160,7 @@
 				CB8117D523159498009A3D44 /* DataController.swift */,
 				CBBE09452316C1910092044B /* GenresConstants.swift */,
 				CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */,
-				CB2B6475234801D2000373FA /* APIKey.swift */,
-				CB2CD1C32367871600C5809E /* APIKey.swift */,
+				CB0194BC23679D36006DBB42 /* APIKey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,7 +290,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBF272A523144CC200B45E92 /* ActorSearchViewController.swift in Sources */,
-				CB2CD1C42367871600C5809E /* APIKey.swift in Sources */,
 				CB2994782319F3520082C44C /* Colors.swift in Sources */,
 				CBE5D59723108A8300C7E2E4 /* ReleaseWindowViewController.swift in Sources */,
 				CB308F1B23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift in Sources */,
@@ -307,7 +303,7 @@
 				CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */,
 				CB8117D623159498009A3D44 /* DataController.swift in Sources */,
 				CB165BCB230C6C2100688014 /* SelectionViewController.swift in Sources */,
-				CB2B6476234801D2000373FA /* APIKey.swift in Sources */,
+				CB0194BD23679D36006DBB42 /* APIKey.swift in Sources */,
 				CB308F2423393A31007919C6 /* PresentAlertControllerDismiss.swift in Sources */,
 				CB308F202339372D007919C6 /* ActorSearchViewController+Extensions.swift in Sources */,
 				CB165BC9230C6C2100688014 /* AppDelegate.swift in Sources */,
