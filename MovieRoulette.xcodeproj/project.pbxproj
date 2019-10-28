@@ -16,14 +16,11 @@
 		CB165BD6230C6C2100688014 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB165BD4230C6C2100688014 /* LaunchScreen.storyboard */; };
 		CB26A3C6233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */; };
 		CB2994782319F3520082C44C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2994772319F3520082C44C /* Colors.swift */; };
-		CB2B6476234801D2000373FA /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2B6475234801D2000373FA /* APIKey.swift */; };
-		CB2CD1C42367871600C5809E /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2CD1C32367871600C5809E /* APIKey.swift */; };
 		CB308F1B23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */; };
 		CB308F1E233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */; };
 		CB308F202339372D007919C6 /* ActorSearchViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */; };
 		CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */; };
 		CB308F2423393A31007919C6 /* PresentAlertControllerDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */; };
-		CB3AA0BD236795AB002F838A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AA0BC236795AB002F838A /* APIKey.swift */; };
 		CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D867C230C805C004FEFED /* TMDBClient.swift */; };
 		CB8117D623159498009A3D44 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8117D523159498009A3D44 /* DataController.swift */; };
 		CBBC16F8231C7979004D1EE9 /* CheckConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */; };
@@ -49,14 +46,11 @@
 		CB165BD7230C6C2100688014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectionViewController+ViewExtensions.swift"; sourceTree = "<group>"; };
 		CB2994772319F3520082C44C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		CB2B6475234801D2000373FA /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		CB2CD1C32367871600C5809E /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReleaseWindowViewController+ViewExtensions.swift"; sourceTree = "<group>"; };
 		CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReleaseWindowViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorSearchViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorSearchViewController+ViewExtensions.swift"; sourceTree = "<group>"; };
 		CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAlertControllerDismiss.swift; sourceTree = "<group>"; };
-		CB3AA0BC236795AB002F838A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CB7D867C230C805C004FEFED /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		CB8117D523159498009A3D44 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnectivity.swift; sourceTree = "<group>"; };
@@ -164,9 +158,6 @@
 				CB8117D523159498009A3D44 /* DataController.swift */,
 				CBBE09452316C1910092044B /* GenresConstants.swift */,
 				CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */,
-				CB2B6475234801D2000373FA /* APIKey.swift */,
-				CB3AA0BC236795AB002F838A /* APIKey.swift */,
-				CB2CD1C32367871600C5809E /* APIKey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,12 +287,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBF272A523144CC200B45E92 /* ActorSearchViewController.swift in Sources */,
-				CB2CD1C42367871600C5809E /* APIKey.swift in Sources */,
 				CB2994782319F3520082C44C /* Colors.swift in Sources */,
 				CBE5D59723108A8300C7E2E4 /* ReleaseWindowViewController.swift in Sources */,
 				CB308F1B23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift in Sources */,
 				CBBC16F8231C7979004D1EE9 /* CheckConnectivity.swift in Sources */,
-				CB3AA0BD236795AB002F838A /* APIKey.swift in Sources */,
 				CBBC16FA231C82E0004D1EE9 /* CustomActorCell.swift in Sources */,
 				CBC3F780230DEF3F00862D5B /* GenresTableViewController.swift in Sources */,
 				CBBE09462316C1910092044B /* GenresConstants.swift in Sources */,
@@ -311,7 +300,6 @@
 				CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */,
 				CB8117D623159498009A3D44 /* DataController.swift in Sources */,
 				CB165BCB230C6C2100688014 /* SelectionViewController.swift in Sources */,
-				CB2B6476234801D2000373FA /* APIKey.swift in Sources */,
 				CB308F2423393A31007919C6 /* PresentAlertControllerDismiss.swift in Sources */,
 				CB308F202339372D007919C6 /* ActorSearchViewController+Extensions.swift in Sources */,
 				CB165BC9230C6C2100688014 /* AppDelegate.swift in Sources */,
