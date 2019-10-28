@@ -62,9 +62,6 @@ class SelectionViewController: UIViewController {
         super.viewWillAppear(animated)
         print("willappear")
         
-//        print("SelectionViewController.managedGenreArray in SelectionVC \(#function)" + " " + "\(SelectionViewController.managedGenreArray)")
-//        print("SelectionViewController.managedGenreArray.count" + " " + "\(SelectionViewController.managedGenreArray.count)")
-        
         setupFetchRequest()
         
         genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
