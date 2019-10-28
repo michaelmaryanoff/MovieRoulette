@@ -40,6 +40,14 @@ class ReleaseWindowViewController: UIViewController {
         // Sets up label
         setupReleaseWindowLabel(label: releaseWindowLabel)
         
+        setupPickerView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        releaseYearPickerView.selectRow(SelectionViewController.yearFrom, inComponent: 0, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,6 +59,11 @@ class ReleaseWindowViewController: UIViewController {
         } catch {
             print("Could not save context")
         }
+    }
+    
+    func setupPickerView() {
+        releaseYearPickerView.selectRow(2019-SelectionViewController.yearFrom, inComponent: 0, animated: true)
+        releaseYearPickerView.selectRow(2019-SelectionViewController.yearTo, inComponent: 1, animated: true)
     }
     
 }
