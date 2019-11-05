@@ -62,7 +62,6 @@ extension SelectionViewController {
         
     }
     
-    
     // MARK: - Animation functions
     func beginAnimating () {
         activityIndicator.startAnimating()
@@ -77,17 +76,13 @@ extension SelectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        // Adapted from Stack Overflow post
+    
         if segue.identifier == "chooseGenres" {
             let destinationVC = segue.destination as! GenresTableViewController
             destinationVC.dataController = dataController
             GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
         } else if segue.identifier == "chooseReleaseWindow" {
             let destinationVC = segue.destination as! ReleaseWindowViewController
-            ReleaseWindowViewController.dataController = dataController
-            ReleaseWindowViewController.releaseWindowArray = SelectionViewController.releaseWindowArray
-            
         } else if segue.identifier == "chooseActor" {
             let destinationVC = segue.destination as! ActorSearchViewController
             destinationVC.dataController = dataController
