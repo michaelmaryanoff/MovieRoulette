@@ -22,8 +22,8 @@ class SelectionViewController: UIViewController {
     var genreCodeSet = Set<Int>()
     
     // Single variables
-    static var yearFrom: Int = 2019
-    static var yearTo: Int = 2019
+    static var yearFrom: Int?
+    static var yearTo: Int?
     var actorId: Int?
     static var genreCount = 0
     
@@ -39,7 +39,6 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var chooseGenreButton: UIButton!
     @IBOutlet weak var chooseReleaseWindowButton: UIButton!
     @IBOutlet weak var chooseActorButton: UIButton!
-    
     
     // Labels
     @IBOutlet weak var actorsLabel: UILabel!
@@ -75,7 +74,6 @@ class SelectionViewController: UIViewController {
                 self.genresSelectedLabel.text = "No genres selected"
             }
         }
-        
     }
     
     // MARK: - Core Data functions
@@ -226,9 +224,7 @@ class SelectionViewController: UIViewController {
         let passedActorId = actorSearchViewController.selectedActorId
         self.actorId = passedActorId
     }
-    
 
-    
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
     }
