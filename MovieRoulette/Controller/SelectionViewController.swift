@@ -18,7 +18,7 @@ class SelectionViewController: UIViewController {
     var moviesArray = [String]()
     var yearsArray = [Int]()
     var genreCodeSet = Set<Int>()
-    static var yearFrom: Int = 1960
+    static var yearFrom: Int = 2019
     static var yearTo: Int = 2019
     var actorId: Int?
     static var genreCount = 0
@@ -27,7 +27,6 @@ class SelectionViewController: UIViewController {
     var dataController: DataController!
     
     static var managedGenreArray = [Genre]()
-    static var releaseWindowArray = [YearRange]()
     static var managedActorArray = [Actor]()
     
     var fetchedResultsController: NSFetchedResultsController<Genre>!
@@ -77,8 +76,6 @@ class SelectionViewController: UIViewController {
             }
         }
         
-        print("SelectionViewController.releaseWindowArray" + " " + "\(SelectionViewController.releaseWindowArray)")
-        
     }
     
     // MARK: - Core Data functions
@@ -86,12 +83,10 @@ class SelectionViewController: UIViewController {
         
         // MARK: Fetch requests
         let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
-        let yearRangeFetchRequest: NSFetchRequest<YearRange> = YearRange.fetchRequest()
         let actorFetchRequest: NSFetchRequest<Actor> = Actor.fetchRequest()
         
         // MARK: Call to fetch requests
         makeGenreFetchRequest(genreFetchrequest)
-        makeYearRangeFetchRequest(yearRangeFetchRequest)
         makeActorFetchRequest(actorFetchRequest)
         
         // Deletes all genres that have "0" as a genre code
@@ -151,41 +146,6 @@ class SelectionViewController: UIViewController {
             SelectionViewController.managedGenreArray = result
             
         
-        
-    }
-    
-    fileprivate func makeYearRangeFetchRequest(_ fetchRequest: NSFetchRequest<YearRange>) {
-        
-        // Takes the results of the fetch request
-        let result = makeFetchRequest(fetchRequest)
-            
-            SelectionViewController.releaseWindowArray = result
-            
-            if result.count > 0 {
-                if let firstResult = result.first {
-                    
-                    print("First result" + " " + "\(firstResult.yearFrom)")
-                    print("Second result" + " " + "\(firstResult.yearTo)")
-                    
-                    // This solves a bug where release window
-                    // displayed incorrectly on small device screens
-                    if (UIScreen.main.bounds.width == 320) {
-                        releaseWindowLabel.text = "Window has been chosen"
-                    } else {
-                        releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
-                        SelectionViewController.yearTo = Int(firstResult.yearTo)
-                        SelectionViewController.yearFrom = Int(firstResult.yearFrom)
-                        ReleaseWindowViewController.yearFrom = Int(firstResult.yearFrom)
-                        ReleaseWindowViewController.yearTo = Int(firstResult.yearTo)
-                        
-                        
-                    }
-                    
-                }
-                
-            } else {
-                print("We could not find any results!")
-        }
         
     }
     

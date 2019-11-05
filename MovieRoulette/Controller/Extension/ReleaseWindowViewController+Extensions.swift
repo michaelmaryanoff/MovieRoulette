@@ -41,6 +41,7 @@ extension ReleaseWindowViewController:  UIPickerViewDataSource, UIPickerViewDele
         ReleaseWindowViewController.yearTo = max(firstSectionValue, secondSectionValue)
         SelectionViewController.yearFrom = Int(ReleaseWindowViewController.yearFrom)
         SelectionViewController.yearTo = Int(ReleaseWindowViewController.yearTo)
+        saveReleaseWindow()
     }
     
     

@@ -38,6 +38,18 @@ class ReleaseWindowViewController: UIViewController {
         setupReleaseWindowLabel(label: releaseWindowLabel)
         
         setupPickerView()
+        print("(defaults.value(forKey: StringConstants.yearFrom)" + " " + "\(defaults.value(forKey: StringConstants.yearFrom))")
+        print("(defaults.value(forKey: StringConstants.yearFrom)" + " " + "\(defaults.value(forKey: StringConstants.yearTo))")
+        
+        if let yearFromValue = defaults.value(forKey: StringConstants.yearFrom) {
+            print("yearfromvalueis" + " " + "\(yearFromValue)")
+            ReleaseWindowViewController.yearFrom = yearFromValue as? Int ?? 2019
+        }
+        
+        if let yearToValue = defaults.value(forKey: StringConstants.yearTo) {
+            print("yearToValueis" + " " + "\(yearToValue)")
+            ReleaseWindowViewController.yearTo = yearToValue as? Int ?? 2019
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,12 +59,18 @@ class ReleaseWindowViewController: UIViewController {
     func setupPickerView() {
         releaseYearPickerView.selectRow(2019-ReleaseWindowViewController.yearFrom, inComponent: 0, animated: true)
         releaseYearPickerView.selectRow(2019-ReleaseWindowViewController.yearTo, inComponent: 1, animated: true)
-        
     }
     
     func saveReleaseWindow() {
         defaults.set(ReleaseWindowViewController.yearFrom, forKey: StringConstants.yearFrom)
         defaults.set(ReleaseWindowViewController.yearTo, forKey: StringConstants.yearTo)
+    }
+    
+    func checkForReleaseWindown() {
+        let yearFrom = defaults.integer(forKey: StringConstants.yearFrom)
+        let yearTo = defaults.integer(forKey: StringConstants.yearTo)
+        
+        defaults.value(forKey: StringConstants.yearTo)
     }
     
 }
