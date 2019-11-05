@@ -41,6 +41,15 @@ extension ReleaseWindowViewController:  UIPickerViewDataSource, UIPickerViewDele
         ReleaseWindowViewController.releaseWindow.yearTo = Int64(max(firstSectionValue, secondSectionValue))
         SelectionViewController.yearFrom = Int(ReleaseWindowViewController.releaseWindow.yearFrom)
         SelectionViewController.yearTo = Int(ReleaseWindowViewController.releaseWindow.yearTo)
+//        print("ReleaseWindowViewController.yearTo" + " " + "\(ReleaseWindowViewController.yearTo)")
+//        print("ReleaseWindowViewController.yearFrom" + " " + "\(ReleaseWindowViewController.yearFrom)")
+//        print("ReleaseWindowViewController.releaseWindow.yearFrom" + " " + "\(ReleaseWindowViewController.releaseWindow.yearFrom)")
+//        print("ReleaseWindowViewController.releaseWindow.yearTo" + " " + "\(ReleaseWindowViewController.releaseWindow.yearTo)")
+        do {
+            try ReleaseWindowViewController.dataController.viewContext.save()
+        } catch {
+            print("Could not save context")
+        }
     }
     
     

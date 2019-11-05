@@ -107,7 +107,6 @@ extension SelectionViewController {
             }
             
         }
-        print("the genre set is" + " " + "\(genreSet)")
         return genreSet
     }
     

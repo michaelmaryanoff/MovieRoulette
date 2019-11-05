@@ -22,6 +22,7 @@
 		CB308F202339372D007919C6 /* ActorSearchViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */; };
 		CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */; };
 		CB308F2423393A31007919C6 /* PresentAlertControllerDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */; };
+		CB4286F92371D12D003B5888 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4286F82371D12D003B5888 /* StringConstants.swift */; };
 		CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D867C230C805C004FEFED /* TMDBClient.swift */; };
 		CB8117D623159498009A3D44 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8117D523159498009A3D44 /* DataController.swift */; };
 		CBBC16F8231C7979004D1EE9 /* CheckConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */; };
@@ -53,6 +54,7 @@
 		CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorSearchViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorSearchViewController+ViewExtensions.swift"; sourceTree = "<group>"; };
 		CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAlertControllerDismiss.swift; sourceTree = "<group>"; };
+		CB4286F82371D12D003B5888 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		CB7D867C230C805C004FEFED /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		CB8117D523159498009A3D44 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnectivity.swift; sourceTree = "<group>"; };
@@ -116,12 +118,9 @@
 		CB308F1C2339304F007919C6 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */,
 				CBCE5692233448A8003F76BC /* GenresTableViewController+Extensions.swift */,
-				CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */,
 				CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */,
 				CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */,
-				CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -147,7 +146,7 @@
 				CBF272A423144CC200B45E92 /* ActorSearchViewController.swift */,
 				CB165BC8230C6C2100688014 /* AppDelegate.swift */,
 				CB308F1C2339304F007919C6 /* Extension */,
-				CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */,
+				CBEEA41623689AB100F9B99C /* View Extensions */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -161,8 +160,20 @@
 				CBBE09452316C1910092044B /* GenresConstants.swift */,
 				CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */,
 				CB0194BC23679D36006DBB42 /* APIKey.swift */,
+				CB4286F82371D12D003B5888 /* StringConstants.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CBEEA41623689AB100F9B99C /* View Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */,
+				CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */,
+				CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */,
+				CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */,
+			);
+			path = "View Extensions";
 			sourceTree = "<group>";
 		};
 		E909D228591513C1910C6D77 /* Pods */ = {
@@ -299,6 +310,7 @@
 				CBBE09462316C1910092044B /* GenresConstants.swift in Sources */,
 				CB165BD1230C6C2100688014 /* MovieRoulette.xcdatamodeld in Sources */,
 				CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */,
+				CB4286F92371D12D003B5888 /* StringConstants.swift in Sources */,
 				CB308F1E233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift in Sources */,
 				CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */,
 				CB8117D623159498009A3D44 /* DataController.swift in Sources */,

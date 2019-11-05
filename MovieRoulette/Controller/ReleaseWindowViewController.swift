@@ -20,10 +20,12 @@ class ReleaseWindowViewController: UIViewController {
     static var yearFrom: Int = 2019
     static var yearTo: Int = 2019
     
+    
     // Managed variables
     static var releaseWindow = YearRange(context: ReleaseWindowViewController.dataController.viewContext)
     static var releaseWindowArray = [YearRange]()
     static var dataController: DataController!
+    let defaults = UserDefaults.standard
     
     // IBOUtlets
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
@@ -41,13 +43,13 @@ class ReleaseWindowViewController: UIViewController {
         setupReleaseWindowLabel(label: releaseWindowLabel)
         
         setupPickerView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        releaseYearPickerView.selectRow(SelectionViewController.yearFrom, inComponent: 0, animated: true)
+        let yearRangeFetchRequest: NSFetchRequest<YearRange> = YearRange.fetchRequest()
+        makeYearRangeFetchRequest(yearRangeFetchRequest)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,8 +64,56 @@ class ReleaseWindowViewController: UIViewController {
     }
     
     func setupPickerView() {
-        releaseYearPickerView.selectRow(2019-SelectionViewController.yearFrom, inComponent: 0, animated: true)
-        releaseYearPickerView.selectRow(2019-SelectionViewController.yearTo, inComponent: 1, animated: true)
+        releaseYearPickerView.selectRow(2019-ReleaseWindowViewController.yearFrom, inComponent: 0, animated: true)
+        releaseYearPickerView.selectRow(2019-ReleaseWindowViewController.yearTo, inComponent: 1, animated: true)
+        
+    }
+    
+    fileprivate func makeYearRangeFetchRequest(_ fetchRequest: NSFetchRequest<YearRange>) {
+        
+        // Takes the results of the fetch request
+        let result = makeFetchRequest(fetchRequest)
+        
+        SelectionViewController.releaseWindowArray = result
+        
+        if result.count > 0 {
+            if let firstResult = result.first {
+                
+                print("Result in resultVC is" + " " + "\(result)")
+                
+//                print("First result in ReleaseWindowVC" + " " + "\(firstResult.yearFrom)")
+//                print("Second result in ReleaseWindowVC" + " " + "\(firstResult.yearTo)")
+//
+//                SelectionViewController.yearTo = Int(firstResult.yearTo)
+//                SelectionViewController.yearFrom = Int(firstResult.yearFrom)
+//                ReleaseWindowViewController.yearFrom = Int(firstResult.yearFrom)
+//                ReleaseWindowViewController.yearTo = Int(firstResult.yearTo)
+                
+            }
+            
+        } else {
+            print("We could not find any results in ReleaseVC!")
+        }
+        
+    }
+    
+    func makeFetchRequest<MangedObject: NSManagedObject>(_ fetchRequest: NSFetchRequest<MangedObject>) -> [MangedObject] {
+        // TODO: You will need to store the results of this as an array and then do something with it afterwards
+        // Maybe make this a guard statement and have this function return [NSManagedObject]
+        
+        do {
+            let result = try ReleaseWindowViewController.dataController.viewContext.fetch(fetchRequest)
+            return result
+        } catch {
+            print("could not fetch requested objects")
+            return []
+        }
+        
+    }
+    
+    func saveReleaseWindow() {
+        defaults.set(ReleaseWindowViewController.yearFrom, forKey: StringConstants.yearFrom)
+        defaults.set(ReleaseWindowViewController.yearTo, forKey: StringConstants.yearTo)
     }
     
 }

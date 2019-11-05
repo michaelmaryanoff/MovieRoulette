@@ -25,6 +25,7 @@ class SelectionViewController: UIViewController {
     
     // MARK: - Managed Core Data variables
     var dataController: DataController!
+    
     static var managedGenreArray = [Genre]()
     static var releaseWindowArray = [YearRange]()
     static var managedActorArray = [Actor]()
@@ -55,12 +56,10 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         
         initialViewSetup()
-        print("didload")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("willappear")
         
         setupFetchRequest()
         
@@ -77,6 +76,8 @@ class SelectionViewController: UIViewController {
                 self.genresSelectedLabel.text = "No genres selected"
             }
         }
+        
+        print("SelectionViewController.releaseWindowArray" + " " + "\(SelectionViewController.releaseWindowArray)")
         
     }
     
@@ -163,19 +164,28 @@ class SelectionViewController: UIViewController {
             if result.count > 0 {
                 if let firstResult = result.first {
                     
+                    print("First result" + " " + "\(firstResult.yearFrom)")
+                    print("Second result" + " " + "\(firstResult.yearTo)")
+                    
                     // This solves a bug where release window
                     // displayed incorrectly on small device screens
                     if (UIScreen.main.bounds.width == 320) {
                         releaseWindowLabel.text = "Window has been chosen"
                     } else {
-                        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
+                        releaseWindowLabel.text = "\(firstResult.yearFrom) to \(firstResult.yearTo)"
                         SelectionViewController.yearTo = Int(firstResult.yearTo)
                         SelectionViewController.yearFrom = Int(firstResult.yearFrom)
+                        ReleaseWindowViewController.yearFrom = Int(firstResult.yearFrom)
+                        ReleaseWindowViewController.yearTo = Int(firstResult.yearTo)
+                        
+                        
                     }
                     
                 }
                 
-            }
+            } else {
+                print("We could not find any results!")
+        }
         
     }
     
