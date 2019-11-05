@@ -15,21 +15,22 @@ import CoreData
 class SelectionViewController: UIViewController {
     
     // MARK: - Non-Managed variables
+    
+    // Structured data
     var moviesArray = [String]()
     var yearsArray = [Int]()
     var genreCodeSet = Set<Int>()
+    
+    // Single variables
     static var yearFrom: Int = 2019
     static var yearTo: Int = 2019
     var actorId: Int?
     static var genreCount = 0
     
-    // MARK: - Managed Core Data variables
+    // MARK: - Managed Core Data variables and arrays
     var dataController: DataController!
-    
     static var managedGenreArray = [Genre]()
     static var managedActorArray = [Actor]()
-    
-    var fetchedResultsController: NSFetchedResultsController<Genre>!
     
     // MARK: - Outles
     
@@ -63,7 +64,6 @@ class SelectionViewController: UIViewController {
         setupFetchRequest()
         
         genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
-        
         
         DispatchQueue.main.async {
             switch self.genreCodeSet.count {

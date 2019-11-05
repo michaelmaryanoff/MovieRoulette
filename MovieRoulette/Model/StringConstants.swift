@@ -9,6 +9,8 @@
 import Foundation
 
 struct StringConstants {
+    
     static let yearFrom = "yearFrom"
     static let yearTo = "yearTo"
+    
 }
