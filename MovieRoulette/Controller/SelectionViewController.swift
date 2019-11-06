@@ -22,12 +22,12 @@ class SelectionViewController: UIViewController {
     var genreCodeSet = Set<Int>()
     
     // Single variables
-    static var yearFrom: Int?
-    static var yearTo: Int?
+    static var yearFrom = 2019
+    static var yearTo = 2019
     var actorId: Int?
     static var genreCount = 0
     
-    // MARK: - Managed Core Data variables and arrays
+    // MARK: - Core Data variables
     var dataController: DataController!
     static var managedGenreArray = [Genre]()
     static var managedActorArray = [Actor]()
@@ -55,6 +55,7 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         
         initialViewSetup()
+        setupReleaseWindowLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,6 +146,11 @@ class SelectionViewController: UIViewController {
             
         
         
+    }
+    
+    func setupReleaseWindowLabel() {
+            
+        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
     }
     
     fileprivate func makeActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
