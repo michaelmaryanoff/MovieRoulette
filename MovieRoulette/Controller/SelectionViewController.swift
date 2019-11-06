@@ -18,7 +18,6 @@ class SelectionViewController: UIViewController {
     
     // Structured data
     var moviesArray = [String]()
-    var yearsArray = [Int]()
     var genreCodeSet = Set<Int>()
     
     // Single variables
@@ -75,6 +74,10 @@ class SelectionViewController: UIViewController {
                 self.genresSelectedLabel.text = "No genres selected"
             }
         }
+        
+        print("SelectionViewController.yearFrom" + " " + "\(SelectionViewController.yearFrom)")
+        print("SelectionViewController.yearTo" + " " + "\(SelectionViewController.yearTo)")
+        setupReleaseWindowLabel()
     }
     
     // MARK: - Core Data functions
@@ -234,6 +237,23 @@ class SelectionViewController: UIViewController {
     @IBAction func chooseGenres(_ sender: Any) {
         performSegue(withIdentifier: "chooseGenres", sender: self.genreCodeSet)
     }
+    
+    @IBAction func chooseReleaseWindow(_ sender: Any) {
+        
+//        let releaseWindowVC = storyboard?.instantiateViewController(withIdentifier: "ReleaseWindowViewController") as! ReleaseWindowViewController
+//        releaseWindowVC.releaseWindowDelegate = self
+//        present(releaseWindowVC, animated: true, completion: nil)
+    }
+    
+    
+    
+}
 
+extension SelectionViewController: ReleaseWindowDelegate {
+    func releaseYearPicked(yearFrom: Int, yearTo: Int) {
+        SelectionViewController.yearFrom = yearFrom
+        SelectionViewController.yearTo = yearTo
+    }
+    
 }
 

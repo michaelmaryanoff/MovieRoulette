@@ -83,6 +83,7 @@ extension SelectionViewController {
             GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
         } else if segue.identifier == "chooseReleaseWindow" {
             let destinationVC = segue.destination as! ReleaseWindowViewController
+            destinationVC.releaseWindowDelegate = self
         } else if segue.identifier == "chooseActor" {
             let destinationVC = segue.destination as! ActorSearchViewController
             destinationVC.dataController = dataController

@@ -30,6 +30,9 @@ extension ReleaseWindowViewController:  UIPickerViewDataSource, UIPickerViewDele
         
         let yearRangeInt = Int(yearRange[row])
         
+        var firstSectionValue: Int = ReleaseWindowViewController.yearFrom
+        var secondSectionValue: Int =  ReleaseWindowViewController.yearTo
+        
         if component == 0 {
             firstSectionValue = yearRangeInt
         } else if component == 1 {
@@ -39,10 +42,20 @@ extension ReleaseWindowViewController:  UIPickerViewDataSource, UIPickerViewDele
         // Ensures that "yearFrom" is always less than "yearTo"
         ReleaseWindowViewController.yearFrom = min(firstSectionValue, secondSectionValue)
         ReleaseWindowViewController.yearTo = max(firstSectionValue, secondSectionValue)
-        SelectionViewController.yearFrom = Int(ReleaseWindowViewController.yearFrom)
-        SelectionViewController.yearTo = Int(ReleaseWindowViewController.yearTo)
-        saveReleaseWindow()
+        print("firstSectionValue" + " " + "\(firstSectionValue)")
+        print("secondSectionValue" + " " + "\(secondSectionValue)")
+        print("ReleaseWindowViewController.yearTo" + " " + "\(ReleaseWindowViewController.yearTo)")
+        print("ReleaseWindowViewController.yearFrom" + " " + "\(ReleaseWindowViewController.yearFrom)")
+        
+        
+        releaseWindowDelegate.releaseYearPicked(yearFrom: ReleaseWindowViewController.yearFrom, yearTo: ReleaseWindowViewController.yearTo)
+        
+//        SelectionViewController.yearFrom = Int(ReleaseWindowViewController.yearFrom)
+//        SelectionViewController.yearTo = Int(ReleaseWindowViewController.yearTo)
+//
+//        saveReleaseWindow()
     }
     
-    
 }
+
+
