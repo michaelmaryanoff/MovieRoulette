@@ -58,6 +58,8 @@ class ReleaseWindowViewController: UIViewController {
     func saveReleaseWindow() {
         defaults.set(ReleaseWindowViewController.yearFrom, forKey: StringConstants.yearFrom)
         defaults.set(ReleaseWindowViewController.yearTo, forKey: StringConstants.yearTo)
+        print("StringConstants.yearFrom" + " " + "\(defaults.integer(forKey: StringConstants.yearFrom))")
+        print("StringConstants.yearTo" + " " + "\(defaults.integer(forKey: StringConstants.yearTo))")
     }
     
     func checkForReleaseWindown() {
