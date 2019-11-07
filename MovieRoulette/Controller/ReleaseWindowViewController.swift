@@ -14,15 +14,12 @@ class ReleaseWindowViewController: UIViewController {
     
     // Global variables
     var yearRange: [Int] = Array(1900...2019).reversed()
-//    var firstSectionValue: Int = 2019
-//    var secondSectionValue: Int = 2019
     static var yearFrom: Int = 2019
     static var yearTo: Int = 2019
     
-    var releaseWindowDelegate: ReleaseWindowDelegate!
-    
-    // User defaults variable
+    // Other variables
     let defaults = UserDefaults.standard
+    var releaseWindowDelegate: ReleaseWindowDelegate!
     
     // IBOUtlets
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
@@ -34,20 +31,17 @@ class ReleaseWindowViewController: UIViewController {
         
         // Defines delegates
         releaseYearPickerView.delegate = self
-//        self.navigationController?.delegate = self
         
-        // Sets up label
+        // Sets up view
         setupReleaseWindowLabel(label: releaseWindowLabel)
-        
         setupPickerView()
         
+        checkForReleaseWindow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("ReleaseWindowViewController.yearFrom" + " " + "\(ReleaseWindowViewController.yearFrom)")
-        print("ReleaseWindowViewController.yearTo" + " " + "\(ReleaseWindowViewController.yearTo)")
     }
     
     func setupPickerView() {
@@ -58,33 +52,18 @@ class ReleaseWindowViewController: UIViewController {
     func saveReleaseWindow() {
         defaults.set(ReleaseWindowViewController.yearFrom, forKey: StringConstants.yearFrom)
         defaults.set(ReleaseWindowViewController.yearTo, forKey: StringConstants.yearTo)
-        print("StringConstants.yearFrom" + " " + "\(defaults.integer(forKey: StringConstants.yearFrom))")
-        print("StringConstants.yearTo" + " " + "\(defaults.integer(forKey: StringConstants.yearTo))")
     }
     
-    func checkForReleaseWindown() {
+    func checkForReleaseWindow() {
         let yearFrom = defaults.integer(forKey: StringConstants.yearFrom)
         let yearTo = defaults.integer(forKey: StringConstants.yearTo)
         
         defaults.value(forKey: StringConstants.yearTo)
+        defaults.value(forKey: StringConstants.yearFrom)
     }
     
+    
 }
-
-//extension ReleaseWindowViewController: UINavigationControllerDelegate {
-//    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-////        let newSelectionVC = viewController as! SelectionViewController
-//        let newReleaseWindowVC = viewController as! ReleaseWindowViewController
-//        if viewController == newSelectionVC {
-//            print("we are using newSelectionVC")
-//        } else if viewController == newReleaseWindowVC {
-//            print("we are using a release window VC")
-//        } else {
-//            print("We are not using this segue")
-//        }
-//    }
-//
-//}
 
 protocol ReleaseWindowDelegate {
     func releaseYearPicked(yearFrom: Int, yearTo: Int)

@@ -75,9 +75,17 @@ class SelectionViewController: UIViewController {
             }
         }
         
-        print("SelectionViewController.yearFrom" + " " + "\(SelectionViewController.yearFrom)")
-        print("SelectionViewController.yearTo" + " " + "\(SelectionViewController.yearTo)")
+        print("SelectionViewController.yearFrom" + " -- " + "\(SelectionViewController.yearFrom)")
+        print("SelectionViewController.yearTo" + " -- " + "\(SelectionViewController.yearTo)")
         setupReleaseWindowLabel()
+        
+        print("defaults.integer(forKey: StringConstants.yearFrom)" + " -- " + "\(UserDefaults.standard.integer(forKey: StringConstants.yearFrom))")
+        print("defaults.integer(forKey: StringConstants.yearTo)" + " -- " + "\(UserDefaults.standard.integer(forKey: StringConstants.yearTo))")
+        print("defaults.value(forKey: StringConstants.yearTo)" + " -- " + "\(UserDefaults.standard.value(forKey: StringConstants.yearTo))")
+        print("defaults.value(forKey: StringConstants.yearFrom)" + " -- " + "\(UserDefaults.standard.value(forKey: StringConstants.yearFrom))")
+        
+        print("UserDefaults.standard.bool(forKey: StringConstants.yearFrom)" + " -=-> " + "\(UserDefaults.standard.bool(forKey: StringConstants.yearFrom))")
+        print("UserDefaults.standard.bool(forKey: StringConstants.yearTo)" + " -=-> " + "\(UserDefaults.standard.bool(forKey: StringConstants.yearTo))")
     }
     
     // MARK: - Core Data functions
