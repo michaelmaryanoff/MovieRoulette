@@ -36,7 +36,6 @@ class ReleaseWindowViewController: UIViewController {
         setupReleaseWindowLabel(label: releaseWindowLabel)
         setupPickerView()
         
-        checkForReleaseWindow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,14 +51,6 @@ class ReleaseWindowViewController: UIViewController {
     func saveReleaseWindow() {
         defaults.set(ReleaseWindowViewController.yearFrom, forKey: StringConstants.yearFrom)
         defaults.set(ReleaseWindowViewController.yearTo, forKey: StringConstants.yearTo)
-    }
-    
-    func checkForReleaseWindow() {
-        let yearFrom = defaults.integer(forKey: StringConstants.yearFrom)
-        let yearTo = defaults.integer(forKey: StringConstants.yearTo)
-        
-        defaults.value(forKey: StringConstants.yearTo)
-        defaults.value(forKey: StringConstants.yearFrom)
     }
     
     

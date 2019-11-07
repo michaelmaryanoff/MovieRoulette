@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         selectionViewController.dataController = dataController
         
         dataController.load()
+        checkForReleaseWindow()
         
         return true
     }
@@ -51,6 +52,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    public func checkForReleaseWindow() {
+        let yearToExists = UserDefaults.standard.bool(forKey: StringConstants.yearFrom)
+        let yearFromExists = UserDefaults.standard.bool(forKey: StringConstants.yearTo)
+        
+        if yearFromExists {
+            print("yearFromExists!")
+            ReleaseWindowViewController.yearFrom = UserDefaults.standard.integer(forKey: StringConstants.yearFrom)
+            SelectionViewController.yearFrom = UserDefaults.standard.integer(forKey: StringConstants.yearFrom)
+        } else {
+            print("yearFrom does not Exists!")
+            UserDefaults.standard.set(2019, forKey: StringConstants.yearFrom)
+            ReleaseWindowViewController.yearFrom = 2019
+            SelectionViewController.yearFrom = 2019
+            
+        }
+        
+        if yearToExists {
+            print("yearToExists!")
+            ReleaseWindowViewController.yearTo = UserDefaults.standard.integer(forKey: StringConstants.yearTo)
+            SelectionViewController.yearTo = UserDefaults.standard.integer(forKey: StringConstants.yearTo)
+        } else {
+            print("yearTo Does not exist!")
+            UserDefaults.standard.set(2019, forKey: StringConstants.yearTo)
+            ReleaseWindowViewController.yearFrom = 2019
+            SelectionViewController.yearTo = 2019
+        }
+        
+        
     }
 
     // MARK: - Core Data stack
