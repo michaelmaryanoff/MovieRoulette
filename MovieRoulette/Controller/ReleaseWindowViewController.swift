@@ -56,6 +56,4 @@ class ReleaseWindowViewController: UIViewController {
     
 }
 
-protocol ReleaseWindowDelegate {
-    func releaseYearPicked(yearFrom: Int, yearTo: Int)
-}
+
