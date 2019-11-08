@@ -54,7 +54,7 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         
         initialViewSetup()
-        setupReleaseWindowLabel()
+        setupReleaseWindowLabelText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,11 +75,11 @@ class SelectionViewController: UIViewController {
             }
         }
         
-        setupReleaseWindowLabel()
+        setupReleaseWindowLabelText()
     }
     
     // MARK: - Core Data functions
-    fileprivate func setupFetchRequest() {
+    func setupFetchRequest() {
         
         // MARK: Fetch requests
         let genreFetchrequest: NSFetchRequest<Genre> = Genre.fetchRequest()
@@ -99,7 +99,7 @@ class SelectionViewController: UIViewController {
         }
     }
     
-    fileprivate func deleteAllEmptyGenres() {
+    func deleteAllEmptyGenres() {
         for genre in SelectionViewController.managedGenreArray {
             if genre.genreCode == Int64(0) {
                 dataController.viewContext.delete(genre)
@@ -144,13 +144,10 @@ class SelectionViewController: UIViewController {
             }
             
             SelectionViewController.managedGenreArray = result
-            
-        
         
     }
     
-    func setupReleaseWindowLabel() {
-            
+    func setupReleaseWindowLabelText() {
         releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
     }
     

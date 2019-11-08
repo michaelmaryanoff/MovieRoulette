@@ -25,6 +25,7 @@
 		CB4286F92371D12D003B5888 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4286F82371D12D003B5888 /* StringConstants.swift */; };
 		CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D867C230C805C004FEFED /* TMDBClient.swift */; };
 		CB8117D623159498009A3D44 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8117D523159498009A3D44 /* DataController.swift */; };
+		CB82D6B42375D71800A9D289 /* SelectionViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82D6B32375D71800A9D289 /* SelectionViewController+Extensions.swift */; };
 		CBBC16F8231C7979004D1EE9 /* CheckConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */; };
 		CBBC16FA231C82E0004D1EE9 /* CustomActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBC16F9231C82E0004D1EE9 /* CustomActorCell.swift */; };
 		CBBE09462316C1910092044B /* GenresConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBE09452316C1910092044B /* GenresConstants.swift */; };
@@ -57,6 +58,7 @@
 		CB4286F82371D12D003B5888 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		CB7D867C230C805C004FEFED /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		CB8117D523159498009A3D44 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		CB82D6B32375D71800A9D289 /* SelectionViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectionViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CBBC16F7231C7979004D1EE9 /* CheckConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnectivity.swift; sourceTree = "<group>"; };
 		CBBC16F9231C82E0004D1EE9 /* CustomActorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActorCell.swift; sourceTree = "<group>"; };
 		CBBE09452316C1910092044B /* GenresConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresConstants.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				CBCE5692233448A8003F76BC /* GenresTableViewController+Extensions.swift */,
 				CB308F1D233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift */,
 				CB308F1F2339372D007919C6 /* ActorSearchViewController+Extensions.swift */,
+				CB82D6B32375D71800A9D289 /* SelectionViewController+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				CB165BD1230C6C2100688014 /* MovieRoulette.xcdatamodeld in Sources */,
 				CB7D867D230C805C004FEFED /* TMDBClient.swift in Sources */,
 				CB4286F92371D12D003B5888 /* StringConstants.swift in Sources */,
+				CB82D6B42375D71800A9D289 /* SelectionViewController+Extensions.swift in Sources */,
 				CB308F1E233930CF007919C6 /* ReleaseWindowViewController+Extensions.swift in Sources */,
 				CB308F2223393861007919C6 /* ActorSearchViewController+ViewExtensions.swift in Sources */,
 				CB8117D623159498009A3D44 /* DataController.swift in Sources */,
