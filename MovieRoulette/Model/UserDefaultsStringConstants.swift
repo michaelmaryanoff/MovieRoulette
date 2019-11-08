@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StringConstants {
+struct UserDefaultsStringConstants {
     
     static let yearFrom = "yearFrom"
     static let yearTo = "yearTo"

@@ -11,7 +11,9 @@ import SwiftyJSON
 
 // This class allows for a quick connectivity check before making a request
 class CheckConnectivity {
+    
     class var isConnectedToInternet:Bool {
         return NetworkReachabilityManager()?.isReachable ?? false
     }
+    
 }

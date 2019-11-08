@@ -54,33 +54,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
+    
     public func checkForReleaseWindow() {
-        let yearToExists = UserDefaults.standard.bool(forKey: StringConstants.yearFrom)
-        let yearFromExists = UserDefaults.standard.bool(forKey: StringConstants.yearTo)
+        // This function checks to see if there is a release year window already written to UserDefaults.
+        // If there is not, it sets it to a default.
+        
+        let yearToExists = UserDefaults.standard.bool(forKey: UserDefaultsStringConstants.yearFrom)
+        let yearFromExists = UserDefaults.standard.bool(forKey: UserDefaultsStringConstants.yearTo)
         
         if yearFromExists {
-            print("yearFromExists!")
-            ReleaseWindowViewController.yearFrom = UserDefaults.standard.integer(forKey: StringConstants.yearFrom)
-            SelectionViewController.yearFrom = UserDefaults.standard.integer(forKey: StringConstants.yearFrom)
+            ReleaseWindowViewController.yearFrom = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearFrom)
+            SelectionViewController.yearFrom = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearFrom)
         } else {
-            print("yearFrom does not Exists!")
-            UserDefaults.standard.set(2019, forKey: StringConstants.yearFrom)
+            UserDefaults.standard.set(2019, forKey: UserDefaultsStringConstants.yearFrom)
             ReleaseWindowViewController.yearFrom = 2019
             SelectionViewController.yearFrom = 2019
-            
         }
         
         if yearToExists {
-            print("yearToExists!")
-            ReleaseWindowViewController.yearTo = UserDefaults.standard.integer(forKey: StringConstants.yearTo)
-            SelectionViewController.yearTo = UserDefaults.standard.integer(forKey: StringConstants.yearTo)
+            ReleaseWindowViewController.yearTo = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearTo)
+            SelectionViewController.yearTo = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearTo)
         } else {
-            print("yearTo Does not exist!")
-            UserDefaults.standard.set(2019, forKey: StringConstants.yearTo)
+            UserDefaults.standard.set(2019, forKey: UserDefaultsStringConstants.yearTo)
             ReleaseWindowViewController.yearFrom = 2019
             SelectionViewController.yearTo = 2019
         }
-        
         
     }
 

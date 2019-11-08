@@ -8,10 +8,9 @@
 
 import UIKit
 
-//MARK - View functions
 extension ActorSearchViewController {
     
-    //MARK: - View helper functions
+    //MARK: - View functions
     func changeActivityIndicatorState(isAnimating: Bool) {
         switch isAnimating {
         case true:

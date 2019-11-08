@@ -13,7 +13,7 @@ class TMDBClient {
     
     // MARK: - Constants
     
-    // Insert your own API key as a string
+    // Replace APIKey.key with your own string
     static let apiKey = APIKey.apiKey
     
     // Static endpoints to be used for each requests
@@ -39,14 +39,12 @@ class TMDBClient {
         case .searchForActor:
             components.path = TMDBClient.EndpointConstants.searchForActorPath
         }
-        
         return components
-        
     }
     
-    
-    
     // MARK: - Search functions
+    
+    // Creates a URL used when "spinning" for a random movie
     static func formulateMovieSearchURL(withTheseGenres genreCodes: [Int]?, yearFrom: Int?, yearTo: Int?, withActorCode actorCode: Int?) -> URL {
         
         // Base url
@@ -57,8 +55,7 @@ class TMDBClient {
         let apiKeyForURL = URLQueryItem(name: "api_key", value: TMDBClient.apiKey)
         queryComponents.append(apiKeyForURL)
         
-        // Loops through genre codes array and appends
-        // codes to url query
+        // Loops through genre codes array and appends codes to URL query
         if let genreCodes = genreCodes {
             for code in genreCodes {
                 let genreQueryItem = URLQueryItem(name: "with_genres", value: "\(code)")
@@ -90,6 +87,7 @@ class TMDBClient {
         return url
     }
     
+    // Uses formatted URL when searching for a random movie
     static func searchForMovies(url: URL?, completion: @escaping(Bool, [String], Error?) -> Void) {
         
         guard let url = url else {
@@ -97,51 +95,47 @@ class TMDBClient {
             return
         }
         
-        print("url is" + " " + "\(url)")
-        
-                // Make the request with the formed URL
-                AF.request(url, method: .get).responseJSON {
-                    
-                    (response) in
-        
-                    // A switch statement where we determine what to do with the results
-                    switch response.result {
-        
-                    // What to do if we get some valid json data
-                    case .success(let value):
-                        
-                        // Creates a temporary string array to be passed through the completion handler
-                        var titleStringArray = [String]()
-                        
-                        titleStringArray = []
-        
-                        let json = JSON(value)
-        
-                        // Getting an array of titles
-                        let jsonArrayMap = json["results"].arrayValue.map {
-                            $0["title"].stringValue
-                        }
-        
-                        // Appends movies to string array
-                        for item in jsonArrayMap {
-                            titleStringArray.append(item)
-                        }
-                        
-                        
-                        completion(true, titleStringArray, nil)
-        
-                    case .failure(let error):
-                        
-                        print("Here was the error in \(#function): \(error.localizedDescription)")
-                        completion(false, [], error)
-                    }
-        
+        // Make the request with the formed URL
+        AF.request(url, method: .get).responseJSON {
+            
+            (response) in
+
+            // A switch statement where we determine what to do with the results
+            switch response.result {
+
+            // What to do if we get some valid json data
+            case .success(let value):
+                
+                // Creates a temporary string array to be passed through the completion handler
+                var titleStringArray = [String]()
+                
+                titleStringArray = []
+
+                let json = JSON(value)
+
+                // Getting an array of titles
+                let jsonArrayMap = json["results"].arrayValue.map {
+                    $0["title"].stringValue
                 }
 
+                // Appends movies to string array
+                for item in jsonArrayMap {
+                    titleStringArray.append(item)
+                }
+                
+                completion(true, titleStringArray, nil)
+
+            case .failure(let error):
+                
+                print("Here was the error in \(#function): \(error.localizedDescription)")
+                completion(false, [], error)
+            }
+
+        }
     
     }
     
-    // A network call that searches for an actor Id in order to create a url query
+    // A network call that searches for an actor ID in order to create a url query
     static func searchForActorID(query: String?, completion: @escaping (Bool, [String], [Int], Error?) -> Void) {
         
         // Makese sure that we actually have a search to pass through
@@ -151,7 +145,7 @@ class TMDBClient {
         }
         
         if query.isEmpty {
-            print("no query")
+            print("There is no query")
             return
         }
         

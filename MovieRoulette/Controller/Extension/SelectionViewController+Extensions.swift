@@ -98,7 +98,6 @@ extension SelectionViewController {
         }
     }
     
-    
     //MARK: - Networking Code
     func findRandomMovie() {
         

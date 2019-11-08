@@ -87,6 +87,7 @@ class SelectionViewController: UIViewController {
 }
 
 extension SelectionViewController: ReleaseWindowDelegate {
+    
     func releaseYearPicked(yearFrom: Int, yearTo: Int) {
         SelectionViewController.yearFrom = yearFrom
         SelectionViewController.yearTo = yearTo
