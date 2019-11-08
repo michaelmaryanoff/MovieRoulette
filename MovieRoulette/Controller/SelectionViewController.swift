@@ -48,85 +48,28 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backgroundIndicatorView: UIView!
     
-    // MARK: - View load functions
-    
+    // MARK: - Lifecycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialViewSetup()
-        setupReleaseWindowLabelText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupFetchRequest()
-        
         genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
         
-        DispatchQueue.main.async {
-            switch self.genreCodeSet.count {
-            case 1:
-                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genre selected"
-            case let count where count > 0:
-                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genres selected"
-            default:
-                self.genresSelectedLabel.text = "No genres selected"
-            }
-        }
-        
-        setupReleaseWindowLabelText()
+        setupFetchRequest()
+        setupTextLabels()
     }
     
     // MARK: - IBActions
-    
     @IBAction func spinForMovie(_ sender: Any) {
-    
-        self.beginAnimating()
         
-        self.moviesArray = []
-        
-        let url = TMDBClient.formulateMovieSearchURL(withTheseGenres: Array(genreCodeSet), yearFrom: SelectionViewController.yearFrom, yearTo: SelectionViewController.yearTo, withActorCode: actorId)
-        print("url" + " " + "\(url)")
-        
-        TMDBClient.searchForMovies(url: url) { (success, stringArray, error) in
-            
-            self.beginAnimating()
-            
-            self.moviesArray = []
-            
-            if CheckConnectivity.isConnectedToInternet == false {
-                self.presentAlertControllerDismiss(title: "There is no internet connection!", message: "Please check your connection and try again.")
-                self.endAnimating()
-                return
-            }
-            
-            if error != nil {
-                self.presentAlertControllerDismiss(title: "There was an error.", message: "\(error!.localizedDescription)")
-            }
-            
-            if success {
-                self.endAnimating()
-                self.moviesArray = []
-                self.moviesArray = stringArray
-                if self.moviesArray.count > 0 {
-                    let randomNumber = Int.random(in: 0..<stringArray.count)
-                    let randomMovie = self.moviesArray[randomNumber]
-                    DispatchQueue.main.async {
-                        self.presentAlertControllerDismiss(title: "The movie you are watching tonight is...", message: "\(randomMovie)")
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.presentAlertControllerDismiss(title: "No movies met these criteria.", message: "Please try again.") 
-                    }
-                }
-                
-                
-            }
-        }
+        findRandomMovie()
     }
     
-
     @IBAction func confirmActorSelection(_ unwindSegue: UIStoryboardSegue) {
         
         guard let actorSearchViewController = unwindSegue.source as? ActorSearchViewController else {

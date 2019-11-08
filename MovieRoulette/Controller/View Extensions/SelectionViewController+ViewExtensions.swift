@@ -10,6 +10,31 @@ import UIKit
 
 extension SelectionViewController {
     
+    //MARK: - Label text setup functions
+    
+    func setupTextLabels() {
+        setupGenreLabelText()
+        setupReleaseWindowLabelText()
+    }
+    
+    func setupGenreLabelText() {
+        
+        DispatchQueue.main.async {
+            switch self.genreCodeSet.count {
+            case 1:
+                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genre selected"
+            case let count where count > 0:
+                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genres selected"
+            default:
+                self.genresSelectedLabel.text = "No genres selected"
+            }
+        }
+    }
+
+    func setupReleaseWindowLabelText() {
+        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
+    }
+    
     //MARK: - View setup functions
     func initialViewSetup() {
         setUpLabels(withCornerRadius: 7, withBackgroundColor: Colors.darkPurple)
@@ -17,6 +42,7 @@ extension SelectionViewController {
         setupActivityIndicator(uiView: backgroundIndicatorView, activityIndicator: activityIndicator)
         
         self.view.bringSubviewToFront(backgroundIndicatorView)
+        setupReleaseWindowLabelText()
     }
     
     func setupActivityIndicator(uiView: UIView, activityIndicator: UIActivityIndicatorView) {
@@ -105,11 +131,5 @@ extension SelectionViewController {
         }
         return genreSet
     }
-    
-    func setupReleaseWindowLabelText() {
-        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
-    }
-    
-    
     
 }
