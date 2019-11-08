@@ -19,7 +19,6 @@ extension GenresTableViewController: UITableViewDelegate, UITableViewDataSource 
         return GenreConstants.genresArray.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath)

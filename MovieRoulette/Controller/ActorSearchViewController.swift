@@ -42,9 +42,7 @@ class ActorSearchViewController: UIViewController  {
         self.view.addSubview(self.activityView)
         
     }
-    
 
-    
     @IBAction func unwindToSelectionViewController (segue: UIStoryboardSegue) {
         performSegue(withIdentifier: "confirmActorSelection", sender: selectedActorId)
     }
@@ -56,7 +54,6 @@ class ActorSearchViewController: UIViewController  {
             for object in result {
                 dataController.viewContext.delete(object)
             }
-            
             
         }
     }

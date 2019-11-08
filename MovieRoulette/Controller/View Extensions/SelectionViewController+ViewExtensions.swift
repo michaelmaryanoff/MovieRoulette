@@ -10,6 +10,31 @@ import UIKit
 
 extension SelectionViewController {
     
+    //MARK: - Label text setup functions
+    
+    func setupTextLabels() {
+        setupGenreLabelText()
+        setupReleaseWindowLabelText()
+    }
+    
+    func setupGenreLabelText() {
+        
+        DispatchQueue.main.async {
+            switch self.genreCodeSet.count {
+            case 1:
+                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genre selected"
+            case let count where count > 0:
+                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genres selected"
+            default:
+                self.genresSelectedLabel.text = "No genres selected"
+            }
+        }
+    }
+
+    func setupReleaseWindowLabelText() {
+        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
+    }
+    
     //MARK: - View setup functions
     func initialViewSetup() {
         setUpLabels(withCornerRadius: 7, withBackgroundColor: Colors.darkPurple)
@@ -17,6 +42,7 @@ extension SelectionViewController {
         setupActivityIndicator(uiView: backgroundIndicatorView, activityIndicator: activityIndicator)
         
         self.view.bringSubviewToFront(backgroundIndicatorView)
+        setupReleaseWindowLabelText()
     }
     
     func setupActivityIndicator(uiView: UIView, activityIndicator: UIActivityIndicatorView) {
@@ -62,7 +88,6 @@ extension SelectionViewController {
         
     }
     
-    
     // MARK: - Animation functions
     func beginAnimating () {
         activityIndicator.startAnimating()
@@ -77,17 +102,14 @@ extension SelectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        // Adapted from Stack Overflow post
+    
         if segue.identifier == "chooseGenres" {
             let destinationVC = segue.destination as! GenresTableViewController
             destinationVC.dataController = dataController
             GenresTableViewController.managedGenreArray = SelectionViewController.managedGenreArray
         } else if segue.identifier == "chooseReleaseWindow" {
             let destinationVC = segue.destination as! ReleaseWindowViewController
-            ReleaseWindowViewController.dataController = dataController
-            ReleaseWindowViewController.releaseWindowArray = SelectionViewController.releaseWindowArray
-            
+            destinationVC.releaseWindowDelegate = self
         } else if segue.identifier == "chooseActor" {
             let destinationVC = segue.destination as! ActorSearchViewController
             destinationVC.dataController = dataController
@@ -107,10 +129,7 @@ extension SelectionViewController {
             }
             
         }
-        print("the genre set is" + " " + "\(genreSet)")
         return genreSet
     }
-    
-    
     
 }

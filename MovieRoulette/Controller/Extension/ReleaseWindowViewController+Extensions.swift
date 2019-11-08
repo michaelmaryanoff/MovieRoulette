@@ -21,14 +21,15 @@ extension ReleaseWindowViewController:  UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         return String(yearRange[row])
     }
-    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         let yearRangeInt = Int(yearRange[row])
+        
+        var firstSectionValue: Int = ReleaseWindowViewController.yearFrom
+        var secondSectionValue: Int =  ReleaseWindowViewController.yearTo
         
         if component == 0 {
             firstSectionValue = yearRangeInt
@@ -37,11 +38,20 @@ extension ReleaseWindowViewController:  UIPickerViewDataSource, UIPickerViewDele
         }
         
         // Ensures that "yearFrom" is always less than "yearTo"
-        ReleaseWindowViewController.releaseWindow.yearFrom = Int64(min(firstSectionValue, secondSectionValue))
-        ReleaseWindowViewController.releaseWindow.yearTo = Int64(max(firstSectionValue, secondSectionValue))
-        SelectionViewController.yearFrom = Int(ReleaseWindowViewController.releaseWindow.yearFrom)
-        SelectionViewController.yearTo = Int(ReleaseWindowViewController.releaseWindow.yearTo)
+        ReleaseWindowViewController.yearFrom = min(firstSectionValue, secondSectionValue)
+        ReleaseWindowViewController.yearTo = max(firstSectionValue, secondSectionValue)
+        
+        // Delegate function that passes yearFrom and yearTo to the SelectionViewController
+        releaseWindowDelegate.releaseYearPicked(yearFrom: ReleaseWindowViewController.yearFrom, yearTo: ReleaseWindowViewController.yearTo)
+        
+        // Saves yearFrom and yearTo to UserDefaults
+        saveReleaseWindow()
     }
     
-    
 }
+
+protocol ReleaseWindowDelegate {
+    func releaseYearPicked(yearFrom: Int, yearTo: Int)
+}
+
+

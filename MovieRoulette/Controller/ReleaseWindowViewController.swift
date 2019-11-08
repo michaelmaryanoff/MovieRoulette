@@ -7,23 +7,19 @@
 //
 
 import UIKit
-import CoreData
 
 class ReleaseWindowViewController: UIViewController {
     
     //MARK: - Variables
     
-    // Non-managed variables
+    // Global variables
     var yearRange: [Int] = Array(1900...2019).reversed()
-    var firstSectionValue: Int = 2019
-    var secondSectionValue: Int = 2019
     static var yearFrom: Int = 2019
     static var yearTo: Int = 2019
     
-    // Managed variables
-    static var releaseWindow = YearRange(context: ReleaseWindowViewController.dataController.viewContext)
-    static var releaseWindowArray = [YearRange]()
-    static var dataController: DataController!
+    // Other variables
+    let defaults = UserDefaults.standard
+    var releaseWindowDelegate: ReleaseWindowDelegate!
     
     // IBOUtlets
     @IBOutlet weak var releaseYearPickerView: UIPickerView!
@@ -35,11 +31,9 @@ class ReleaseWindowViewController: UIViewController {
         
         // Defines delegates
         releaseYearPickerView.delegate = self
-        self.navigationController?.delegate = self
         
-        // Sets up label
+        // Sets up view
         setupReleaseWindowLabel(label: releaseWindowLabel)
-        
         setupPickerView()
         
     }
@@ -47,39 +41,18 @@ class ReleaseWindowViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        releaseYearPickerView.selectRow(SelectionViewController.yearFrom, inComponent: 0, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Ensures that the viewContext saves when navigating away from view
-        do {
-            try ReleaseWindowViewController.dataController.viewContext.save()
-        } catch {
-            print("Could not save context")
-        }
     }
     
     func setupPickerView() {
-        releaseYearPickerView.selectRow(2019-SelectionViewController.yearFrom, inComponent: 0, animated: true)
-        releaseYearPickerView.selectRow(2019-SelectionViewController.yearTo, inComponent: 1, animated: true)
+        releaseYearPickerView.selectRow(2019-ReleaseWindowViewController.yearFrom, inComponent: 0, animated: true)
+        releaseYearPickerView.selectRow(2019-ReleaseWindowViewController.yearTo, inComponent: 1, animated: true)
+    }
+    
+    func saveReleaseWindow() {
+        defaults.set(ReleaseWindowViewController.yearFrom, forKey: UserDefaultsStringConstants.yearFrom)
+        defaults.set(ReleaseWindowViewController.yearTo, forKey: UserDefaultsStringConstants.yearTo)
     }
     
 }
 
-extension ReleaseWindowViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        print("\(#function) has been called in releasewindow vc")
-        let newSelectionVC = viewController as? SelectionViewController
-        if viewController == newSelectionVC {
-            SelectionViewController.releaseWindowArray = ReleaseWindowViewController.releaseWindowArray
-            SelectionViewController.releaseWindowArray = ReleaseWindowViewController.releaseWindowArray
-            SelectionViewController.yearFrom = Int(ReleaseWindowViewController.releaseWindow.yearFrom)
-            SelectionViewController.yearTo = Int(ReleaseWindowViewController.releaseWindow.yearTo)
-        } else {
-            print("We are not using this segue")
-        }
-    }
-    
-}
+

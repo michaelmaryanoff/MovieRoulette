@@ -190,7 +190,7 @@
         <!--Release Window View Controller-->
         <scene sceneID="r4x-qf-KtX">
             <objects>
-                <viewController id="hf4-vJ-vVq" customClass="ReleaseWindowViewController" customModule="MovieRoulette" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReleaseWindowViewController" id="hf4-vJ-vVq" customClass="ReleaseWindowViewController" customModule="MovieRoulette" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dQ7-sv-xVx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -29,9 +29,7 @@ extension ActorSearchViewController: UITableViewDelegate, UITableViewDataSource 
         let movieTitle = actors[indexPath.row]
         
         cell.textLabel?.text = movieTitle
-        
-        
-        
+    
         return cell
     }
     
@@ -94,7 +92,6 @@ extension ActorSearchViewController: UISearchBarDelegate {
         self.changeActivityIndicatorState(isAnimating: true)
         
         TMDBClient.searchForActorID(query: searchText) { (success, actorStringArray, idIntArray, error) in
-            
             
             if !actorStringArray.isEmpty {
                 self.changeActivityIndicatorState(isAnimating: false)

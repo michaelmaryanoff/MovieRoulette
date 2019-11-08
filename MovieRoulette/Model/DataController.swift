@@ -12,14 +12,12 @@ import CoreData
 // This class is used to set up a Data Controller that can be passed between classes
 class DataController {
     
-    
     let persistentContainer: NSPersistentContainer
     
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
-    
-    
+
     init(modelName:String) {
         persistentContainer = NSPersistentContainer(name: modelName)
     }
