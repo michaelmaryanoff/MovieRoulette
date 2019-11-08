@@ -13,7 +13,7 @@ class TMDBClient {
     
     // MARK: - Constants
     
-    // Replace APIKey.key with your own string
+    // Replace "APIKey.key" with your own string
     static let apiKey = APIKey.apiKey
     
     // Static endpoints to be used for each requests
