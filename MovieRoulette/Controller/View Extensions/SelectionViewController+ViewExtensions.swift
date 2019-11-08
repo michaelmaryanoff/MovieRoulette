@@ -106,6 +106,10 @@ extension SelectionViewController {
         return genreSet
     }
     
+    func setupReleaseWindowLabelText() {
+        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
+    }
+    
     
     
 }

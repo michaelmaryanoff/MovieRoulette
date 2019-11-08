@@ -135,7 +135,7 @@ class SelectionViewController: UIViewController {
         
     }
     
-    fileprivate func makeGenreFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
+    func makeGenreFetchRequest(_ fetchRequest: NSFetchRequest<Genre>) {
         
         let result = makeFetchRequest(fetchRequest)
             
@@ -147,11 +147,9 @@ class SelectionViewController: UIViewController {
         
     }
     
-    func setupReleaseWindowLabelText() {
-        releaseWindowLabel.text = "\(SelectionViewController.yearFrom) to \(SelectionViewController.yearTo)"
-    }
+
     
-    fileprivate func makeActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
+    func makeActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
         
         // Takes the results of the fetch request
         let result = makeFetchRequest(fetchRequest)
