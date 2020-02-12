@@ -42,6 +42,9 @@ extension GenresTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // Ensures that cell selected fades out.
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         guard let currentCell = tableView.cellForRow(at: indexPath) else {
             print("cannot with current cell")
             return
