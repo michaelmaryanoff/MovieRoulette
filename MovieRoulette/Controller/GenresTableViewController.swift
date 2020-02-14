@@ -14,7 +14,6 @@ class GenresTableViewController: UIViewController {
     // MARK: - Variables
     
     // Managed variables
-    static var managedGenreArrayCount = 0
     var fetchedResultsController: NSFetchedResultsController<Genre>!
     var dataController: DataController!
     static var managedGenreArray = [Genre]()
@@ -33,7 +32,6 @@ class GenresTableViewController: UIViewController {
         // Setting the delegate for the table view
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.navigationController?.delegate = self
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -45,8 +43,7 @@ class GenresTableViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         // Ensures that the marked genres are passed through to the SelectionViewController
-        SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
-        SelectionViewController.genreCount = GenresTableViewController.managedGenreArray.count
+//        SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
     }
     
     // Reusable function that changes the view context
@@ -65,7 +62,6 @@ class GenresTableViewController: UIViewController {
                     newGenre.genreName = cellText
                     newGenre.genreCode = Int64(value)
                     GenresTableViewController.managedGenreArray.append(newGenre)
-                    GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count
                     do {
                         try dataController.viewContext.save()
                     } catch {
@@ -84,7 +80,6 @@ class GenresTableViewController: UIViewController {
                             if let genreIndex = genreIndex {
                                 GenresTableViewController.managedGenreArray.remove(at: genreIndex)
                                 self.dataController.viewContext.delete(item)
-                                GenresTableViewController.managedGenreArrayCount = GenresTableViewController.managedGenreArray.count
                                 do {
                                     try dataController.viewContext.save()
                                 } catch {

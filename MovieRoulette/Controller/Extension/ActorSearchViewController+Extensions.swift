@@ -110,7 +110,6 @@ extension ActorSearchViewController: UISearchBarDelegate {
                     self.presentAlertControllerDismiss(title: "Could not find any actors.", message: "Please try again.")
                 }
                 
-                
             }
             
             self.actors = actorStringArray

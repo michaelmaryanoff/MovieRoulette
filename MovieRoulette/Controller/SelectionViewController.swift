@@ -24,7 +24,7 @@ class SelectionViewController: UIViewController {
     static var yearFrom = 2019
     static var yearTo = 2019
     var actorId: Int?
-    static var genreCount = 0
+    var genreCount = 0
     
     // MARK: - Core Data variables
     var dataController: DataController!
@@ -52,16 +52,22 @@ class SelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.delegate = self
         initialViewSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
-        
         setupFetchRequest()
+        genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
+        UserDefaults.standard.set(genreCodeSet.count, forKey: StringConstants.genreCount)
+        calculateGenreLabelText()
         setupTextLabels()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    
     }
     
     // MARK: - IBActions

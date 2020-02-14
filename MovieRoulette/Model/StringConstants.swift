@@ -8,9 +8,11 @@
 
 import Foundation
 
-struct UserDefaultsStringConstants {
+struct StringConstants {
     
     static let yearFrom = "yearFrom"
     static let yearTo = "yearTo"
+    
+    static let genreCount = "genreCount"
     
 }

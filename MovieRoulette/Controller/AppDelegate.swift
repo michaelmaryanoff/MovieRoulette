@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         dataController.load()
         checkForReleaseWindow()
-        
+        checkForGenreCount()
         return true
     }
 
@@ -55,31 +55,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    public func checkForReleaseWindow() {
+    func checkForReleaseWindow() {
         // This function checks to see if there is a release year window already written to UserDefaults.
         // If there is not, it sets it to a default.
         
-        let yearToExists = UserDefaults.standard.bool(forKey: UserDefaultsStringConstants.yearFrom)
-        let yearFromExists = UserDefaults.standard.bool(forKey: UserDefaultsStringConstants.yearTo)
+        let yearToExists = UserDefaults.standard.bool(forKey: StringConstants.yearFrom)
+        let yearFromExists = UserDefaults.standard.bool(forKey: StringConstants.yearTo)
         
         if yearFromExists {
-            ReleaseWindowViewController.yearFrom = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearFrom)
-            SelectionViewController.yearFrom = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearFrom)
+            ReleaseWindowViewController.yearFrom = UserDefaults.standard.integer(forKey: StringConstants.yearFrom)
+            SelectionViewController.yearFrom = UserDefaults.standard.integer(forKey: StringConstants.yearFrom)
         } else {
-            UserDefaults.standard.set(2019, forKey: UserDefaultsStringConstants.yearFrom)
+            UserDefaults.standard.set(2019, forKey: StringConstants.yearFrom)
             ReleaseWindowViewController.yearFrom = 2019
             SelectionViewController.yearFrom = 2019
         }
         
         if yearToExists {
-            ReleaseWindowViewController.yearTo = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearTo)
-            SelectionViewController.yearTo = UserDefaults.standard.integer(forKey: UserDefaultsStringConstants.yearTo)
+            ReleaseWindowViewController.yearTo = UserDefaults.standard.integer(forKey: StringConstants.yearTo)
+            SelectionViewController.yearTo = UserDefaults.standard.integer(forKey: StringConstants.yearTo)
         } else {
-            UserDefaults.standard.set(2019, forKey: UserDefaultsStringConstants.yearTo)
+            UserDefaults.standard.set(2019, forKey: StringConstants.yearTo)
             ReleaseWindowViewController.yearFrom = 2019
             SelectionViewController.yearTo = 2019
         }
         
+    }
+    
+    func checkForGenreCount() {
+        let genreCountExists = UserDefaults.standard.bool(forKey: StringConstants.genreCount)
+        
+        if !genreCountExists {
+            UserDefaults.standard.set(0, forKey: StringConstants.genreCount)
+        }
     }
 
     // MARK: - Core Data stack
