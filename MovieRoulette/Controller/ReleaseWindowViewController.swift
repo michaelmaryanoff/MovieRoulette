@@ -49,8 +49,8 @@ class ReleaseWindowViewController: UIViewController {
     }
     
     func saveReleaseWindow() {
-        defaults.set(ReleaseWindowViewController.yearFrom, forKey: UserDefaultsStringConstants.yearFrom)
-        defaults.set(ReleaseWindowViewController.yearTo, forKey: UserDefaultsStringConstants.yearTo)
+        defaults.set(ReleaseWindowViewController.yearFrom, forKey: StringConstants.yearFrom)
+        defaults.set(ReleaseWindowViewController.yearTo, forKey: StringConstants.yearTo)
     }
     
 }
