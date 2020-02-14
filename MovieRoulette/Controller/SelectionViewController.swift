@@ -24,7 +24,7 @@ class SelectionViewController: UIViewController {
     static var yearFrom = 2019
     static var yearTo = 2019
     var actorId: Int?
-    static var genreCount = 0
+    var genreCount = 0
     
     // MARK: - Core Data variables
     var dataController: DataController!

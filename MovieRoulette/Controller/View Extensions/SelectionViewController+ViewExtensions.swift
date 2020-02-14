@@ -13,21 +13,18 @@ extension SelectionViewController {
     //MARK: - Label text setup functions
     
     func setupTextLabels() {
-        setupGenreLabelText()
+        calculateGenreLabelText()
         setupReleaseWindowLabelText()
     }
     
-    func setupGenreLabelText() {
-        
-        DispatchQueue.main.async {
-            switch self.genreCodeSet.count {
-            case 1:
-                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genre selected"
-            case let count where count > 0:
-                self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genres selected"
-            default:
-                self.genresSelectedLabel.text = "No genres selected"
-            }
+    func calculateGenreLabelText() {
+        switch self.genreCount {
+        case 1:
+            self.genresSelectedLabel.text = "\(self.genreCount) genre selected"
+        case let count where count > 0:
+            self.genresSelectedLabel.text = "\(self.genreCount) genres selected"
+        default:
+            self.genresSelectedLabel.text = "No genres selected"
         }
     }
 

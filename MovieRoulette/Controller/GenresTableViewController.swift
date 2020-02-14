@@ -46,7 +46,7 @@ class GenresTableViewController: UIViewController {
         
         // Ensures that the marked genres are passed through to the SelectionViewController
         SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
-        SelectionViewController.genreCount = GenresTableViewController.managedGenreArray.count
+        self.genreCount = GenresTableViewController.managedGenreArray.count
     }
     
     // Reusable function that changes the view context
