@@ -73,17 +73,23 @@ extension GenresTableViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 // MARK: - Segue extension
-extension GenresTableViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+
+// Note: this extension has been changed to an extension on the Selection View controller
+extension SelectionViewController: UINavigationControllerDelegate {
+    // This function uses the navigation controller to pass information between view controllers
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let newSelectionVC = viewController as? SelectionViewController
         if viewController == newSelectionVC {
+            print("we are using the selection vc in \(#function)")
+            newSelectionVC?.genreCount = GenresTableViewController.managedGenreArray.count
+            print("GenresTableViewController.managedGenreArray.count" + " -=-> " + "\(GenresTableViewController.managedGenreArray.count)")
         } else {
-            print("We are using a different segue.")
+            print("selectionVC -> genresVC")
         }
         do {
             try dataController.viewContext.save()
         } catch {
-            print("could not save")
+            
         }
     }
     

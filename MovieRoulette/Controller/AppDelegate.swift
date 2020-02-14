@@ -86,7 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let genreCountExists = UserDefaults.standard.bool(forKey: StringConstants.genreCount)
         
         if !genreCountExists {
-            print("No genre count found")
             UserDefaults.standard.set(0, forKey: StringConstants.genreCount)
         }
     }
