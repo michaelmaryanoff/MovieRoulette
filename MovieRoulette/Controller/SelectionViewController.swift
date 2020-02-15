@@ -51,29 +51,23 @@ class SelectionViewController: UIViewController {
     // MARK: - Lifecycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.delegate = self
         initialViewSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("called \(#function)")
-        calculateGenreLabelText()
-        genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
-        
-        print("genreCount in SelectionVC" + " -=-> " + "\(self.genreCount)")
-        
         setupFetchRequest()
+        genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
+        UserDefaults.standard.set(genreCodeSet.count, forKey: StringConstants.genreCount)
+        calculateGenreLabelText()
         setupTextLabels()
-        print("managedGenreArray in \(#function): \(SelectionViewController.managedGenreArray)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        print("called \(#function)")
-        
-        print("genreCount in SelectionVC" + " -=-> " + "\(self.genreCount) in \(#function)\n")
+    
     }
     
     // MARK: - IBActions

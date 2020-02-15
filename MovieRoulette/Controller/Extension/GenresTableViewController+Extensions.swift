@@ -80,9 +80,7 @@ extension SelectionViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let newSelectionVC = viewController as? SelectionViewController
         if viewController == newSelectionVC {
-            print("we are using the selection vc in \(#function)")
-            newSelectionVC?.genreCount = GenresTableViewController.managedGenreArray.count
-            print("GenresTableViewController.managedGenreArray.count" + " -=-> " + "\(GenresTableViewController.managedGenreArray.count)")
+            print("genresVC -> SelectionVC")
         } else {
             print("selectionVC -> genresVC")
         }

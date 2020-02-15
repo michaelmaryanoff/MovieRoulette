@@ -33,7 +33,6 @@ class GenresTableViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -44,7 +43,7 @@ class GenresTableViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         // Ensures that the marked genres are passed through to the SelectionViewController
-        SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
+//        SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
     }
     
     // Reusable function that changes the view context

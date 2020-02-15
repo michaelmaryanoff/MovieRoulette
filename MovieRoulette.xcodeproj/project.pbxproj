@@ -171,10 +171,10 @@
 		CBEEA41623689AB100F9B99C /* View Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */,
 				CB26A3C5233137DD00AC0498 /* SelectionViewController+ViewExtensions.swift */,
 				CB308F1A23392E9E007919C6 /* ReleaseWindowViewController+ViewExtensions.swift */,
 				CB308F2123393861007919C6 /* ActorSearchViewController+ViewExtensions.swift */,
+				CB308F2323393A31007919C6 /* PresentAlertControllerDismiss.swift */,
 			);
 			path = "View Extensions";
 			sourceTree = "<group>";
