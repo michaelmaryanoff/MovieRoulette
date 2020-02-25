@@ -59,15 +59,9 @@ class SelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupFetchRequest()
-        genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
-        UserDefaults.standard.set(genreCodeSet.count, forKey: StringConstants.genreCount)
+        
         calculateGenreLabelText()
         setupTextLabels()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    
     }
     
     // MARK: - IBActions

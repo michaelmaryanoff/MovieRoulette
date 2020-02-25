@@ -71,24 +71,3 @@ extension GenresTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
 }
-
-// MARK: - Segue extension
-
-// Note: this extension has been changed to an extension on the Selection View controller
-extension SelectionViewController: UINavigationControllerDelegate {
-    // This function uses the navigation controller to pass information between view controllers
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        let newSelectionVC = viewController as? SelectionViewController
-        if viewController == newSelectionVC {
-            print("genresVC -> SelectionVC")
-        } else {
-            print("selectionVC -> genresVC")
-        }
-        do {
-            try dataController.viewContext.save()
-        } catch {
-            
-        }
-    }
-    
-}

@@ -38,13 +38,6 @@ class GenresTableViewController: UIViewController {
         }
         
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Ensures that the marked genres are passed through to the SelectionViewController
-//        SelectionViewController.managedGenreArray = GenresTableViewController.managedGenreArray
-    }
     
     // Reusable function that changes the view context
     func changeManagedGenreSet(forCell cell: UITableViewCell, add: Bool, indexPath: IndexPath) {

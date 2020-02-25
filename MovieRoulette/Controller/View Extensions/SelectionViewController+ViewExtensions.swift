@@ -18,6 +18,8 @@ extension SelectionViewController {
     }
     
     func calculateGenreLabelText() {
+        genreCodeSet = createGenreSet(managedArray: SelectionViewController.managedGenreArray)
+        UserDefaults.standard.set(genreCodeSet.count, forKey: StringConstants.genreCount)
         switch self.genreCodeSet.count {
         case 1:
             self.genresSelectedLabel.text = "\(self.genreCodeSet.count) genre selected"
