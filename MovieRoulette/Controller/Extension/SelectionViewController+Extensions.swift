@@ -76,8 +76,6 @@ extension SelectionViewController {
         }
         
         SelectionViewController.managedGenreArray = result
-        print("result count" + " -=-> " + "\(result.count)")
-        print("SelectionViewController.managedGenreArray.count" + " -=-> " + "\(SelectionViewController.managedGenreArray.count)")
     }
     
     func makeActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {

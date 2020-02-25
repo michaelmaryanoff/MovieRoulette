@@ -52,7 +52,6 @@ class SelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.delegate = self
         initialViewSetup()
     }
     
