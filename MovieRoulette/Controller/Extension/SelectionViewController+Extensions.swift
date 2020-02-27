@@ -76,8 +76,6 @@ extension SelectionViewController {
         }
         
         SelectionViewController.managedGenreArray = result
-        print("result count" + " -=-> " + "\(result.count)")
-        print("<#Print label#>" + " -=-> " + "\(SelectionViewController.managedGenreArray.count)")
     }
     
     func makeActorFetchRequest(_ fetchRequest: NSFetchRequest<Actor>) {
@@ -107,7 +105,6 @@ extension SelectionViewController {
         self.moviesArray = []
         
         let url = TMDBClient.formulateMovieSearchURL(withTheseGenres: Array(genreCodeSet), yearFrom: SelectionViewController.yearFrom, yearTo: SelectionViewController.yearTo, withActorCode: actorId)
-        print("url" + " " + "\(url)")
         
         TMDBClient.searchForMovies(url: url) { (success, stringArray, error) in
             
